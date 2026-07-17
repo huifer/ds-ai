@@ -49,6 +49,8 @@ export function loadConfig() {
         journal: env.CH_JOURNAL,
         signal:  env.CH_SIGNAL,
         system:  env.CH_SYSTEM,
+        rss:     env.CH_RSS,
+        daily:   env.CH_DAILY,
       },
       labels: {
         memory:  '🧠',
@@ -57,6 +59,8 @@ export function loadConfig() {
         journal: '🌿',
         signal:  '📡',
         system:  '🛠',
+        rss:     '📰',
+        daily:   '🌙',
       },
       // 智能路由:类别关键词命中 → 对应 channel
       routing: {

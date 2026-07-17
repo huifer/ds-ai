@@ -23,6 +23,9 @@ import { RpcClient } from '@earendil-works/pi-coding-agent';
 import { loadConfig, PATHS } from './config.mjs';
 import { createDiscordClient } from './discord-client.mjs';
 import { getDiscord } from '../extensions/discord-tools-shared.mjs';
+import { createScheduler } from './scheduler.mjs';
+import { runRssJob, RSS_JOB_ID, RSS_JOB_SCHEDULE } from './jobs/rss-daily.mjs';
+import { runDailySummaryJob, DAILY_JOB_ID, DAILY_JOB_SCHEDULE } from './jobs/daily-summary.mjs';
 
 // ---- 全局代理:launchd 启的进程没有 macOS 系统代理配置 ----
 try {
@@ -37,6 +40,7 @@ const PI_BIN_DIR = '/Users/zhangsan/.nvm/versions/node/v24.15.0/lib/node_modules
 const PI_CLI = join(PI_BIN_DIR, 'dist', 'cli.js');
 const PI_NODE = '/Users/zhangsan/.nvm/versions/node/v24.15.0/bin/node';
 const TOOLS_EXT = join(ROOT, 'extensions', 'discord-tools.mjs');
+const FILE_EXT = join(ROOT, 'extensions', 'file-tools.mjs');
 const SESSION_DIR = join(ROOT, 'sessions');
 
 // ---- 日志:带时间戳,全走同一个 orchestrator.log ----
@@ -101,6 +105,8 @@ async function main() {
       CH_JOURNAL: cfg.channels.journal,
       CH_SIGNAL: cfg.channels.signal,
       CH_SYSTEM: cfg.channels.system,
+      CH_RSS:    cfg.channels.rss,
+      CH_DAILY:  cfg.channels.daily,
       // 代理(launchd 进程没继承系统代理)
       HTTP_PROXY: 'http://127.0.0.1:7897',
       HTTPS_PROXY: 'http://127.0.0.1:7897',
@@ -109,6 +115,7 @@ async function main() {
     args: [
       '--mode', 'rpc',
       '--extension', TOOLS_EXT,
+      '--extension', FILE_EXT,
       '--session-dir', SESSION_DIR,
       '--name', `discord-bridge-${new Date().toISOString().slice(0, 10)}`,
     ],
@@ -180,6 +187,25 @@ async function main() {
   await new Promise((r) => setTimeout(r, 300));
   log('entry-bot 完全就绪');
 
+  // ---- 7.5. 调度器:RSS hub + 每日总结 ----
+  const sched = createScheduler({ log });
+  sched.register({
+    id: RSS_JOB_ID,
+    hour: RSS_JOB_SCHEDULE.hour,
+    minute: RSS_JOB_SCHEDULE.minute,
+    tzOffsetHours: RSS_JOB_SCHEDULE.tzOffsetHours,
+    run: ({ dateKey }) => runRssJob({ dateKey, pi, discord, log }),
+  });
+  sched.register({
+    id: DAILY_JOB_ID,
+    hour: DAILY_JOB_SCHEDULE.hour,
+    minute: DAILY_JOB_SCHEDULE.minute,
+    tzOffsetHours: DAILY_JOB_SCHEDULE.tzOffsetHours,
+    run: ({ dateKey }) => runDailySummaryJob({ dateKey, pi, discord, log }),
+  });
+  sched.start();
+  log(`调度器已启动 · jobs: ${sched.list().map((j) => `${j.id}@${j.hour}:${String(j.minute).padStart(2,'0')}`).join(', ')}`);
+
   // ---- 7. 处理 Discord 用户消息 ----
   async function handleUserMessage(msg) {
     if (msg.author?.bot) return;
@@ -210,6 +236,7 @@ async function main() {
   // ---- 8. 优雅退出 ----
   async function shutdown(sig) {
     log(`收到 ${sig}, 关闭中…`);
+    try { sched.stop(); } catch {}
     try { await pi.stop(); } catch {}
     try { await discord.destroy(); } catch {}
     log('已关闭');

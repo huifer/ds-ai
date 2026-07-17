@@ -22,6 +22,14 @@ npm-debug.log*
 # ---- symlinks(用户特定) ----
 links/
 
+# ---- legacy 旧版本仓库----
+# 只跟踪源码 + 文档;node_modules / logs / .env 跳过
+legacy/**/node_modules/
+legacy/**/logs/
+legacy/**/.env
+legacy/**/.env.local
+legacy/**/package-lock.json
+
 # ---- os ----
 .DS_Store
 .idea/

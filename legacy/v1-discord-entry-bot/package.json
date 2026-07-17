@@ -1,0 +1,10 @@
+{
+  "name": "discord-pi-bridge",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "discord.js": "^14.21.0"
+  },
+  "engines": { "node": ">=18" }
+}

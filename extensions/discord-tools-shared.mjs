@@ -43,6 +43,8 @@ export function getCfg() {
     CH_JOURNAL: process.env.CH_JOURNAL,
     CH_SIGNAL: process.env.CH_SIGNAL,
     CH_SYSTEM: process.env.CH_SYSTEM,
+    CH_RSS: process.env.CH_RSS,
+    CH_DAILY: process.env.CH_DAILY,
   };
   for (const k of Object.keys(env)) {
     if (!env[k] && existsSync(ENV_PATH)) {
@@ -61,10 +63,13 @@ export function getCfg() {
       journal: env.CH_JOURNAL,
       signal:  env.CH_SIGNAL,
       system:  env.CH_SYSTEM,
+      rss:     env.CH_RSS,
+      daily:   env.CH_DAILY,
     },
     labels: {
       memory: '🧠', ideas: '✨', build: '🔨',
       journal: '🌿', signal: '📡', system: '🛠',
+      rss: '📰', daily: '🌙',
     },
   };
   return cachedCfg;

@@ -37,9 +37,34 @@ export default function (pi) {
         if (!ch || ch.type !== ChannelType.GuildText) {
           return { content: [{ type: 'text', text: 'channel not found or not text channel' }], isError: true };
         }
-        const sent = await ch.send(body.length > 1990 ? body.slice(0, 1980) + '…' : body);
+        // 超长内容分片发送(Discord 单条消息 2000 字符上限)
+        const MAX = 1900;
+        const messageIds = [];
+        if (body.length <= MAX) {
+          const sent = await ch.send(body);
+          messageIds.push(sent.id);
+        } else {
+          // 按 1900 字符切,优先在 \n\n 处切
+          const chunks = [];
+          let rest = body;
+          while (rest.length > 0) {
+            if (rest.length <= MAX) { chunks.push(rest); break; }
+            let cut = rest.lastIndexOf('\n\n', MAX);
+            if (cut < MAX * 0.5) cut = rest.lastIndexOf('\n', MAX);
+            if (cut < MAX * 0.5) cut = MAX;
+            chunks.push(rest.slice(0, cut));
+            rest = rest.slice(cut).replace(/^\n+/, '');
+          }
+          for (let i = 0; i < chunks.length; i++) {
+            const tag = chunks.length > 1 ? `\n\n_(${i + 1}/${chunks.length})_` : '';
+            const sent = await ch.send(chunks[i] + tag);
+            messageIds.push(sent.id);
+            // 简单节流,避免 rate limit
+            if (i < chunks.length - 1) await new Promise((r) => setTimeout(r, 250));
+          }
+        }
         return {
-          content: [{ type: 'text', text: JSON.stringify({ ok: true, channelId, messageId: sent.id, length: body.length }, null, 2) }],
+          content: [{ type: 'text', text: JSON.stringify({ ok: true, channelId, messageIds, chunks: messageIds.length, length: body.length }, null, 2) }],
         };
       } catch (e) {
         return { content: [{ type: 'text', text: `发送失败: ${e.message}` }], isError: true };
