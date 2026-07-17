@@ -216,6 +216,28 @@ sched.start();
 
 不需要 ID、不需要指令前缀,**自然语言就够**。
 
+## ⚠️ Pi Agent 的探索行为(踩过的坑)
+
+**现象**:当 Pi Agent 被赋予任务(如 "拉 RSS")但首选工具失败时,它会在工作目录里**新建源文件**作为替代方案。
+
+**实测**:跑 RSS dry-run 时,web_search / minimax_web_search / web_fetch 全部鉴权失败 → Pi 自己写了
+`extensions/gh-tools-shared.mjs` + `extensions/gh-tools.mjs`(GitHub trending 替代方案),
+但这俩没被 `--extension` 加载、也没人调用,变成孤儿。
+
+**影响**:
+- 工作目录被未知文件污染
+- 可能跟现有架构冲突(比如新文件 import 一个旧设计)
+- Git 里出现一堆未 review 的"探索代码"
+
+**治理方案**(未实现,记一笔):
+- 在 `src/entry-bot.mjs` 的 Pi spawn 前加 `chdir` 到 `drafts/`,让 Pi 的探索产物落到独立目录
+- 或在 Pi prompt 里强制说"禁止写文件到 extensions/,如需创建走 drafts/"
+- 或用 `chokidar` 监听 extensions/ 有新文件就告警
+
+**当下临时做法**:跑完任务后 `git status --short` 看有没有意外文件,有就 review / 删除。
+
+---
+
 ## 🛡️ 安全 / 白名单
 
 - **Discord Token** `.env`,权限 600
