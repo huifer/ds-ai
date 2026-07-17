@@ -1,0 +1,29 @@
+# ---- secrets ----
+.env
+.env.local
+.env.*.local
+
+# ---- runtime logs ----
+logs/*.log
+logs/orchestrator.log
+logs/launchd.*.log
+
+# ---- pi sessions ----
+sessions/
+
+# ---- generated data (本地沉淀,可重建) ----
+data/rss/
+data/daily-summary/
+
+# ---- node ----
+node_modules/
+npm-debug.log*
+
+# ---- symlinks(用户特定) ----
+links/
+
+# ---- os ----
+.DS_Store
+.idea/
+.vscode/
+*.swp

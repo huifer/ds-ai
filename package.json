@@ -1,0 +1,24 @@
+{
+  "name": "pi-discord-bridge",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Discord <-> Pi Agent (RPC mode) bridge daemon — 一个 Node 进程,sleep forever,无 TUI",
+  "keywords": ["discord", "pi-agent", "rpc", "headless", "bot"],
+  "author": "zhangsan",
+  "license": "MIT",
+  "main": "./src/entry-bot.mjs",
+  "scripts": {
+    "start": "node src/entry-bot.mjs",
+    "dev": "node src/entry-bot.mjs 2>&1 | tee -a logs/orchestrator.log",
+    "status": "bash scripts/status.sh"
+  },
+  "dependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@sinclair/typebox": "^0.34.52",
+    "discord.js": "^14.27.0",
+    "global-agent": "^4.1.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
