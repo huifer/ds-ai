@@ -3,11 +3,12 @@
 // 手动触发定时任务或偶发任务(立刻跑一次,跳过调度器等时间)
 //
 // 用法:
-//   node scripts/trigger-job.mjs rss                        # 立刻跑 RSS hub
-//   node scripts/trigger-job.mjs daily                       # 立刻跑每日总结
-//   node scripts/trigger-job.mjs rss 2026-07-17              # 指定日期
-//   node scripts/trigger-job.mjs discover "AI coding agents" # 偶发需求发现
-//   node scripts/trigger-job.mjs discover "Cursor" signal    # 偶发,推 signal 频道
+//   node scripts/trigger-job.mjs rss                                # 立刻跑 RSS hub
+//   node scripts/trigger-job.mjs daily                              # 立刻跑每日总结
+//   node scripts/trigger-job.mjs rss 2026-07-17                     # 指定日期
+//   node scripts/trigger-job.mjs opportunity "AI coding agents"      # 偶发机会发现(默认推 #💡 机会)
+//   node scripts/trigger-job.mjs opportunity "Cursor" build          # 推 #🔨 工程
+//   node scripts/trigger-job.mjs discover "topic"                    # 兼容旧名(alias 到 opportunity)
 import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { existsSync, appendFileSync, mkdirSync, readFileSync } from 'node:fs';
@@ -74,7 +75,7 @@ async function main() {
 
   const { buildRssPrompt } = await import('../src/jobs/rss-daily.mjs');
   const { buildDailySummaryPrompt } = await import('../src/jobs/daily-summary.mjs');
-  const { buildDiscoverPrompt } = await import('../src/jobs/discover.mjs');
+  const { buildOpportunityPrompt } = await import('../src/jobs/opportunity.mjs');
 
   let prompt;
   let jobNameSuffix = dateKey;
@@ -83,7 +84,8 @@ async function main() {
     join(ROOT, 'extensions', 'file-tools.mjs'),
   ];
   const extsByKind = {
-    discover: [join(ROOT, 'extensions', 'discover-tools.mjs')],
+    opportunity: [join(ROOT, 'extensions', 'discover-tools.mjs')],
+    discover: [join(ROOT, 'extensions', 'discover-tools.mjs')],   // alias
   };
   const exts = [...baseExts, ...(extsByKind[kind] || [])];
 
@@ -91,18 +93,18 @@ async function main() {
     prompt = buildRssPrompt({ dateKey });
   } else if (kind === 'daily') {
     prompt = buildDailySummaryPrompt({ dateKey });
-  } else if (kind === 'discover') {
+  } else if (kind === 'opportunity' || kind === 'discover') {
     if (!extraArg || !extraArg.trim()) {
-      throw new Error('discover 模式必须传 topic: node scripts/trigger-job.mjs discover "<topic>"');
+      throw new Error(`${kind} 模式必须传 topic: node scripts/trigger-job.mjs ${kind} "<topic>"`);
     }
     const topic = extraArg;
-    const channelCategory = args[1] || 'signal';
-    prompt = buildDiscoverPrompt({ topic, dateKey, channelCategory });
+    const channelCategory = args[1] || 'opportunity';
+    prompt = buildOpportunityPrompt({ topic, dateKey, channelCategory });
     const slug = String(topic).toLowerCase().replace(/[^a-z0-9一-龥]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
     jobNameSuffix = `${dateKey}-${slug}`;
-    log(`discover topic="${topic}" → channel=${channelCategory}`);
+    log(`${kind} topic="${topic}" → channel=${channelCategory}`);
   } else {
-    throw new Error(`未知任务: ${kind}(只支持 rss / daily / discover)`);
+    throw new Error(`未知任务: ${kind}(只支持 rss / daily / opportunity / discover)`);
   }
 
   const { RpcClient } = await import('@earendil-works/pi-coding-agent');
@@ -123,6 +125,7 @@ async function main() {
       CH_RSS: env.CH_RSS,
       CH_DAILY: env.CH_DAILY,
       CH_DISCOVER: env.CH_DISCOVER,
+      CH_OPPORTUNITY: env.CH_OPPORTUNITY,
     },
     args: [
       '--mode', 'rpc',

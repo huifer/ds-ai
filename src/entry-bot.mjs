@@ -25,9 +25,9 @@ import { createDiscordClient } from './discord-client.mjs';
 import { getDiscord } from '../extensions/discord-tools-shared.mjs';
 import { createScheduler } from './scheduler.mjs';
 import { runRssJob, RSS_JOB_ID, RSS_JOB_SCHEDULE } from './jobs/rss-daily.mjs';
-import { runDailySummaryJob, DAILY_JOB_ID, DAILY_SUMMARY_SCHEDULE } from './jobs/daily-summary.mjs';
+import { runDailySummaryJob, DAILY_JOB_ID, DAILY_JOB_SCHEDULE } from './jobs/daily-summary.mjs';
 import { runTokenTrendJob, TREND_JOB_ID, TREND_JOB_SCHEDULE, handleTrendCommand as runTrendHandler } from './jobs/token-trend.mjs';
-import { buildDiscoverPrompt } from './jobs/discover.mjs';
+import { buildOpportunityPrompt } from './jobs/opportunity.mjs';
 
 // ---- 全局代理:launchd 启的进程没有 macOS 系统代理配置 ----
 try {
@@ -217,6 +217,27 @@ async function main() {
       channelId: cfg.channels.trend || cfg.channels.system,
     }),
   });
+// ---- 每日任务 to-do list(用 child_process 跑独立脚本)----
+  sched.register({
+    id: 'gh-todo-daily',
+    hour: 10,
+    minute: 0,
+    tzOffsetHours: 8,
+    run: async () => {
+      const { spawn } = await import('node:child_process');
+      const script = join(ROOT, 'scripts', 'push-gh-list.mjs');
+      log('[gh-todo-daily] 触发,跑 ' + script);
+      const child = spawn('node', [script], { stdio: ['ignore', 'pipe', 'pipe'] });
+      let out = '', err = '';
+      child.stdout.on('data', d => { out += d; });
+      child.stderr.on('data', d => { err += d; });
+      child.on('close', code => {
+        log('[gh-todo-daily] exit=' + code);
+        if (out) log('[gh-todo-daily] stdout: ' + out.trim().split('\n').slice(-3).join(' | '));
+        if (err) log('[gh-todo-daily] stderr: ' + err.trim().split('\n').slice(-3).join(' | '));
+      });
+    },
+  });
   sched.start();
   log(`调度器已启动 · jobs: ${sched.list().map((j) => `${j.id}@${j.hour}:${String(j.minute).padStart(2,'0')}`).join(', ')}`);
 
@@ -236,9 +257,11 @@ async function main() {
       return;
     }
 
-    // ---- 7a.1 !discover <topic> [channel] spawn Pi subprocess 跑偶发需求发现 ----
-    if (text === '!discover' || text.startsWith('!discover ') || text.startsWith('!discover\t')) {
-      await handleDiscoverCommand(msg, text);
+    // ---- 7a.1 !opportunity / !discover <topic> [channel] spawn Pi subprocess 跑偶发机会发现 ----
+    // discover 保留为 alias(向后兼容),主用 opportunity
+    if (text === '!opportunity' || text.startsWith('!opportunity ') || text.startsWith('!opportunity\t') ||
+        text === '!discover' || text.startsWith('!discover ') || text.startsWith('!discover\t')) {
+      await handleOpportunityCommand(msg, text);
       return;
     }
 
@@ -298,38 +321,45 @@ async function main() {
     }
   }
 
-  // ---- 7b.2 !discover 命令处理 ----
-  //  拦截用户在主入口的 !discover 调用,spawn 一个一次性 Pi subprocess 跑 8 步 pipeline。
-  //  trigger-job.mjs 内部加载 discover-tools extension,Pi 用结构化工具采集 + 自己的 LLM 合成。
-  //  跑完后 Pi 会自己推 entry channel + 目标 channel,brief 落 data/discovery/。
+  // ---- 7b.2 !opportunity / !discover 命令处理 ----
+  //  拦截主入口的 !opportunity(主用) / !discover(alias)调用,
+  //  spawn 一次性 Pi subprocess 跑 8 步 pipeline,Pi 用结构化工具采集 + 自己的 LLM 合成。
+  //  跑完后 Pi 会自己推 entry channel + 目标 channel(默认 #💡 机会),brief 落 data/opportunity/。
   //
   //  为什么不走主 Pi(长期 running 的那个):
   //   - 主 Pi 在 streaming user message,新 prompt 会打断
-  //   - discover 要 1-3 分钟,阻塞用户后续消息
+  //   - opportunity 要 1-3 分钟,阻塞用户后续消息
   //   - 一次性 subprocess 更稳:失败不影响主 Pi 状态
-  async function handleDiscoverCommand(msg, text) {
+  async function handleOpportunityCommand(msg, text) {
+    const isAlias = text.startsWith('!discover');
+    const cmd = isAlias ? '!discover' : '!opportunity';
     const parts = text.split(/\s+/).filter(Boolean);
     const topic = parts.slice(1).join(' ').trim();
+
     if (!topic || topic === 'help' || topic === '?') {
       await msg.reply(
-        '🔍 **!discover 命令 · 偶发需求发现**\n\n' +
+        '💡 **!opportunity 命令 · 偶发机会发现**\n\n' +
         '**用法**\n' +
-        '• `!discover <topic>` — 触发需求发现,brief 推 #📡 发现\n' +
-        '• `!discover <topic> <channel>` — 推指定频道\n' +
-        '  (可用:signal / build / ideas / memory / discover)\n' +
-        '• `!discover help` — 本帮助\n\n' +
-        '**背后**\n' +
+        '• `!opportunity <topic>` — 触发机会发现,brief 推 #💡 机会\n' +
+        '• `!opportunity <topic> <channel>` — 推指定频道\n' +
+        '  (可用:opportunity / build / ideas / memory / signal)\n' +
+        '• `!opportunity help` — 本帮助\n\n' +
+        '**特点**\n' +
         '• spawn 一次性 Pi subprocess,加载 discover-tools extension\n' +
-        '• 数据采集走 HN Algolia / gh CLI / Reddit RSS(零 key)\n' +
+        '• 数据采集走 HN Algolia / gh CLI / 中文 RSS / Reddit(零 key)\n' +
         '• AI 推理(聚类 / 合成 / 写 brief)在 Pi agent 自己的 LLM\n' +
-        '• 跑完会自动推 entry channel + 目标 channel + 落 data/discovery/\n\n' +
-        '**预计耗时** 1-3 分钟,跑完不用等',
+        '• 输出含 5 个 cluster + SaaS/App 创业灵感 + 链接清单\n' +
+        '• 跑完自动推 entry channel + 目标频道 + 落 data/opportunity/\n\n' +
+        '**别名**\n' +
+        '• `!discover <topic>` 等价于 `!opportunity <topic>`(向后兼容)\n\n' +
+        '**预计耗时** 1-3 分钟',
       ).catch(() => {});
       return;
     }
+
     // 解析可选 channelCategory(最后一个词,且匹配已知 channel 名)
-    const knownCats = ['signal', 'build', 'ideas', 'memory', 'discover', 'system', 'journal'];
-    let channelCategory = 'signal';
+    const knownCats = ['opportunity', 'signal', 'build', 'ideas', 'memory', 'discover', 'system', 'journal'];
+    let channelCategory = 'opportunity';
     let topicOnly = topic;
     const tokens = topic.split(/\s+/);
     const lastToken = tokens[tokens.length - 1]?.toLowerCase();
@@ -338,33 +368,32 @@ async function main() {
       topicOnly = tokens.slice(0, -1).join(' ');
     }
     if (!topicOnly.trim()) {
-      await msg.reply('用法: `!discover <topic> [channel]`').catch(() => {});
+      await msg.reply('用法: `!opportunity <topic> [channel]`').catch(() => {});
       return;
     }
 
     try { await discord.react(msg, '⏳'); } catch {}
-    log(`!discover triggered: topic="${topicOnly}" channel=${channelCategory}`);
+    log(`!opportunity triggered: topic="${topicOnly}" channel=${channelCategory}`);
 
     // 给用户立刻反馈
     await msg.reply(
-      `🔍 **需求发现已触发**\n\n` +
+      `💡 **机会发现已触发**\n\n` +
       `**Topic**: \`${topicOnly}\`\n` +
       `**Target channel**: #${channelCategory}\n` +
       `**预计耗时**: 1-3 分钟\n\n` +
-      `Pi agent 跑完会自动推 entry channel + #${channelCategory}。你不用等,可以继续干别的。`
+      `Pi agent 跑完会自动推 entry channel + #${channelCategory}。你不用等。`
     ).catch(() => {});
 
     // spawn 一次性 Pi subprocess(完全复用 trigger-job.mjs)
     const child = spawn('node', [
       join(ROOT, 'scripts/trigger-job.mjs'),
-      'discover',
+      'opportunity',
       topicOnly,
       channelCategory,
     ], {
       cwd: ROOT,
       env: {
         ...process.env,
-        // 强制走代理(launchd 子进程可能不继承)
         HTTP_PROXY: 'http://127.0.0.1:7897',
         HTTPS_PROXY: 'http://127.0.0.1:7897',
         ALL_PROXY: 'socks5://127.0.0.1:7897',
@@ -373,17 +402,17 @@ async function main() {
     });
 
     let stderrBuf = '';
-    child.stdout.on('data', () => { /* 透传到 orchestrator.log */ });
+    child.stdout.on('data', () => { /* 透传 */ });
     child.stderr.on('data', (d) => { stderrBuf += d.toString(); });
     child.on('close', async (code) => {
       try { await discord.removeReact(msg, '⏳'); } catch {}
       if (code === 0) {
-        log(`!discover subprocess exited OK`);
+        log(`!opportunity subprocess exited OK`);
       } else {
-        log(`!discover subprocess failed: code=${code} stderr=${stderrBuf.slice(0, 500)}`);
+        log(`!opportunity subprocess failed: code=${code} stderr=${stderrBuf.slice(0, 500)}`);
         try {
           await msg.reply(
-            `😵 **discover 失败**\n\n` +
+            `😵 **opportunity 失败**\n\n` +
             `\`trigger-job.mjs\` 退出码 \`${code}\`\n` +
             `\`\`\`\n${stderrBuf.slice(0, 1500)}\n\`\`\`\n\n` +
             `看 \`logs/trigger.log\` 完整日志`,
@@ -392,7 +421,7 @@ async function main() {
       }
     });
     child.on('error', async (e) => {
-      log(`!discover spawn error: ${e.message}`);
+      log(`!opportunity spawn error: ${e.message}`);
       try { await discord.removeReact(msg, '⏳'); } catch {}
       try { await msg.reply(`😵 spawn trigger-job 失败: ${e.message}`); } catch {}
     });

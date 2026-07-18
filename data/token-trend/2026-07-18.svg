@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 980" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif">
+<rect width="1280" height="980" fill="#0d1117"/>
+<text x="50" y="32" fill="#c9d1d9" font-size="20" font-weight="600">📊 Token 消耗趋势 · 2026-07-18</text>
+<text x="1250" y="32" fill="#8b949e" font-size="11" text-anchor="end">窗口 14d · hybrid · ccusage=daily✓/session✓/monthly✓ · LiteLLM</text>
+<rect x="50" y="56" width="587" height="279.3333333333333" fill="#161b22" stroke="#30363d" rx="6"/>
+<text x="62" y="74" fill="#c9d1d9" font-size="13" font-weight="600">每日 Token 总量堆叠</text>
+<line x1="100" y1="299.3333333333333" x2="621" y2="299.3333333333333" stroke="#21262d" stroke-width="1"/>
+<text x="94" y="302.3333333333333" fill="#8b949e" font-size="10" text-anchor="end">0</text>
+<line x1="100" y1="246" x2="621" y2="246" stroke="#21262d" stroke-width="1"/>
+<text x="94" y="249" fill="#8b949e" font-size="10" text-anchor="end">87.90M</text>
+<line x1="100" y1="192.66666666666666" x2="621" y2="192.66666666666666" stroke="#21262d" stroke-width="1"/>
+<text x="94" y="195.66666666666666" fill="#8b949e" font-size="10" text-anchor="end">175.81M</text>
+<line x1="100" y1="139.33333333333331" x2="621" y2="139.33333333333331" stroke="#21262d" stroke-width="1"/>
+<text x="94" y="142.33333333333331" fill="#8b949e" font-size="10" text-anchor="end">263.71M</text>
+<line x1="100" y1="86" x2="621" y2="86" stroke="#21262d" stroke-width="1"/>
+<text x="94" y="89" fill="#8b949e" font-size="10" text-anchor="end">351.61M</text>
+<rect x="105.6" y="291.0" width="26.1" height="8.3" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="105.6" y="273.8" width="26.1" height="17.2" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="105.6" y="184.9" width="26.1" height="88.9" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="142.8" y="294.3" width="26.1" height="5.1" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="142.8" y="285.3" width="26.1" height="9.0" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="142.8" y="224.1" width="26.1" height="61.1" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="217.2" y="299.1" width="26.1" height="0.2" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="217.2" y="298.8" width="26.1" height="0.3" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="217.2" y="245.6" width="26.1" height="53.2" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="217.2" y="243.9" width="26.1" height="1.7" fill="#d29922" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="254.4" y="299.3" width="26.1" height="0.1" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="254.4" y="297.6" width="26.1" height="1.7" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="254.4" y="98.4" width="26.1" height="199.2" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="254.4" y="86.0" width="26.1" height="12.4" fill="#d29922" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="291.7" y="295.8" width="26.1" height="3.5" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="291.7" y="293.8" width="26.1" height="2.0" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="291.7" y="102.9" width="26.1" height="190.9" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="291.7" y="94.3" width="26.1" height="8.5" fill="#d29922" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="328.9" y="296.4" width="26.1" height="2.9" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="328.9" y="295.5" width="26.1" height="0.9" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="328.9" y="226.5" width="26.1" height="69.0" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="366.1" y="297.9" width="26.1" height="1.5" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="366.1" y="297.4" width="26.1" height="0.5" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="366.1" y="256.1" width="26.1" height="41.3" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="403.3" y="297.5" width="26.1" height="1.9" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="403.3" y="297.0" width="26.1" height="0.5" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="403.3" y="180.1" width="26.1" height="116.9" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="440.5" y="297.5" width="26.1" height="1.8" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="440.5" y="297.1" width="26.1" height="0.4" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="440.5" y="160.5" width="26.1" height="136.5" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="477.7" y="295.5" width="26.1" height="3.8" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="477.7" y="294.8" width="26.1" height="0.7" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="477.7" y="104.7" width="26.1" height="190.1" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="514.9" y="296.5" width="26.1" height="2.8" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="514.9" y="296.0" width="26.1" height="0.5" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="514.9" y="168.6" width="26.1" height="127.4" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="552.2" y="296.1" width="26.1" height="3.3" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="552.2" y="295.6" width="26.1" height="0.5" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="552.2" y="136.1" width="26.1" height="159.5" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="589.4" y="296.5" width="26.1" height="2.8" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="589.4" y="296.0" width="26.1" height="0.6" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="589.4" y="178.0" width="26.1" height="118.0" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<text x="118.6" y="313.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-05</text>
+<text x="193.0" y="313.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-07</text>
+<text x="267.5" y="313.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-09</text>
+<text x="341.9" y="313.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-11</text>
+<text x="416.3" y="313.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-13</text>
+<text x="490.8" y="313.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-15</text>
+<text x="565.2" y="313.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-17</text>
+<text x="602.4" y="313.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-18</text>
+<rect x="64" y="317.3333333333333" width="8" height="8" fill="#58a6ff"/>
+<text x="76" y="325.3333333333333" fill="#c9d1d9" font-size="9">input</text>
+<rect x="154" y="317.3333333333333" width="8" height="8" fill="#f85149"/>
+<text x="166" y="325.3333333333333" fill="#c9d1d9" font-size="9">output</text>
+<rect x="244" y="317.3333333333333" width="8" height="8" fill="#3fb950"/>
+<text x="256" y="325.3333333333333" fill="#c9d1d9" font-size="9">cacheR</text>
+<rect x="334" y="317.3333333333333" width="8" height="8" fill="#d29922"/>
+<text x="346" y="325.3333333333333" fill="#c9d1d9" font-size="9">cacheW</text>
+<rect x="663" y="56" width="587" height="279.3333333333333" fill="#161b22" stroke="#30363d" rx="6"/>
+<text x="675" y="74" fill="#c9d1d9" font-size="13" font-weight="600">每日成本折线 (USD · LiteLLM 真实价)</text>
+<line x1="723" y1="309.3333333333333" x2="1234" y2="309.3333333333333" stroke="#21262d" stroke-width="1"/>
+<text x="717" y="312.3333333333333" fill="#8b949e" font-size="10" text-anchor="end">$0</text>
+<line x1="723" y1="253.5" x2="1234" y2="253.5" stroke="#21262d" stroke-width="1"/>
+<text x="717" y="256.5" fill="#8b949e" font-size="10" text-anchor="end">$59.49</text>
+<line x1="723" y1="197.66666666666666" x2="1234" y2="197.66666666666666" stroke="#21262d" stroke-width="1"/>
+<text x="717" y="200.66666666666666" fill="#8b949e" font-size="10" text-anchor="end">$118.98</text>
+<line x1="723" y1="141.83333333333331" x2="1234" y2="141.83333333333331" stroke="#21262d" stroke-width="1"/>
+<text x="717" y="144.83333333333331" fill="#8b949e" font-size="10" text-anchor="end">$178.47</text>
+<line x1="723" y1="86" x2="1234" y2="86" stroke="#21262d" stroke-width="1"/>
+<text x="717" y="89" fill="#8b949e" font-size="10" text-anchor="end">$237.96</text>
+<path d="M723.0,225.5 L762.3,245.4 L801.6,309.3 L840.9,242.5 L880.2,86.0 L919.5,185.5 L958.8,299.9 L998.2,303.9 L1037.5,286.1 L1076.8,282.9 L1116.1,271.1 L1155.4,293.8 L1194.7,277.6 L1234.0,295.0" fill="none" stroke="#a371f7" stroke-width="2"/>
+<circle cx="723.0" cy="225.5" r="3" fill="#a371f7"/>
+<text x="723.0" y="217.5" fill="#c9d1d9" font-size="9" text-anchor="middle">$89.35</text>
+<circle cx="762.3" cy="245.4" r="3" fill="#a371f7"/>
+<circle cx="801.6" cy="309.3" r="3" fill="#a371f7"/>
+<circle cx="840.9" cy="242.5" r="3" fill="#a371f7"/>
+<circle cx="880.2" cy="86.0" r="3" fill="#a371f7"/>
+<text x="880.2" y="78.0" fill="#c9d1d9" font-size="9" text-anchor="middle">$237.96</text>
+<circle cx="919.5" cy="185.5" r="3" fill="#a371f7"/>
+<circle cx="958.8" cy="299.9" r="3" fill="#a371f7"/>
+<circle cx="998.2" cy="303.9" r="3" fill="#a371f7"/>
+<circle cx="1037.5" cy="286.1" r="3" fill="#a371f7"/>
+<circle cx="1076.8" cy="282.9" r="3" fill="#a371f7"/>
+<circle cx="1116.1" cy="271.1" r="3" fill="#a371f7"/>
+<circle cx="1155.4" cy="293.8" r="3" fill="#a371f7"/>
+<circle cx="1194.7" cy="277.6" r="3" fill="#a371f7"/>
+<circle cx="1234.0" cy="295.0" r="3" fill="#a371f7"/>
+<text x="1234.0" y="287.0" fill="#c9d1d9" font-size="9" text-anchor="middle">$15.28</text>
+<text x="723.0" y="323.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-05</text>
+<text x="801.6" y="323.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-07</text>
+<text x="880.2" y="323.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-09</text>
+<text x="958.8" y="323.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-11</text>
+<text x="1037.5" y="323.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-13</text>
+<text x="1116.1" y="323.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-15</text>
+<text x="1194.7" y="323.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-17</text>
+<text x="1234.0" y="323.3333333333333" fill="#8b949e" font-size="9" text-anchor="middle">07-18</text>
+<rect x="50" y="361.3333333333333" width="587" height="279.3333333333333" fill="#161b22" stroke="#30363d" rx="6"/>
+<text x="62" y="379.3333333333333" fill="#c9d1d9" font-size="13" font-weight="600">按 model 成本 Top 10 (USD)</text>
+<text x="62" y="407" fill="#c9d1d9" font-size="10" font-weight="500">claude-sonnet-4-6</text>
+<rect x="212" y="395" width="415.0" height="16" fill="#58a6ff" rx="2"/>
+<text x="633" y="407" fill="#c9d1d9" font-size="10">$301.16</text>
+<text x="62" y="430.3333333333333" fill="#c9d1d9" font-size="10" font-weight="500">glm-4.7</text>
+<rect x="212" y="418.3333333333333" width="385.3" height="16" fill="#3fb950" rx="2"/>
+<text x="633" y="430.3333333333333" fill="#c9d1d9" font-size="10">$279.58</text>
+<text x="62" y="453.6666666666667" fill="#c9d1d9" font-size="10" font-weight="500">claude-opus-4-7</text>
+<rect x="212" y="441.6666666666667" width="182.8" height="16" fill="#d29922" rx="2"/>
+<text x="633" y="453.6666666666667" fill="#c9d1d9" font-size="10">$132.65</text>
+<text x="62" y="477" fill="#c9d1d9" font-size="10" font-weight="500">gpt-5.5</text>
+<rect x="212" y="465" width="36.4" height="16" fill="#f85149" rx="2"/>
+<text x="633" y="477" fill="#c9d1d9" font-size="10">$26.42</text>
+<text x="62" y="500.3333333333333" fill="#c9d1d9" font-size="10" font-weight="500">MiniMax-M3</text>
+<rect x="212" y="488.3333333333333" width="21.9" height="16" fill="#a371f7" rx="2"/>
+<text x="633" y="500.3333333333333" fill="#c9d1d9" font-size="10">$15.91</text>
+<text x="62" y="523.6666666666667" fill="#c9d1d9" font-size="10" font-weight="500">MiniMax-M3</text>
+<rect x="212" y="511.6666666666667" width="17.7" height="16" fill="#ff7b72" rx="2"/>
+<text x="633" y="523.6666666666667" fill="#c9d1d9" font-size="10">$12.82</text>
+<text x="62" y="546.9999999999999" fill="#c9d1d9" font-size="10" font-weight="500">claude-haiku-4-5-20251</text>
+<rect x="212" y="534.9999999999999" width="6.5" height="16" fill="#79c0ff" rx="2"/>
+<text x="633" y="546.9999999999999" fill="#c9d1d9" font-size="10">$4.73</text>
+<text x="62" y="570.3333333333333" fill="#c9d1d9" font-size="10" font-weight="500">MiniMax-M2.7</text>
+<rect x="212" y="558.3333333333333" width="2.0" height="16" fill="#56d4dd" rx="2"/>
+<text x="633" y="570.3333333333333" fill="#c9d1d9" font-size="10">$0.515</text>
+<text x="62" y="593.6666666666666" fill="#c9d1d9" font-size="10" font-weight="500">deepseek-ai/deepseek-v</text>
+<rect x="212" y="581.6666666666666" width="2.0" height="16" fill="#f0883e" rx="2"/>
+<text x="633" y="593.6666666666666" fill="#c9d1d9" font-size="10">$0.0058</text>
+<text x="62" y="616.9999999999999" fill="#c9d1d9" font-size="10" font-weight="500">minimaxai/minimax-m3</text>
+<rect x="212" y="604.9999999999999" width="0.0" height="16" fill="#bc8cff" rx="2"/>
+<text x="633" y="616.9999999999999" fill="#c9d1d9" font-size="10">$0</text>
+<rect x="663" y="361.3333333333333" width="587" height="279.3333333333333" fill="#161b22" stroke="#30363d" rx="6"/>
+<text x="675" y="379.3333333333333" fill="#c9d1d9" font-size="13" font-weight="600">每日 cost 按 agent 堆叠 (USD)</text>
+<line x1="713" y1="604.6666666666666" x2="1234" y2="604.6666666666666" stroke="#21262d" stroke-width="1"/>
+<text x="707" y="607.6666666666666" fill="#8b949e" font-size="10" text-anchor="end">0</text>
+<line x1="713" y1="551.3333333333333" x2="1234" y2="551.3333333333333" stroke="#21262d" stroke-width="1"/>
+<text x="707" y="554.3333333333333" fill="#8b949e" font-size="10" text-anchor="end">74</text>
+<line x1="713" y1="498" x2="1234" y2="498" stroke="#21262d" stroke-width="1"/>
+<text x="707" y="501" fill="#8b949e" font-size="10" text-anchor="end">148</text>
+<line x1="713" y1="444.66666666666663" x2="1234" y2="444.66666666666663" stroke="#21262d" stroke-width="1"/>
+<text x="707" y="447.66666666666663" fill="#8b949e" font-size="10" text-anchor="end">221</text>
+<line x1="713" y1="391.3333333333333" x2="1234" y2="391.3333333333333" stroke="#21262d" stroke-width="1"/>
+<text x="707" y="394.3333333333333" fill="#8b949e" font-size="10" text-anchor="end">295</text>
+<rect x="718.6" y="536.1" width="26.1" height="68.6" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="718.6" y="517.0" width="26.1" height="19.1" fill="#3fb950" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="755.8" y="604.5" width="26.1" height="0.2" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="830.2" y="544.8" width="26.1" height="59.9" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="867.4" y="391.3" width="26.1" height="213.3" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="904.7" y="559.7" width="26.1" height="45.0" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="904.7" y="559.3" width="26.1" height="0.4" fill="#d29922" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="904.7" y="559.3" width="26.1" height="0.0" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="941.9" y="593.2" width="26.1" height="11.5" fill="#d29922" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="1016.3" y="586.8" width="26.1" height="17.9" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="1053.5" y="581.0" width="26.1" height="23.7" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="1090.7" y="578.6" width="26.1" height="26.1" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="1127.9" y="588.5" width="26.1" height="16.2" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="1165.2" y="582.6" width="26.1" height="22.0" fill="#58a6ff" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="1165.2" y="579.7" width="26.1" height="2.9" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<rect x="1202.4" y="598.3" width="26.1" height="6.3" fill="#f85149" stroke="#0d1117" stroke-width="0.5"/>
+<text x="731.6" y="618.6666666666666" fill="#8b949e" font-size="9" text-anchor="middle">07-05</text>
+<text x="806.0" y="618.6666666666666" fill="#8b949e" font-size="9" text-anchor="middle">07-07</text>
+<text x="880.5" y="618.6666666666666" fill="#8b949e" font-size="9" text-anchor="middle">07-09</text>
+<text x="954.9" y="618.6666666666666" fill="#8b949e" font-size="9" text-anchor="middle">07-11</text>
+<text x="1029.3" y="618.6666666666666" fill="#8b949e" font-size="9" text-anchor="middle">07-13</text>
+<text x="1103.8" y="618.6666666666666" fill="#8b949e" font-size="9" text-anchor="middle">07-15</text>
+<text x="1178.2" y="618.6666666666666" fill="#8b949e" font-size="9" text-anchor="middle">07-17</text>
+<text x="1215.4" y="618.6666666666666" fill="#8b949e" font-size="9" text-anchor="middle">07-18</text>
+<rect x="677" y="622.6666666666666" width="8" height="8" fill="#58a6ff"/>
+<text x="689" y="630.6666666666666" fill="#c9d1d9" font-size="9">claude</text>
+<rect x="767" y="622.6666666666666" width="8" height="8" fill="#3fb950"/>
+<text x="779" y="630.6666666666666" fill="#c9d1d9" font-size="9">codex</text>
+<rect x="857" y="622.6666666666666" width="8" height="8" fill="#d29922"/>
+<text x="869" y="630.6666666666666" fill="#c9d1d9" font-size="9">opencode</text>
+<rect x="947" y="622.6666666666666" width="8" height="8" fill="#f85149"/>
+<text x="959" y="630.6666666666666" fill="#c9d1d9" font-size="9">pi</text>
+<rect x="50" y="666.6666666666666" width="587" height="279.3333333333333" fill="#161b22" stroke="#30363d" rx="6"/>
+<text x="62" y="684.6666666666666" fill="#c9d1d9" font-size="13" font-weight="600">今日 vs 昨日 对比</text>
+<text x="80" y="720.6666666666666" fill="#c9d1d9" font-size="11" font-weight="500">Cost (USD)</text>
+<text x="160" y="720.6666666666666" fill="#8b949e" font-size="9">今日</text>
+<rect x="190" y="710.6666666666666" width="95.3" height="14" fill="#a371f7" rx="2"/>
+<text x="290.2835360447149" y="720.6666666666666" fill="#c9d1d9" font-size="10">$15.28</text>
+<text x="160" y="738.6666666666666" fill="#8b949e" font-size="9">昨日</text>
+<rect x="190" y="728.6666666666666" width="210.8" height="14" fill="#a371f7" opacity="0.4" rx="2"/>
+<text x="405.8" y="738.6666666666666" fill="#8b949e" font-size="10">$33.82</text>
+<text x="580.65" y="728.6666666666666" fill="#3fb950" font-size="12" font-weight="600" text-anchor="end">-54.8%</text>
+<text x="80" y="770.6666666666666" fill="#c9d1d9" font-size="11" font-weight="500">Tokens (总)</text>
+<text x="160" y="770.6666666666666" fill="#8b949e" font-size="9">今日</text>
+<rect x="190" y="760.6666666666666" width="156.7" height="14" fill="#58a6ff" rx="2"/>
+<text x="351.7302172959662" y="770.6666666666666" fill="#c9d1d9" font-size="10">199.99M</text>
+<text x="160" y="788.6666666666666" fill="#8b949e" font-size="9">昨日</text>
+<rect x="190" y="778.6666666666666" width="210.8" height="14" fill="#58a6ff" opacity="0.4" rx="2"/>
+<text x="405.8" y="788.6666666666666" fill="#8b949e" font-size="10">268.98M</text>
+<text x="580.65" y="778.6666666666666" fill="#3fb950" font-size="12" font-weight="600" text-anchor="end">-25.6%</text>
+<text x="80" y="820.6666666666666" fill="#c9d1d9" font-size="11" font-weight="500">Input</text>
+<text x="160" y="820.6666666666666" fill="#8b949e" font-size="9">今日</text>
+<rect x="190" y="810.6666666666666" width="181.2" height="14" fill="#58a6ff" rx="2"/>
+<text x="376.17004872120253" y="820.6666666666666" fill="#c9d1d9" font-size="10">4.65M</text>
+<text x="160" y="838.6666666666666" fill="#8b949e" font-size="9">昨日</text>
+<rect x="190" y="828.6666666666666" width="210.8" height="14" fill="#58a6ff" opacity="0.4" rx="2"/>
+<text x="405.8" y="838.6666666666666" fill="#8b949e" font-size="10">5.41M</text>
+<text x="580.65" y="828.6666666666666" fill="#3fb950" font-size="12" font-weight="600" text-anchor="end">-14.1%</text>
+<text x="80" y="870.6666666666666" fill="#c9d1d9" font-size="11" font-weight="500">Output</text>
+<text x="160" y="870.6666666666666" fill="#8b949e" font-size="9">今日</text>
+<rect x="190" y="860.6666666666666" width="210.8" height="14" fill="#f85149" rx="2"/>
+<text x="405.8" y="870.6666666666666" fill="#c9d1d9" font-size="10">912.1K</text>
+<text x="160" y="888.6666666666666" fill="#8b949e" font-size="9">昨日</text>
+<rect x="190" y="878.6666666666666" width="174.4" height="14" fill="#f85149" opacity="0.4" rx="2"/>
+<text x="369.4448912508374" y="888.6666666666666" fill="#8b949e" font-size="10">754.8K</text>
+<text x="580.65" y="878.6666666666666" fill="#f85149" font-size="12" font-weight="600" text-anchor="end">+20.8%</text>
+<text x="190" y="914.6666666666666" fill="#8b949e" font-size="9">📅 今日 2026-07-18 · 昨日 2026-07-17</text>
+<rect x="663" y="666.6666666666666" width="587" height="279.3333333333333" fill="#161b22" stroke="#30363d" rx="6"/>
+<text x="675" y="684.6666666666666" fill="#c9d1d9" font-size="13" font-weight="600">本月累计 (2026-07) vs 日均</text>
+<rect x="683" y="726.6666666666666" width="547" height="22" fill="#21262d" rx="3"/>
+<rect x="683" y="726.6666666666666" width="317.6" height="22" fill="#a371f7" opacity="0.7" rx="3"/>
+<text x="689" y="741.6666666666666" fill="#c9d1d9" font-size="11" font-weight="500">2026-07</text>
+<text x="1224" y="741.6666666666666" fill="#c9d1d9" font-size="10" text-anchor="end">第 18/31 天 · 累计 $955.16</text>
+<text x="683" y="784.6666666666666" fill="#8b949e" font-size="10">日均 $53.06 · 预测全月 $1644.99</text>
+<text x="683" y="802.6666666666666" fill="#8b949e" font-size="10">agents: claude · codex · opencode · pi</text>
+<text x="683" y="926" fill="#8b949e" font-size="9">glm-4.7 $460.95</text>
+<text x="813" y="926" fill="#8b949e" font-size="9">claude-sonnet-4- $301.16</text>
+<text x="943" y="926" fill="#8b949e" font-size="9">claude-opus-4-7 $132.65</text>
+<text x="1073" y="926" fill="#8b949e" font-size="9">gpt-5.5 $26.42</text>
+<text x="1203" y="926" fill="#8b949e" font-size="9">MiniMax-M3 $15.91</text>
+<text x="50" y="955" fill="#8b949e" font-size="10">📁 data/token-trend/2026-07-18.{md,svg}</text>
+<text x="1250" y="955" fill="#8b949e" font-size="10" text-anchor="end">pi-discord-agents · auto-generated</text>
+</svg>
