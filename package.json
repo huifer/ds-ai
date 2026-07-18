@@ -2,15 +2,22 @@
   "name": "pi-discord-bridge",
   "version": "2.0.0",
   "type": "module",
-  "description": "Discord <-> Pi Agent (RPC mode) bridge daemon — 一个 Node 进程,sleep forever,无 TUI",
-  "keywords": ["discord", "pi-agent", "rpc", "headless", "bot"],
+  "description": "Discord <-> Pi Agent (RPC mode) bridge daemon \u2014 \u4e00\u4e2a Node \u8fdb\u7a0b,sleep forever,\u65e0 TUI",
+  "keywords": [
+    "discord",
+    "pi-agent",
+    "rpc",
+    "headless",
+    "bot"
+  ],
   "author": "zhangsan",
   "license": "MIT",
   "main": "./src/entry-bot.mjs",
   "scripts": {
     "start": "node src/entry-bot.mjs",
     "dev": "node src/entry-bot.mjs 2>&1 | tee -a logs/orchestrator.log",
-    "status": "bash scripts/status.sh"
+    "status": "bash scripts/status.sh",
+    "discover": "node scripts/trigger-job.mjs discover"
   },
   "dependencies": {
     "@earendil-works/pi-coding-agent": "*",

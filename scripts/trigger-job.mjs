@@ -1,20 +1,18 @@
 #!/usr/bin/env node
 // scripts/trigger-job.mjs
-// 手动触发 RSS hub 或每日总结任务(立刻跑一次,跳过调度器等 12:00)
+// 手动触发定时任务或偶发任务(立刻跑一次,跳过调度器等时间)
 //
 // 用法:
-//   node scripts/trigger-job.mjs rss            # 立刻跑 RSS hub
-//   node scripts/trigger-job.mjs daily           # 立刻跑每日总结
-//   node scripts/trigger-job.mjs rss 2026-07-17  # 指定日期
-//
-// 实现:用 RpcClient 启一个一次性 Pi 子进程,prompt 注入,等 Pi 完成。
-// 跑完后 Pi 自己会用 discord_post_message 推送到对应 channel。
+//   node scripts/trigger-job.mjs rss                        # 立刻跑 RSS hub
+//   node scripts/trigger-job.mjs daily                       # 立刻跑每日总结
+//   node scripts/trigger-job.mjs rss 2026-07-17              # 指定日期
+//   node scripts/trigger-job.mjs discover "AI coding agents" # 偶发需求发现
+//   node scripts/trigger-job.mjs discover "Cursor" signal    # 偶发,推 signal 频道
 import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { existsSync, appendFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 
-// 全局代理
 try {
   const { bootstrap } = await import('global-agent');
   bootstrap();
@@ -27,14 +25,20 @@ const PI_CLI = join(PI_BIN_DIR, 'dist', 'cli.js');
 const LOG_PATH = resolve(ROOT, 'logs', 'trigger.log');
 
 const kind = process.argv[2] || 'rss';
-const dateKey = process.argv[3] || (() => {
-  // 北京时间今天
+const args = process.argv.slice(3).filter((a) => a !== '--');
+const extraArg = args[0];
+
+function todayKeyBeijing() {
   const now = new Date();
   const utcMs = now.getTime() + now.getTimezoneOffset() * 60_000;
   const tzMs = utcMs + 8 * 3600_000;
   const d = new Date(tzMs);
   return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
-})();
+}
+
+const dateKey = (kind === 'discover')
+  ? todayKeyBeijing()
+  : (extraArg || todayKeyBeijing());
 
 function log(...a) {
   const ts = new Date().toISOString().slice(11, 23);
@@ -70,13 +74,37 @@ async function main() {
 
   const { buildRssPrompt } = await import('../src/jobs/rss-daily.mjs');
   const { buildDailySummaryPrompt } = await import('../src/jobs/daily-summary.mjs');
-  const prompt = kind === 'rss'
-    ? buildRssPrompt({ dateKey })
-    : kind === 'daily'
-    ? buildDailySummaryPrompt({ dateKey })
-    : (() => { throw new Error(`未知任务: ${kind}(只支持 rss / daily)`); })();
+  const { buildDiscoverPrompt } = await import('../src/jobs/discover.mjs');
 
-  // 用 RpcClient 跑一次性 Pi
+  let prompt;
+  let jobNameSuffix = dateKey;
+  const baseExts = [
+    join(ROOT, 'extensions', 'discord-tools.mjs'),
+    join(ROOT, 'extensions', 'file-tools.mjs'),
+  ];
+  const extsByKind = {
+    discover: [join(ROOT, 'extensions', 'discover-tools.mjs')],
+  };
+  const exts = [...baseExts, ...(extsByKind[kind] || [])];
+
+  if (kind === 'rss') {
+    prompt = buildRssPrompt({ dateKey });
+  } else if (kind === 'daily') {
+    prompt = buildDailySummaryPrompt({ dateKey });
+  } else if (kind === 'discover') {
+    if (!extraArg || !extraArg.trim()) {
+      throw new Error('discover 模式必须传 topic: node scripts/trigger-job.mjs discover "<topic>"');
+    }
+    const topic = extraArg;
+    const channelCategory = args[1] || 'signal';
+    prompt = buildDiscoverPrompt({ topic, dateKey, channelCategory });
+    const slug = String(topic).toLowerCase().replace(/[^a-z0-9一-龥]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+    jobNameSuffix = `${dateKey}-${slug}`;
+    log(`discover topic="${topic}" → channel=${channelCategory}`);
+  } else {
+    throw new Error(`未知任务: ${kind}(只支持 rss / daily / discover)`);
+  }
+
   const { RpcClient } = await import('@earendil-works/pi-coding-agent');
   const pi = new RpcClient({
     cliPath: PI_CLI,
@@ -94,13 +122,13 @@ async function main() {
       CH_SYSTEM: env.CH_SYSTEM,
       CH_RSS: env.CH_RSS,
       CH_DAILY: env.CH_DAILY,
+      CH_DISCOVER: env.CH_DISCOVER,
     },
     args: [
       '--mode', 'rpc',
-      '--extension', join(ROOT, 'extensions', 'discord-tools.mjs'),
-      '--extension', join(ROOT, 'extensions', 'file-tools.mjs'),
+      ...exts.flatMap((p) => ['--extension', p]),
       '--session-dir', join(ROOT, 'sessions'),
-      '--name', `trigger-${kind}-${dateKey}`,
+      '--name', `trigger-${kind}-${jobNameSuffix}`,
     ],
   });
 
@@ -111,7 +139,6 @@ async function main() {
       const delta = ev.assistantMessageEvent;
       if (delta?.type === 'text_delta') {
         assistantBuffer += delta.delta;
-        // 打印增量到 stdout,看 Pi 在干什么
         process.stdout.write(delta.delta);
       }
     }
@@ -134,17 +161,11 @@ async function main() {
   log(`注入 prompt (${prompt.length} chars)`);
   await pi.prompt(prompt);
 
-  // 等任务完成:30 分钟超时,但通常 1~5 分钟结束
   const TIMEOUT_MS = 30 * 60_000;
   const POLL_MS = 5_000;
   const start = Date.now();
-  let completed = false;
   while (Date.now() - start < TIMEOUT_MS) {
     await new Promise((r) => setTimeout(r, POLL_MS));
-    // 简单判断:agent_end 事件触发后 + 5 秒没新输出认为完成
-    if (lastMessageLength > 0 && Date.now() - start > 30_000) {
-      // 兜底:超时主动退
-    }
   }
 
   log(`任务结束,关闭 Pi…`);
