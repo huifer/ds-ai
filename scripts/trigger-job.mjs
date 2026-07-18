@@ -37,7 +37,7 @@ function todayKeyBeijing() {
   return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
 }
 
-const dateKey = (kind === 'discover')
+const dateKey = (kind === 'opportunity' || kind === 'discover')
   ? todayKeyBeijing()
   : (extraArg || todayKeyBeijing());
 

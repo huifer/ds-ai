@@ -1,0 +1,1105 @@
+{
+  "generatedAt": "2026-07-18T12:03:53.719Z",
+  "elapsedMs": 13375,
+  "windowHours": 24,
+  "stats": {
+    "total": 42,
+    "ok": 42,
+    "failed": 0,
+    "items": 87
+  },
+  "sources": [
+    {
+      "name": "Hugging Face Blog",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "layer": "hf",
+      "ok": true,
+      "bytes": 244053,
+      "contentType": "application/rss+xml; charset=utf-8",
+      "totalItems": 829,
+      "keptItems": 1,
+      "items": [
+        {
+          "title": "Fine-tune video and image models at scale with NVIDIA NeMo Automodel and 🤗 Diffusers",
+          "url": "https://huggingface.co/blog/nvidia/scale-diffusers-finetuning-nemo-automodel",
+          "publishedAt": "Fri, 17 Jul 2026 15:57:54 GMT",
+          "description": "",
+          "author": ""
+        }
+      ]
+    },
+    {
+      "name": "Daily AI Papers (papers.cool)",
+      "url": "https://papers.cool/arxiv/rss",
+      "layer": "hf",
+      "ok": true,
+      "bytes": 7539,
+      "contentType": "text/html; charset=UTF-8",
+      "totalItems": 0,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "Transformers Library Releases",
+      "url": "https://github.com/huggingface/transformers/releases.atom",
+      "layer": "hf",
+      "ok": true,
+      "bytes": 771008,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "huggingface_hub Releases",
+      "url": "https://github.com/huggingface/huggingface_hub/releases.atom",
+      "layer": "hf",
+      "ok": true,
+      "bytes": 104515,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "OpenAI News",
+      "url": "https://openai.com/news/rss.xml",
+      "layer": "openai",
+      "ok": true,
+      "bytes": 630778,
+      "contentType": "text/xml; charset=utf-8",
+      "totalItems": 1039,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "OpenAI Status",
+      "url": "https://status.openai.com/history.rss",
+      "layer": "openai",
+      "ok": true,
+      "bytes": 95356,
+      "contentType": "application/rss+xml",
+      "totalItems": 92,
+      "keptItems": 3,
+      "items": [
+        {
+          "title": "Some users are unable to access Codex",
+          "url": "https://status.openai.com//incidents/01KXT44TAQQ2R0AZDDVSJGAC4H",
+          "publishedAt": "Sat, 18 Jul 2026 08:31:42 GMT",
+          "description": "Status: MonitoringWe have applied the mitigation and are monitoring the recovery.Affected components CLI (Degraded performance) Codex in ChatGPT Desktop (Degraded performance)",
+          "author": ""
+        },
+        {
+          "title": "New ChatGPT App Not Available For Enterprise Users Without Codex Permissions",
+          "url": "https://status.openai.com//incidents/01KXRBA8B98QHMMVP3M86NHFZ1",
+          "publishedAt": "Sat, 18 Jul 2026 08:24:02 GMT",
+          "description": "Status: ResolvedAll impacted services have now fully recovered.Affected components Codex in ChatGPT Desktop (Operational)",
+          "author": ""
+        },
+        {
+          "title": "Codex 5.6-sol Experiencing Increased Server-Overload Errors",
+          "url": "https://status.openai.com//incidents/01KXRHE25717D2WQ1WFMT2B7WZ",
+          "publishedAt": "Fri, 17 Jul 2026 20:42:53 GMT",
+          "description": "Status: ResolvedAll impacted services have now fully recovered.",
+          "author": ""
+        }
+      ]
+    },
+    {
+      "name": "openai-python Releases",
+      "url": "https://github.com/openai/openai-python/releases.atom",
+      "layer": "openai",
+      "ok": true,
+      "bytes": 14732,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "openai-node Releases",
+      "url": "https://github.com/openai/openai-node/releases.atom",
+      "layer": "openai",
+      "ok": true,
+      "bytes": 32474,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "Cloudflare Blog",
+      "url": "https://blog.cloudflare.com/rss/",
+      "layer": "cloudflare",
+      "ok": true,
+      "bytes": 378731,
+      "contentType": "application/rss+xml; charset=utf-8",
+      "totalItems": 20,
+      "keptItems": 1,
+      "items": [
+        {
+          "title": "Cloudflare WAF protects WordPress applications from two high-severity vulnerabilities",
+          "url": "https://blog.cloudflare.com/wordpress-vulnerabilities/",
+          "publishedAt": "Fri, 17 Jul 2026 21:30:43 GMT",
+          "description": "Cloudflare has deployed two WAF rules in response to high-severity vulnerabilities disclosed to us by the WordPress security team. The new rules protect all Cloudflare customers using affected WordPress versions, but customers should still update immediately to a patched release",
+          "author": "Daniele Molteni"
+        }
+      ]
+    },
+    {
+      "name": "Cloudflare Blog - Engineering",
+      "url": "https://blog.cloudflare.com/tag/engineering/rss",
+      "layer": "cloudflare",
+      "ok": true,
+      "bytes": 391266,
+      "contentType": "application/rss+xml; charset=utf-8",
+      "totalItems": 19,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "Cloudflare Status",
+      "url": "https://www.cloudflarestatus.com/history.rss",
+      "layer": "cloudflare",
+      "ok": true,
+      "bytes": 45056,
+      "contentType": "application/rss+xml; charset=utf-8",
+      "totalItems": 25,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "BCN (Barcelona) on 2026-07-27",
+          "url": "https://www.cloudflarestatus.com/incidents/pzp7hjp91p6m",
+          "publishedAt": "Mon, 27 Jul 2026 03:30:00 +0000",
+          "description": "THIS IS A SCHEDULED EVENT Jul 27, 03:30 - 12:30 UTC Jul 16, 10:15 UTC Scheduled - We will be performing scheduled maintenance in BCN (Barcelona) datacenter on 2026-07-27 between 03:30 and 12:30 UTC.Traffic might be re-routed from this location, hence there is a possibility of a slight increase in latency during this maintenance window for end-users in the affected region. For PNI / CNI customers connecting with us in this location, please make sure you are expecting this traffic to fail over els",
+          "author": ""
+        },
+        {
+          "title": "AMS (Amsterdam) on 2026-07-24",
+          "url": "https://www.cloudflarestatus.com/incidents/g8ddgyxzb71n",
+          "publishedAt": "Fri, 24 Jul 2026 00:30:00 +0000",
+          "description": "THIS IS A SCHEDULED EVENT Jul 24, 00:30 - 06:00 UTC Jul 14, 10:30 UTC Update - We will be performing scheduled maintenance in AMS (Amsterdam) datacenter on 2026-07-24 between 00:30 and 06:00 UTC.Traffic might be re-routed from this location, hence there is a possibility of a slight increase in latency during this maintenance window for end-users in the affected region. For PNI / CNI customers connecting with us in this location, please make sure you are expecting this traffic to fail over elsewh",
+          "author": ""
+        },
+        {
+          "title": "AMS (Amsterdam) on 2026-07-23",
+          "url": "https://www.cloudflarestatus.com/incidents/x8pbynf2tfr7",
+          "publishedAt": "Thu, 23 Jul 2026 00:30:00 +0000",
+          "description": "THIS IS A SCHEDULED EVENT Jul 23, 00:30 - 06:00 UTC Jul 14, 11:56 UTC Scheduled - We will be performing scheduled maintenance in AMS (Amsterdam) datacenter on 2026-07-23 between 00:30 and 06:00 UTC.Traffic might be re-routed from this location, hence there is a possibility of a slight increase in latency during this maintenance window for end-users in the affected region. For PNI / CNI customers connecting with us in this location, please make sure you are expecting this traffic to fail over els",
+          "author": ""
+        },
+        {
+          "title": "EWR (Newark) on 2026-07-22",
+          "url": "https://www.cloudflarestatus.com/incidents/41vz6140tfv4",
+          "publishedAt": "Wed, 22 Jul 2026 06:00:00 +0000",
+          "description": "THIS IS A SCHEDULED EVENT Jul 22, 06:00 - 10:00 UTC Jul 15, 13:56 UTC Scheduled - We will be performing scheduled maintenance in EWR (Newark) datacenter on 2026-07-22 between 06:00 and 10:00 UTC.Traffic might be re-routed from this location, hence there is a possibility of a slight increase in latency during this maintenance window for end-users in the affected region. For PNI / CNI customers connecting with us in this location, please make sure you are expecting this traffic to fail over elsewh",
+          "author": ""
+        },
+        {
+          "title": "BGW (Baghdad) on 2026-07-21",
+          "url": "https://www.cloudflarestatus.com/incidents/mlvgk9579q9p",
+          "publishedAt": "Tue, 21 Jul 2026 07:00:00 +0000",
+          "description": "THIS IS A SCHEDULED EVENT Jul 21, 07:00 UTC &nbsp;-&nbsp; Jul 23, 16:00 UTC Jul 16, 13:23 UTC Update - We will be performing scheduled maintenance in BGW (Baghdad) datacenter between 2026-07-21 07:00 and 2026-07-23 16:00 UTC.Traffic might be re-routed from this location, hence there is a possibility of a slight increase in latency during this maintenance window for end-users in the affected region. For PNI / CNI customers connecting with us in this location, please make sure you are expecting th",
+          "author": ""
+        },
+        {
+          "title": "MUC (Munich) on 2026-07-21",
+          "url": "https://www.cloudflarestatus.com/incidents/9fh8wp7k0xl7",
+          "publishedAt": "Tue, 21 Jul 2026 00:00:00 +0000",
+          "description": "THIS IS A SCHEDULED EVENT Jul 21, 00:00 - 04:00 UTC Jul 16, 11:33 UTC Scheduled - We will be performing scheduled maintenance in MUC (Munich) datacenter on 2026-07-21 between 00:00 and 04:00 UTC.Traffic might be re-routed from this location, hence there is a possibility of a slight increase in latency during this maintenance window for end-users in the affected region. For PNI / CNI customers connecting with us in this location, please make sure you are expecting this traffic to fail over elsewh",
+          "author": ""
+        }
+      ]
+    },
+    {
+      "name": "workerd Releases",
+      "url": "https://github.com/cloudflare/workerd/releases.atom",
+      "layer": "cloudflare",
+      "ok": true,
+      "bytes": 8050,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 1,
+      "items": [
+        {
+          "title": "v1.20260718.1",
+          "url": "https://github.com/cloudflare/workerd/releases/tag/v1.20260718.1",
+          "publishedAt": "2026-07-18T01:07:21Z",
+          "description": "Full Changelog: v1.20260717.1...v1.20260718.1",
+          "author": "github-actions[bot]"
+        }
+      ]
+    },
+    {
+      "name": "workers-sdk (Wrangler) Releases",
+      "url": "https://github.com/cloudflare/workers-sdk/releases.atom",
+      "layer": "cloudflare",
+      "ok": true,
+      "bytes": 50499,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "Cloudflare Unified Changelog",
+      "url": "https://developers.cloudflare.com/changelog/rss/index.xml",
+      "layer": "cloudflare",
+      "ok": true,
+      "bytes": 4686002,
+      "contentType": "application/xml",
+      "totalItems": 1057,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "Anthropic Claude SDK Python",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases.atom",
+      "layer": "anthropic",
+      "ok": true,
+      "bytes": 16478,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "Anthropic Claude SDK TypeScript",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases.atom",
+      "layer": "anthropic",
+      "ok": true,
+      "bytes": 11566,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 3,
+      "items": [
+        {
+          "title": "sdk: v0.112.3",
+          "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.3",
+          "publishedAt": "2026-07-17T20:05:52Z",
+          "description": "0.112.3 (2026-07-17) Full Changelog: sdk-v0.112.2...sdk-v0.112.3 Chores docs: small updates (79fd6c7)",
+          "author": "stainless-app[bot]"
+        },
+        {
+          "title": "sdk: v0.112.2",
+          "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.2",
+          "publishedAt": "2026-07-17T16:36:12Z",
+          "description": "0.112.2 (2026-07-17) Full Changelog: sdk-v0.112.1...sdk-v0.112.2 Chores client: docs updates (fdb3a65)",
+          "author": "stainless-app[bot]"
+        },
+        {
+          "title": "google-cloud-sdk: v0.0.6",
+          "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/google-cloud-sdk-v0.0.6",
+          "publishedAt": "2026-07-17T20:06:00Z",
+          "description": "0.0.6 (2026-07-17) Full Changelog: google-cloud-sdk-v0.0.5...google-cloud-sdk-v0.0.6 Bug Fixes google-cloud: bump google-auth-library to ^10.2.0 (#230) (01e74ee) Chores internal: tidy changelog (4d3022d) internal: version bump (eb97e85)",
+          "author": "stainless-app[bot]"
+        }
+      ]
+    },
+    {
+      "name": "Anthropic Cookbook",
+      "url": "https://github.com/anthropics/anthropic-cookbook/releases.atom",
+      "layer": "anthropic",
+      "ok": true,
+      "bytes": 556,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 0,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "DeepMind Blog",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "layer": "ai-agent",
+      "ok": true,
+      "bytes": 77510,
+      "contentType": "text/xml",
+      "totalItems": 100,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "BAIR Blog (Berkeley)",
+      "url": "https://bair.berkeley.edu/blog/feed.xml",
+      "layer": "ai-agent",
+      "ok": true,
+      "bytes": 260814,
+      "contentType": "application/xml",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "The Decoder",
+      "url": "https://the-decoder.com/feed/",
+      "layer": "ai-agent",
+      "ok": true,
+      "bytes": 21735,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "totalItems": 10,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "China's new World Artificial Intelligence Cooperation Organization is President Xi's clearest play yet for a parallel AI order",
+          "url": "https://the-decoder.com/chinas-new-world-artificial-intelligence-cooperation-organization-is-president-xis-clearest-play-yet-for-a-parallel-ai-order/",
+          "publishedAt": "Sat, 18 Jul 2026 10:46:04 +0000",
+          "description": "At the World AI Conference in Shanghai, Xi Jinping announced 5,000 AI training slots for Global South countries and the launch of the \"World Artificial Intelligence Cooperation Organization.\" Cooperation centers with ASEAN, the African Union, BRICS, and other alliances are planned to follow. China is systematically building a parallel AI governance structure outside Western influence. The article China's new World Artificial Intelligence Cooperation Organization is President Xi's clearest play y",
+          "author": "Matthias Bastian"
+        },
+        {
+          "title": "Open-weight models now match frontier cyber performance from just four months ago at a fraction of the cost",
+          "url": "https://the-decoder.com/open-weight-models-now-match-frontier-cyber-performance-from-just-four-months-ago-at-a-fraction-of-the-cost/",
+          "publishedAt": "Sat, 18 Jul 2026 10:16:02 +0000",
+          "description": "The British AI Security Institute warns that open-weight models like GLM-5.2 and DeepSeek V4-Pro now trail closed frontier models in cyber capabilities by four to seven months. At the start of 2025, the gap was still six to ten months. It also found that safety measures on open models are largely ineffective, leaving defenders less time to prepare. The article Open-weight models now match frontier cyber performance from just four months ago at a fraction of the cost appeared first on The Decoder",
+          "author": "Matthias Bastian"
+        },
+        {
+          "title": "The Pentagon's new AI playbook treats slow adoption as a bigger risk than \"imperfect alignment\"",
+          "url": "https://the-decoder.com/the-pentagons-new-ai-playbook-treats-slow-adoption-as-a-bigger-risk-than-imperfect-alignment/",
+          "publishedAt": "Sat, 18 Jul 2026 08:10:40 +0000",
+          "description": "The US Department of the Navy has signed a strategy to \"weaponize\" data and AI and build an \"AI-first\" fleet. Large language models would run directly on warships, and an AI war council would prioritize mission scenarios. The core message is that moving too slowly carries greater risks than \"imperfect alignment.\" The article The Pentagon's new AI playbook treats slow adoption as a bigger risk than \"imperfect alignment\" appeared first on The Decoder.",
+          "author": "Tomislav Bezmalinović"
+        },
+        {
+          "title": "Anthropic slashes Claude Fable 5 limits in Max and Team Premium and pushes Pro users toward API pricing",
+          "url": "https://the-decoder.com/anthropic-slashes-claude-fable-5-limits-in-max-and-team-premium-and-pushes-pro-users-toward-api-pricing/",
+          "publishedAt": "Sat, 18 Jul 2026 07:17:11 +0000",
+          "description": "Anthropic will include Claude Fable 5 in Max and Team Premium plans starting July 20, but at just 50 percent of regular limits, which themselves drop by a third that same day. Pro users get a one-time $100 credit, then pay API rates. The reversal from Anthropic's original plan to pull Fable from subscriptions entirely likely comes down to competitive pressure from OpenAI's cheaper GPT-5.6 Sol. The article Anthropic slashes Claude Fable 5 limits in Max and Team Premium and pushes Pro users toward",
+          "author": "Matthias Bastian"
+        },
+        {
+          "title": "Zuckerberg's plan to sell excess AI compute could finds its first big customer in Anthropic",
+          "url": "https://the-decoder.com/zuckerbergs-plan-to-sell-excess-ai-compute-could-finds-its-first-big-customer-in-anthropic/",
+          "publishedAt": "Fri, 17 Jul 2026 21:16:00 +0000",
+          "description": "Meta is reportedly in talks with Anthropic to rent out compute capacity from its data centers. The article Zuckerberg's plan to sell excess AI compute could finds its first big customer in Anthropic appeared first on The Decoder.",
+          "author": "Jonathan Kemper"
+        },
+        {
+          "title": "GPT-5.6 is deleting user files when given full access, and OpenAI says it shouldn't but did",
+          "url": "https://the-decoder.com/gpt-5-6-is-deleting-user-files-when-given-full-access-and-openai-says-it-shouldnt-but-did/",
+          "publishedAt": "Fri, 17 Jul 2026 19:35:52 +0000",
+          "description": "OpenAI's GPT-5.6 has accidentally wiped users' entire home directories in several cases, mostly in the unprotected \"Full Access Mode.\" The model overwrites a temporary directory variable and carries out destructive actions on its own instead of asking for confirmation. OpenAI has announced extra safeguards and a detailed post-mortem. The article GPT-5.6 is deleting user files when given full access, and OpenAI says it shouldn't but did appeared first on The Decoder.",
+          "author": "Matthias Bastian"
+        }
+      ]
+    },
+    {
+      "name": "LangChain Blog",
+      "url": "https://blog.langchain.dev/rss.xml",
+      "layer": "ai-agent",
+      "ok": true,
+      "bytes": 78421,
+      "contentType": "application/rss+xml; charset=utf-8",
+      "totalItems": 94,
+      "keptItems": 1,
+      "items": [
+        {
+          "title": "Open Source Extraction Service",
+          "url": "https://www.langchain.com/blog/open-source-extraction-service",
+          "publishedAt": "Sat, 18 Jul 2026 01:05:38 GMT",
+          "description": "",
+          "author": ""
+        }
+      ]
+    },
+    {
+      "name": "Hacker News (front)",
+      "url": "https://hnrss.org/frontpage",
+      "layer": "ai-agent",
+      "ok": true,
+      "bytes": 17195,
+      "contentType": "application/xml; charset=utf-8",
+      "totalItems": 20,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "What AI did to stackoverflow in a graph",
+          "url": "https://data.stackexchange.com/stackoverflow/query/1953768#graph",
+          "publishedAt": "Sat, 18 Jul 2026 11:12:46 +0000",
+          "description": "Article URL: https://data.stackexchange.com/stackoverflow/query/1953768#graph Comments URL: https://news.ycombinator.com/item?id=48956949 Points: 14 # Comments: 3",
+          "author": "secretslol"
+        },
+        {
+          "title": "Why do AI company logos look like buttholes?",
+          "url": "https://velvetshark.com/ai-company-logos-that-look-like-buttholes",
+          "publishedAt": "Sat, 18 Jul 2026 11:06:50 +0000",
+          "description": "Article URL: https://velvetshark.com/ai-company-logos-that-look-like-buttholes Comments URL: https://news.ycombinator.com/item?id=48956924 Points: 95 # Comments: 18",
+          "author": "miniBill"
+        },
+        {
+          "title": "LG monitors silently install software through Windows Update without consent",
+          "url": "https://videocardz.com/newz/lg-monitors-silently-install-software-through-windows-update-without-user-consent",
+          "publishedAt": "Sat, 18 Jul 2026 10:21:19 +0000",
+          "description": "Article URL: https://videocardz.com/newz/lg-monitors-silently-install-software-through-windows-update-without-user-consent Comments URL: https://news.ycombinator.com/item?id=48956688 Points: 132 # Comments: 62",
+          "author": "baranul"
+        },
+        {
+          "title": "Qubes OS Security in the Public Record",
+          "url": "https://arxiv.org/abs/2607.14587",
+          "publishedAt": "Sat, 18 Jul 2026 08:50:07 +0000",
+          "description": "Article URL: https://arxiv.org/abs/2607.14587 Comments URL: https://news.ycombinator.com/item?id=48956307 Points: 25 # Comments: 2",
+          "author": "sciences44"
+        },
+        {
+          "title": "The Computer at the Bottom of a Canal",
+          "url": "https://negroniventurestudios.com/2026/07/18/the-computer-at-the-bottom-of-a-canal/",
+          "publishedAt": "Sat, 18 Jul 2026 08:33:31 +0000",
+          "description": "Article URL: https://negroniventurestudios.com/2026/07/18/the-computer-at-the-bottom-of-a-canal/ Comments URL: https://news.ycombinator.com/item?id=48956231 Points: 22 # Comments: 2",
+          "author": "Kudos"
+        },
+        {
+          "title": "Show HN: Find someone in the dark – light them or light yourself? (Three.js)",
+          "url": "https://github.com/skorotkiewicz/signal-in-the-dark",
+          "publishedAt": "Sat, 18 Jul 2026 06:32:24 +0000",
+          "description": "Article URL: https://github.com/skorotkiewicz/signal-in-the-dark Comments URL: https://news.ycombinator.com/item?id=48955740 Points: 10 # Comments: 1",
+          "author": "modinfo"
+        }
+      ]
+    },
+    {
+      "name": "Hacker News (best)",
+      "url": "https://hnrss.org/best",
+      "layer": "ai-agent",
+      "ok": true,
+      "bytes": 25721,
+      "contentType": "application/xml; charset=utf-8",
+      "totalItems": 30,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "Regressive JPEGs",
+          "url": "https://maurycyz.com/projects/bad_jpeg/",
+          "publishedAt": "Sat, 18 Jul 2026 03:14:20 +0000",
+          "description": "Article URL: https://maurycyz.com/projects/bad_jpeg/ Comments URL: https://news.ycombinator.com/item?id=48954851 Points: 408 # Comments: 42",
+          "author": "vitaut"
+        },
+        {
+          "title": "Kaiser nurses say AI, surveillance are making their jobs and patient care worse",
+          "url": "https://localnewsmatters.org/2026/07/15/kaiser-nurses-say-ai-workplace-surveillance-are-making-their-jobs-and-patient-care-worse/",
+          "publishedAt": "Fri, 17 Jul 2026 22:26:30 +0000",
+          "description": "Article URL: https://localnewsmatters.org/2026/07/15/kaiser-nurses-say-ai-workplace-surveillance-are-making-their-jobs-and-patient-care-worse/ Comments URL: https://news.ycombinator.com/item?id=48952880 Points: 518 # Comments: 341",
+          "author": "gnabgib"
+        },
+        {
+          "title": "The Zilog Z80 has turned 50",
+          "url": "https://goliath32.com/blog/z80.html",
+          "publishedAt": "Fri, 17 Jul 2026 19:41:02 +0000",
+          "description": "Article URL: https://goliath32.com/blog/z80.html Comments URL: https://news.ycombinator.com/item?id=48951461 Points: 236 # Comments: 95",
+          "author": "st_goliath"
+        },
+        {
+          "title": "Learning a few things about running SQLite",
+          "url": "https://jvns.ca/blog/2026/07/17/learning-about-running-sqlite/",
+          "publishedAt": "Fri, 17 Jul 2026 17:45:41 +0000",
+          "description": "Article URL: https://jvns.ca/blog/2026/07/17/learning-about-running-sqlite/ Comments URL: https://news.ycombinator.com/item?id=48950122 Points: 265 # Comments: 69",
+          "author": "surprisetalk"
+        },
+        {
+          "title": "Thanks HN for 15 years of support and helping me find my life's work",
+          "url": "https://news.ycombinator.com/item?id=48949551",
+          "publishedAt": "Fri, 17 Jul 2026 16:57:27 +0000",
+          "description": "Tomorrow is the 15th anniversary of the first day of the Recurse Center (https://www.recurse.com/)My cofounders and I did YC all the way back in the Summer of 2010, with the initial idea of building \"OkCupid for jobs.\" That idea quickly fizzled, and we spent the better part of a year pivoting between other ideas that also failed.Finally, we made something that we wanted ourselves: a self-directed programming retreat, where people built fun projects, contributed to open source, and helped each ot",
+          "author": "nicholasjbs"
+        },
+        {
+          "title": "The state of open source AI",
+          "url": "https://stateofopensource.ai/",
+          "publishedAt": "Fri, 17 Jul 2026 14:31:10 +0000",
+          "description": "Article URL: https://stateofopensource.ai/ Comments URL: https://news.ycombinator.com/item?id=48947825 Points: 456 # Comments: 328",
+          "author": "rellem"
+        }
+      ]
+    },
+    {
+      "name": "IndieHackers",
+      "url": "https://www.indiehackers.com/feed.xml",
+      "layer": "saas-outbound",
+      "ok": true,
+      "bytes": 313537,
+      "contentType": "text/html; charset=UTF-8",
+      "totalItems": 0,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "ProductHunt Today",
+      "url": "https://www.producthunt.com/feed",
+      "layer": "saas-outbound",
+      "ok": true,
+      "bytes": 43760,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 50,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "Mainichi",
+          "url": "https://www.producthunt.com/products/mainichi-2",
+          "publishedAt": "2026-07-18T04:57:41-07:00",
+          "description": "Learn Japanese, one prefecture at a time. Discussion | Link",
+          "author": "Michał Paczyński"
+        },
+        {
+          "title": "OpenMarkdown",
+          "url": "https://www.producthunt.com/products/openmarkdown",
+          "publishedAt": "2026-07-18T04:57:36-07:00",
+          "description": "A markdown editor you and your agent co-edit Discussion | Link",
+          "author": "XUEYANZ"
+        },
+        {
+          "title": "Mirage",
+          "url": "https://www.producthunt.com/products/mirage-15",
+          "publishedAt": "2026-07-18T05:03:10-07:00",
+          "description": "Turn your SaaS into a clickable demo in 90 seconds. Discussion | Link",
+          "author": "Anukar"
+        },
+        {
+          "title": "WX",
+          "url": "https://www.producthunt.com/products/wx",
+          "publishedAt": "2026-07-18T04:58:10-07:00",
+          "description": "An experimental synth for playable generative sound Discussion | Link",
+          "author": "Metehan Sipahi"
+        },
+        {
+          "title": "Acebuilder",
+          "url": "https://www.producthunt.com/products/acebuilder",
+          "publishedAt": "2026-07-18T04:57:36-07:00",
+          "description": "Build landing pages with Aceternity UI Discussion | Link",
+          "author": "Manu Arora"
+        },
+        {
+          "title": "Clark",
+          "url": "https://www.producthunt.com/products/clark-agent",
+          "publishedAt": "2026-07-18T05:01:59-07:00",
+          "description": "An AI coworker with its own cloud computer Discussion | Link",
+          "author": "Ben Lang"
+        }
+      ]
+    },
+    {
+      "name": "Stripe Blog",
+      "url": "https://stripe.com/blog/feed.rss",
+      "layer": "saas-outbound",
+      "ok": true,
+      "bytes": 8817,
+      "contentType": "application/rss+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "SaaStr",
+      "url": "https://www.saastr.com/feed/",
+      "layer": "saas-outbound",
+      "ok": true,
+      "bytes": 132727,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "totalItems": 10,
+      "keptItems": 3,
+      "items": [
+        {
+          "title": "SaaStr AI App of the Week: Nue. The Revenue Platform Built for How B2B + AI Actually Prices Now",
+          "url": "https://www.saastr.com/saastr-ai-app-of-the-week-nue-the-revenue-platform-built-for-how-b2b-ai-actually-prices-now/",
+          "publishedAt": "Sat, 18 Jul 2026 09:40:32 +0000",
+          "description": "The hardest problem in B2B + AI right now is not building the product. It’s pricing it. Every AI company is walking away from pure per-seat and toward usage, consumption, credits, and outcome-based models. The tooling most of them run to quote, bill, and recognize revenue was built for a world where you set your... Continue Reading",
+          "author": "Jason Lemkin"
+        },
+        {
+          "title": "Claude Became Our AI VP of Product. We Moved 10 Years Off Marketo for $14. Our Agent Killed a $10K App in an Hour: The Agents #010",
+          "url": "https://www.saastr.com/claude-became-our-ai-vp-of-product-we-moved-10-years-off-marketo-for-14-our-agent-killed-a-10k-app-in-an-hour-the-agents-010/",
+          "publishedAt": "Fri, 17 Jul 2026 15:44:01 +0000",
+          "description": "Amelia and I just published Episode #010 of The Agents. Same setup as always: three humans, 21+ agents in production, an 8-figure B2B + AI business and $200m of investments at SaaStr AI Fund, revenue running 140% of last year and growing again. Every week we get into what’s actually working, what broke, and what... Continue Reading",
+          "author": "Jason Lemkin"
+        },
+        {
+          "title": "5 Interesting Learnings from Zoom at ~$5 Billion in ARR: Modestly Re-Accelerating Growth, Real AI Monetization, a $27B Market Cap, and a 25x Anthropic Windfall",
+          "url": "https://www.saastr.com/5-interesting-learnings-from-zoom-at-5-billion-in-arr-re-accelerating-growth-real-ai-monetization-and-a-25x-anthropic-windfall/",
+          "publishedAt": "Fri, 17 Jul 2026 12:10:10 +0000",
+          "description": "Almost everyone wrote Zoom off a few years back. The innovative app everyone loved before 2020, but then almost a COVID one-hit-wonder that peaked in 2021 after going from $1B to $4B in ARR in one year. That would slowly bleed out as people went back to the office and Teams ate some of its... Continue Reading",
+          "author": "Jason Lemkin"
+        }
+      ]
+    },
+    {
+      "name": "Unsplash Blog",
+      "url": "https://unsplash.com/blog/rss/",
+      "layer": "media",
+      "ok": true,
+      "bytes": 424911,
+      "contentType": "application/rss+xml; charset=utf-8",
+      "totalItems": 15,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "ffmpeg Releases",
+      "url": "https://git.ffmpeg.org/gitweb/ffmpeg.git/rss/atom",
+      "layer": "media",
+      "ok": true,
+      "bytes": 4518,
+      "contentType": "text/html; charset=utf-8",
+      "totalItems": 0,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "36氪",
+      "url": "https://36kr.com/feed",
+      "layer": "cn",
+      "ok": true,
+      "bytes": 105449,
+      "contentType": "application/rss+xml; charset=utf-8",
+      "totalItems": 30,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "9点1氪丨ofo停更5年突然发文，运营主体仍处存续状态；苹果市值重返全球第一；乐事回应“蓝色薯片”来源",
+          "url": "https://36kr.com/p/3900449325287305?f=rss",
+          "publishedAt": "2026-07-18 09:05:45  +0800",
+          "description": "今日热点导览 月之暗面正式推出开源模型Kimi K3 智谱ARR达到10亿美元，半年增长15倍 国际足联：世界杯冠军将有戒指，每枚均有独立编号 国内成品油价7月17日晚上调 A股存储板块龙头股遭遇两个跌停 TOP3大新闻 ofo停更5年突然发文，运营主体仍处存续状态 7月15日，沉寂近5年的ofo小黄车官方微信公众号突然更新。此次公众号发布的内容，是一则皮肤病患者援助招募信息。虽然与共享单车业务并无关联，这次更新仍然迅速引发关注。不少网友提及尚未退回的押金问题：“我的199元什么时候退？”“退款队伍还排着吗？”“这么多年过去了，押金还有希望吗？” 此前有不少网友认为，ofo早已倒闭。然而，天眼查显示，ofo关联运营主体北京拜克洛克科技有限公司目前仍处于存续状态，公司风险信息较高，涉及大量司法案件、被执行信息及限制消费令。（扬子晚报） 苹果市值重返全球第一 7月17日，苹果股价超越英伟达，成为全球市值最高公司。英伟达下跌3.2%，市值进一步缩水至约4.86万亿美元；苹果则依靠近期强势上涨，市值上升至约4.90万亿美元，时隔3个月重返全球市值第一。（界面新闻）&nbsp; 乐事：“蓝色薯片",
+          "author": ""
+        },
+        {
+          "title": "印奇在 WAIC 2026 开幕式主论坛发表主题演讲：当智能体走进物理世界",
+          "url": "https://36kr.com/p/3900439867147909?f=rss",
+          "publishedAt": "2026-07-18 08:53:35  +0800",
+          "description": "2026 世界人工智能大会（WAIC 2026）于 7 月 17 日正式开幕。作为全球人工智能领域的顶级盛会，本届大会以“智能伙伴 共创未来”为主题。阶跃星辰董事长、千里科技董事长印奇作为特邀嘉宾出席大会开幕式并在大会主论坛（上午场）发表主题演讲《当智能体进入物理世界》。回顾 15 年 AI 创业历程，他表示，AI 创业已从小众赛道成为全球重要共识。今天的 AI 研究者和创业者既站在几代科学家持续探索的肩膀上，也受益于信息技术、移动互联网、云计算、半导体、新能源等产业积累，能够参与这场时代变革无比幸运。 印奇判断，2026 年模型能力正在跨越关键临界点，AI 已从只能连续执行数秒任务，进阶到能够独立工作数十小时，行业正站在 AGI 高峰的山脚下。继自然语言之后，编程正成为衡量 AI 能力跃迁的重要标尺。随着智能体模型与下一代终端产品加速结合，智能正从数字屏幕走向真实物理世界，智能体也将从聊天工具进化为能够感知、决策和执行任务的生产力最小单元。未来，工程师、设计师、研究员等都能拥有专属智能体，使一个人具备一支团队的能力。 印奇指出，智能体浪潮将推动新系统、新载体、新网络三大结构性变革。在",
+          "author": ""
+        },
+        {
+          "title": "氪星晚报｜阿里1688将推出AI时代B2B交易互联互通开放标准；英特尔与Google Cloud宣布深化战略合作；铁路部门试点提前60天预约购票服务",
+          "url": "https://36kr.com/p/3896564485572489?f=rss",
+          "publishedAt": "2026-07-17 21:01:42  +0800",
+          "description": "大公司： 成大生物：流感病毒裂解疫苗（高剂量）进入I期临床试验 36氪获悉，成大生物公告，公司全资子公司成大生物(本溪)研发的流感病毒裂解疫苗（高剂量）已获国家药监局临床试验批准，并完成I期临床试验筹备工作，正式进入I期临床试验阶段。该疫苗抗原含量为常规剂量四倍，适用于60岁以上老年人群及高风险人群，国内尚无同类产品获批上市，有望填补市场空白。 苏宁易购携手人工智能合作伙伴，布局家用服务机器人 36氪获悉，近日，苏宁易购旗下碧英科技入围工信部人工智能揭榜挂帅项目，将联合产业生态合作伙伴研发智能家庭陪护机器人。该项目面向老龄化背景下的居家照护需求，结合具身智能技术，探索家用机器人商业化路径。 阿里1688将推出AI时代B2B交易互联互通开放标准 7月17日，在2026世界人工智能大会上，阿里1688宣布将在本月底推出UTP通用交易协议（UniversalTradeProtocol，简称“UTP”）。随着AI越来越会做生意，B2B正在演变为A2A——买家的AI直接对接工厂的AI自动完成交易，但不同AI之间缺一套行业通用交易协议。UTP相当于为A2A时代的全球贸易建立统一的交易基础设施。UT",
+          "author": ""
+        },
+        {
+          "title": "腾讯升级发布具身智能全栈方案，ADP 4.0海外版正式上线",
+          "url": "https://36kr.com/newsflashes/3900908700436103?f=rss",
+          "publishedAt": "2026-07-18 17:30:23  +0800",
+          "description": "7月18日，在2026世界人工智能大会（WAIC）上，腾讯面向具身智能与智能体领域带来多项产品技术的升级发布。在具身智能领域，腾讯正式升级发布具身智能全栈方案，贯穿云底座、模型层、平台层与应用层，全面助力机器人本体及系统开发商提质提效；在智能体领域，基于个人与企业提效需求，推出差异化的全矩阵解决方案。其中，面向企业用户的腾讯云企业级智能体开发平台ADP4.0海外版正式上线，同时发布「十大行业百大场景生态计划」，目前该平台已落地30多个行业，覆盖智能客服、知识管理、媒体生产等业务场景；面向个人用户的腾讯WorkBuddy正式发布独立App，成为业界首个登陆iOS、Android、鸿蒙三端的通用智能体应用。",
+          "author": ""
+        },
+        {
+          "title": "腾讯云智能体硬件生态提速，首款接入WorkBuddy AI记忆眼镜发布",
+          "url": "https://36kr.com/newsflashes/3900906468984713?f=rss",
+          "publishedAt": "2026-07-18 17:00:06  +0800",
+          "description": "7月17日，在2026世界人工智能大会（WAIC）期间，腾讯云WorkBuddy与李未可科技宣布达成战略生态合作，并发布首款接入WorkBuddy的X-AI记忆眼镜。这也是WorkBuddy硬件生态迈出的关键一步。X-AI记忆眼镜搭载自研WakeeMemory OS，能够持续感知真实工作场景，整理后的信息，将自动同步至WorkBuddy。基于长期积累形成的工作记忆，WakeeMemory能够持续理解用户的工作习惯、任务优先级以及合作关系，把碎片化的信息整理成带有完整上下文的行动���，再交由WorkBuddy完成后续执行。",
+          "author": ""
+        },
+        {
+          "title": "福特在美召回近39万辆Aviator和Explorer车型，涉及座椅部件安全问题",
+          "url": "https://36kr.com/newsflashes/3900845248415362?f=rss",
+          "publishedAt": "2026-07-18 16:30:50  +0800",
+          "description": "美国国家公路交通安全管理局（NHTSA）7月18日公布，福特汽车公司正在召回部分2020至2027款Aviator和2020至2026款Explorer车型，涉及约38.8万辆汽车。由于二排外侧座椅便捷进入功能开关可能出现卡滞，导致座椅解锁、倾斜或滑动，车辆发生碰撞时可能无法有效约束乘员，增加受伤风险。",
+          "author": ""
+        }
+      ]
+    },
+    {
+      "name": "少数派",
+      "url": "https://sspai.com/feed",
+      "layer": "cn",
+      "ok": true,
+      "bytes": 5745,
+      "contentType": "application/xml; charset=UTF-8",
+      "totalItems": 10,
+      "keptItems": 1,
+      "items": [
+        {
+          "title": "小米 NAS 拆解与初步上手：它会是你的第一台 NAS 吗？",
+          "url": "https://sspai.com/post/112398",
+          "publishedAt": "Sat, 18 Jul 2026 11:10:35 +0800",
+          "description": "小米智能存储最适合两类用户：家里已经有较多米家设备的人，以及小米手机用户。查看全文",
+          "author": "羊刀仙"
+        }
+      ]
+    },
+    {
+      "name": "InfoQ 中文",
+      "url": "https://www.infoq.cn/feed.xml",
+      "layer": "cn",
+      "ok": true,
+      "bytes": 13689,
+      "contentType": "application/xml; charset=utf-8",
+      "totalItems": 20,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "火速上架！空降即登顶Arena，Kimi K3当日登陆「模型广场」",
+          "url": "https://www.infoq.cn/article/NtfFE25blBHubhNNTmkJ?utm_source=rss&utm_medium=article",
+          "publishedAt": "Sat, 18 Jul 2026 17:14:05 GMT",
+          "description": "点击查看原文>",
+          "author": "木子"
+        },
+        {
+          "title": "中国 AI 产业核心要素出海发展白皮书",
+          "url": "https://www.infoq.cn/minibook/GSbtyU9968lerf5gwPpU?utm_source=rss&utm_medium=article",
+          "publishedAt": "Sat, 18 Jul 2026 12:02:12 GMT",
+          "description": "点击查看原文>",
+          "author": "InfoQ 中文站"
+        },
+        {
+          "title": "为什么 AI Agent 拿到数据却不会推理？可观测对象图语义层的设计与开源实践｜AICon深圳",
+          "url": "https://www.infoq.cn/article/KPd6YwU0Y1iCMGMakSmE?utm_source=rss&utm_medium=article",
+          "publishedAt": "Sat, 18 Jul 2026 10:00:00 GMT",
+          "description": "点击查看原文>",
+          "author": "AICon 全球人工智能开发与应用大会"
+        },
+        {
+          "title": "AI 智能体算力消耗过快，传统账单风控跟不上速度",
+          "url": "https://www.infoq.cn/article/secM60Za0CNxIYvQO47m?utm_source=rss&utm_medium=article",
+          "publishedAt": "Sat, 18 Jul 2026 09:00:00 GMT",
+          "description": "点击查看原文>",
+          "author": "作者： Steef-Jan Wiggers"
+        },
+        {
+          "title": "豆包视频通话背后，火山引擎重构 Agent 时代多模态传输底座",
+          "url": "https://www.infoq.cn/article/GICIrEsTJwEgGsDYFvCM?utm_source=rss&utm_medium=article",
+          "publishedAt": "Sat, 18 Jul 2026 08:54:38 GMT",
+          "description": "点击查看原文>",
+          "author": "火山引擎视频云"
+        },
+        {
+          "title": "不止于 4K，火山引擎画质增强让视频从清晰走向细腻",
+          "url": "https://www.infoq.cn/article/rgF4YG8DcjMKe9CTU0yM?utm_source=rss&utm_medium=article",
+          "publishedAt": "Sat, 18 Jul 2026 08:43:19 GMT",
+          "description": "点击查看原文>",
+          "author": "火山引擎视频云"
+        }
+      ]
+    },
+    {
+      "name": "雷锋网",
+      "url": "https://www.leiphone.com/feed",
+      "layer": "cn",
+      "ok": true,
+      "bytes": 409346,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "totalItems": 20,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "商汤大装置联合五家头部科研机构启动科学发现平台战略合作，探索科学智能新范式",
+          "url": "https://www.leiphone.com/category/ai/STqP2Xt59jKRSEkT.html",
+          "publishedAt": "Sat, 18 Jul 2026 16:59:00 +0800",
+          "description": "7月18日，在WAIC 2026商汤科技“基座大模型架构创新与生态合作论坛”上，商汤大装置联合上海人工智能实验室、北京中关村学院、深圳河套学院、上海算法创新研究院、上海交通大学人工智能学院五家国内顶尖科研机构，共同启动科学发现平台战略合作，通过汇聚国家级科研平台、高水平新型研发机构和一流高校科研力量，共同探索人工智能赋能基础研究和前沿科技创新（AI for Science）的新范式。商汤联合创始人、大装置事业群总裁杨帆，与上海人工智能实验室主任助理石伯明、北京中关村学院副院长秦涛、深圳河套学院副院长欧阳万里、上海算法创新研究院大模型中心负责人熊飞宇、上海交通大学人工智能学院教授严骏驰共同出席发布仪式。五家合作机构分别代表我国人工智能基础研究、科技创新、人才培养和成果转化的重要力量。其中，上海人工智能实验室是国际级人工智能新型科研机构；北京中关村学院和深圳河套学院聚焦人工智能领域科技人才培养和前沿技术创新平台；上海算法创新研究院持续推动人工智能核心算法和大模型关键技术突破；上海交通大学人工智能学院依托世界一流高校科研优势，积极推进人工智能交叉学科建设和原创性科研创新。多方协同联动，标志着",
+          "author": ""
+        },
+        {
+          "title": "后摩智能携 M50 Inside 终端亮相 WAIC 2026，支撑端侧 AI 算力与终端创新",
+          "url": "https://www.leiphone.com/category/industrynews/M1iLyizkT9WLF8YH.html",
+          "publishedAt": "Sat, 18 Jul 2026 15:02:00 +0800",
+          "description": "仅手掌大小的Agent Computer，能驱动千亿参数大模型，24小时在线的本地“桌面AI助理”，能一句话自动生成PPT；全息交互个人终端，可以实时进行画面渲染，驱动一个可以持续对话的数字人……7月18日，在WAIC 2026张江科学会堂，（记者观察到，）后摩智能携多款M50 Inside创新AI终端集中亮相，让大模型从云端真正走向本地，端侧智能触手可及。&nbsp;大模型推理走向端侧，高算力、低功耗、易部署芯片成刚需&nbsp;随着大模型从云端全面向端侧迁移，端侧AI迎来爆发式增长，各类终端设备逐步具备自主记忆、智能检索、逻辑推演、自主任务执行的全流程能力。行业普遍将2026年定义为端侧AI元年，AI PC、智能服务机器人、边缘智能终端等产品加速落地商用场景。&nbsp;当前大模型参数规模持续扩容，但终端设备的体积、电池功耗、散热空间均存在刚性限制，算力、功耗、延时、部署等约束，已然成为大模型规模化落地端侧的核心瓶颈，也让高算力、低功耗、易部署的大模型端边AI芯片成为产业刚需。&nbsp;针对行业痛点，后摩智能M50芯片依托存算一体架构，在10W功耗下实现160 TOPS单芯片算力",
+          "author": ""
+        },
+        {
+          "title": "WAIC | 从能力领先到产业交付，科大讯飞如何让AI成为真实世界生产力？",
+          "url": "https://www.leiphone.com/category/industrynews/Xr6FFEeoQ7jUDXSI.html",
+          "publishedAt": "Sat, 18 Jul 2026 15:00:00 +0800",
+          "description": "进入2026年下半年，AI行业正在经历一次重要切换。过去几年，大模型竞争更多围绕参数规模、榜单排名和单点能力展开。模型会不会写作、能不能推理、代码能力强不强，是公众最直观的感受。如今，当AI开始进入课堂、医院、企业、城市、办公桌和智能终端，真正关键的问题变成了：AI能不能稳定完成真实任务，能不能嵌入真实流程，能不能在合规、安全、成本可控的前提下持续运行，能不能把一次次调用转化为组织效率和用户体验？&nbsp;换句话说，AI的竞争正在从“模型能力竞争”，进入“真实世界生产力竞争”。今年WAIC，科大讯飞将以“解放生产力 释放想象力”为主题，系统呈现从自主可控大模型底座、行业应用、智能终端到真实场景的AI生产力布局。这不是一次简单的展品罗列，而是科大讯飞对AI产业新阶段的一次集中回答。AI要成为真实世界生产力，不能只靠一个会聊天的模型。它需要一个足够可靠的底座，一套足够聪明的模型能力，一批足够深入的行业场景，以及能够被用户持续使用的真实入口。对科大讯飞来说，这条路的关键词有两个：全栈自主可控，能力持续领先。自主可控不是退而求其次，更不是在安全与能力之间做妥协。在国家战略安全与产业长期竞争力",
+          "author": ""
+        },
+        {
+          "title": "从“能回答”到“能执行”，WAIC 2026 网易有道 LobsterAI 重新定义办公助手边界",
+          "url": "https://www.leiphone.com/category/industrynews/59N2nNCnS8JoskbA.html",
+          "publishedAt": "Sat, 18 Jul 2026 14:43:00 +0800",
+          "description": "7月17日，2026 世界人工智能大会（WAIC）在上海正式开幕。网易有道展位内人潮涌动，一款名为 LobsterAI 的桌面级办公助手 Agent 产品吸引了不少观众驻足体验，纷纷排队等待亲手“指挥” AI 完成真实任务。一位参展观众在试用后由衷感叹：“不是让 AI 帮我写一段话，而是让它真正进入电脑，一步步把任务完成。”从“对话”到“行动”：一个指令，自动拆解执行网易有道此次 AI Agent 应用矩阵的共同底层逻辑是“Model + Harness”：即模型提供智能能力，Harness 则负责理解任务、连接工具、调度流程、管理上下文，把模型能力转化为可持续交付的产品体验。在 WAIC 现场，LobsterAI 展示了从“对话”走向“行动”的真实落地能力：用户只需下达任务指令，AI 即可连接文件、终端、浏览器与本地项目，自动拆解任务并执行，真正进入工作流完成实际工作。一位上海的技术人员尝试在现场用 LobsterAI 自动连接本地项目、运行测试脚本、生成代码审查报告，体验后他感慨道：“这才是我想要的 Agent，不是聊天，是干活。”国内大厂首个 100% 开源桌面级办公助手 Age",
+          "author": ""
+        },
+        {
+          "title": "让智能走进产业现场，鹿明机器人亮相WAIC 2026",
+          "url": "https://www.leiphone.com/category/industrynews/Ch0J0HQjN5HwBc2H.html",
+          "publishedAt": "Sat, 18 Jul 2026 14:02:00 +0800",
+          "description": "7月17日至20日，2026世界人工智能大会暨人工智能全球治理高级别会议（WAIC 2026）在上海举办。作为全球人工智能领域的重要盛会，WAIC正成为观察产业发展趋势的重要窗口。今年大会上，越来越多企业不再只是展示技术能力，而是围绕真实应用、产业协同和商业化成果展开交流，具身智能正式迈入价值验证的新阶段。本届WAIC，鹿明机器人围绕”让智能走进现实”的品牌主张，集中展示了产业具身的最新实践。从联合产业伙伴发布工业场景合作案例，到展示产业具身大脑Prime R0及无本体数采能力，鹿明完整呈现了覆盖“场景—数据—模型”的产业具身技术体系。从产业现场出发：以真实需求驱动具身智能规模化落地当具身智能进入价值验证阶段，企业竞争正在从技术突破转向产业落地。鹿明认为，工业、商业与家庭，是具身智能逐步迈向通用智能的三个发展阶段。其中，工业场景具有结构化程度高、任务边界清晰、作业目标明确等特点，投入产出比可量化，能够形成“数据采集—模型训练—场景部署—效果反馈”的完整技术闭环，是具身智能实现规模化落地和持续迭代的最佳起点。随着机器人在工业场景不断积累真实数据和模型泛化能力，其能力将进一步延伸至商业服务",
+          "author": ""
+        },
+        {
+          "title": "灵巧智能亮相WAIC，全栈自研驱动具身智能产业化落地",
+          "url": "https://www.leiphone.com/category/industrynews/w5PrxGuvqYtI9U4p.html",
+          "publishedAt": "Sat, 18 Jul 2026 12:13:00 +0800",
+          "description": "2026世界人工智能大会（WAIC）启幕，具身智能、物理AI与人形机器人赛道再次成为产业关注焦点。伴随大模型、感知交互和运动控制能力持续进步，行业竞争正从“能展示什么”加速转向“能交付什么”。在此背景下，灵巧智能携全链路技术体系与多场景落地成果亮相WAIC，系统展示其在类人灵巧操作领域的全栈能力与产业化路径。当前，具身智能产业正从技术热潮迈入落地验证阶段。市场上多数产品已具备移动、感知、语音交互等基础能力，但在制造、电力等高价值场景中，机器人仍普遍面临“能感知、会交互，却难以完成复杂实操”的难题。在拧螺丝、插拔、分拣、精细装配等任务中，机器人既要应对物体形态、材质、重量的差异，也要适应环境扰动和长流程、精细力控带来的复杂挑战。真正制约具身智能规模化应用的，已不只是认知能力，而是面向真实世界的灵巧操作能力。&nbsp;围绕这一行业痛点，灵巧智能给出的解题之道是：全栈打通。在具身智能赛道，很多企业擅长“做一只手”或“做一个模型”，但真实产业环境中的问题从来不是单点问题——硬件灵活性、感知完备性、数据充足性、算法适配性、场景工程化能力，这些要素相互耦合，任何一块短板都会卡住全局。正因如此，灵",
+          "author": ""
+        }
+      ]
+    },
+    {
+      "name": "虎嗅",
+      "url": "https://www.huxiu.com/rss",
+      "layer": "cn",
+      "ok": true,
+      "bytes": 11201,
+      "contentType": "text/html; charset=utf-8",
+      "totalItems": 0,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "GitHub Trending (weekly)",
+      "url": "https://mshibanami.github.io/GitHubTrendingRSS/weekly/all.xml",
+      "layer": "github",
+      "ok": true,
+      "bytes": 921719,
+      "contentType": "application/xml",
+      "totalItems": 19,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "Nutlope/hallmark",
+          "url": "https://github.com/Nutlope/hallmark",
+          "publishedAt": "",
+          "description": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.Hallmark A design skill for Claude Code, Cursor, and Codex that refuses to look AI-generated. Live demo → &nbsp;·&nbsp; twenty themes &nbsp;·&nbsp; four verbs &nbsp;·&nbsp; press T to cycle. Made by Together AI. Hallmark picks a macrostructure for the brief, dresses it in one of twenty themes, runs fifty-seven slop-test gates plus a pre-emit self-critique, and refuses the on-distribution defaults every LLM was trained into. Two pages b",
+          "author": ""
+        },
+        {
+          "title": "abseil/abseil-cpp",
+          "url": "https://github.com/abseil/abseil-cpp",
+          "publishedAt": "",
+          "description": "Abseil Common Libraries (C++)Abseil - C++ Common Libraries The repository contains the Abseil C++ library code. Abseil is an open-source collection of C++ code (compliant to C++17) designed to augment the C++ standard library. Table of Contents About Abseil Quickstart Building Abseil Support Codemap Releases License Links About Abseil Abseil is an open-source collection of C++ library code designed to augment the C++ standard library. The Abseil library code is collected from Google's own C++ co",
+          "author": ""
+        },
+        {
+          "title": "google-labs-code/stitch-skills",
+          "url": "https://github.com/google-labs-code/stitch-skills",
+          "publishedAt": "",
+          "description": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor.Stitch Design Skills A collection of agent skills and plugins for Google Stitch, following the Agent Skills open standard. Compatible with coding agents such as Codex, Antigravity, Gemini CLI, Claude Code, and Cursor. Quick Start 1. Install Plugins (Recommended) The fastest way to set up",
+          "author": ""
+        },
+        {
+          "title": "HKUDS/Vibe-Trading",
+          "url": "https://github.com/HKUDS/Vibe-Trading",
+          "publishedAt": "",
+          "description": "\"Vibe-Trading: Your Personal Trading Agent\" English | 中文 | 日本語 | 한국어 | العربية Vibe-Trading: Your Personal Trading Agent One Command to Empower Your Agent with Comprehensive Trading Capabilities Website &nbsp;·&nbsp; Docs &nbsp;·&nbsp; News &nbsp;·&nbsp; Features &nbsp;·&nbsp; Shadow Account &nbsp;·&nbsp; Demo &nbsp;·&nbsp; Quick Start &nbsp;·&nbsp; Examples &nbsp;·&nbsp; API / MCP &nbsp;·&nbsp; Roadmap &nbsp;·&nbsp; Contributing 📰 News ⚠️ Security warning: The X account VibeTrading_HKU, Virtua",
+          "author": ""
+        },
+        {
+          "title": "wonderwhy-er/DesktopCommanderMCP",
+          "url": "https://github.com/wonderwhy-er/DesktopCommanderMCP",
+          "publishedAt": "",
+          "description": "This is MCP server for Claude that gives it terminal control, file system search and diff file editing capabilitiesDesktop Commander MCP Search, update, manage files and run terminal commands with AI Work with code and text, run processes, and automate tasks, going far beyond other AI editors - while using host client subscriptions instead of API token costs. 🖥️ Try the Desktop Commander App (Beta) Want a better experience? The Desktop Commander App gives you everything the MCP server does, plu",
+          "author": ""
+        },
+        {
+          "title": "OpenCut-app/OpenCut",
+          "url": "https://github.com/OpenCut-app/OpenCut",
+          "publishedAt": "",
+          "description": "The open-source CapCut alternative OpenCut A free and open source video editor for web, desktop, and mobile. Status OpenCut is being rewritten from the ground up. What's coming: An Editor API First-class third party plugins (made possible by a plugin-first architecture) Desktop, mobile, and browser from one codebase (Rust core) MCP server (for AI agents) Headless mode (automation, batch rendering) A scripting tab directly in the editor You can still find the previous version at opencut-app/openc",
+          "author": ""
+        }
+      ]
+    },
+    {
+      "name": "Pi Coding Agent Releases",
+      "url": "https://github.com/badlogic/pi-mono/releases.atom",
+      "layer": "github",
+      "ok": true,
+      "bytes": 45996,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "Supabase Releases",
+      "url": "https://github.com/supabase/supabase/releases.atom",
+      "layer": "github",
+      "ok": true,
+      "bytes": 108285,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "TechCrunch",
+      "url": "https://techcrunch.com/feed/",
+      "layer": "tech-general",
+      "ok": true,
+      "bytes": 18456,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "totalItems": 20,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "Neil Rimer thinks the AI money is coming back out",
+          "url": "https://techcrunch.com/2026/07/17/neil-rimer-thinks-the-ai-money-is-coming-back-out/",
+          "publishedAt": "Sat, 18 Jul 2026 04:47:25 +0000",
+          "description": "Neil Rimer, the venture capitalist who co-founded Index Ventures, predicts the historic wealth AI is generating in Silicon Valley will have to be redistributed, voluntarily or involuntarily.",
+          "author": "Connie Loizos"
+        },
+        {
+          "title": "Applications close in 48 hours — here’s everything Australian founders need to know about Stripe x Startup Battlefield",
+          "url": "https://techcrunch.com/2026/07/17/applications-close-in-48-hours-heres-everything-australian-founders-need-to-know-about-stripe-x-startup-battlefield/",
+          "publishedAt": "Fri, 17 Jul 2026 23:08:00 +0000",
+          "description": "The window is almost shut. On August 19, eight startups will take the stage at Stripe Tour Sydney in front of investors, global press, and the Australian tech community. One startup walks away with automatic entry into TechCrunch Disrupt in San Francisco — no application, no further competition, a guaranteed spot on the world’s most […]",
+          "author": "Isabelle Johannessen"
+        },
+        {
+          "title": "Vertu wants executives to pay $6,880 for an AI agent — here’s how it actually performs",
+          "url": "https://techcrunch.com/2026/07/17/vertu-wants-executives-to-pay-6880-for-an-ai-agent-heres-how-it-actually-performs/",
+          "publishedAt": "Fri, 17 Jul 2026 22:55:09 +0000",
+          "description": "From AI workflows to battery life and security, here's what it's really like to live with Vertu's luxury foldable every day.",
+          "author": "Jagmeet Singh"
+        },
+        {
+          "title": "Databricks hits $188B valuation, extending its run as AI’s favorite second act",
+          "url": "https://techcrunch.com/2026/07/17/databricks-hits-188b-valuation-extending-its-run-as-ais-favorite-second-act/",
+          "publishedAt": "Fri, 17 Jul 2026 22:12:56 +0000",
+          "description": "Databricks has remade its image into an AI company and has published research on the cost savings of open weight AI models for coding.",
+          "author": "Julie Bort"
+        },
+        {
+          "title": "The Zoom hack that says, ‘Don’t record me’",
+          "url": "https://techcrunch.com/2026/07/17/the-zoom-hack-that-says-dont-record-me/",
+          "publishedAt": "Fri, 17 Jul 2026 21:20:47 +0000",
+          "description": "If every meeting, watercooler conversation, and date gets transcribed and summarized, who's actually reading any of it?",
+          "author": "Connie Loizos"
+        },
+        {
+          "title": "Agility Robotics plants its flag in Tesla’s backyard",
+          "url": "https://techcrunch.com/2026/07/17/agility-robotics-plants-its-flag-in-teslas-backyard/",
+          "publishedAt": "Fri, 17 Jul 2026 20:19:49 +0000",
+          "description": "Agility is opening a new training center for its Digit robots in Fremont, California.",
+          "author": "Tim Fernholz"
+        }
+      ]
+    },
+    {
+      "name": "The Verge",
+      "url": "https://www.theverge.com/rss/index.xml",
+      "layer": "tech-general",
+      "ok": true,
+      "bytes": 35943,
+      "contentType": "application/xml; charset=UTF-8",
+      "totalItems": 10,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "The apps, gadgets, and tools every reader needs",
+          "url": "https://www.theverge.com/tech/967544/best-apps-gadgets-reading-installer",
+          "publishedAt": "2026-07-17T16:27:52-04:00",
+          "description": "Hi, friends! Welcome to Installer No. 136, your guide to the best and Verge-iest stuff in the world. (If you're new here, welcome, hope your neighborhood isn't as smoky as mine, and also you can read all the old editions at the Installer homepage.) This week, I've been recording the next season of Version History […]",
+          "author": "David Pierce"
+        },
+        {
+          "title": "Fine, electric mountain bikes don’t suck",
+          "url": "https://www.theverge.com/tech/966964/emtb-riders-are-not-cheaters",
+          "publishedAt": "2026-07-17T10:46:45-04:00",
+          "description": "Cheater, I'd grumble between huffs as yet another e-bike rider casually skittered past me on a steep ascent. It's this purist attitude that, for years, has left me blind to one simple fact: electric mountain bikes are fun! My attitude adjustment came a few weeks ago, the very first time I rode an Amflow PX […]",
+          "author": "Thomas Ricker"
+        },
+        {
+          "title": "Taylor Farms pulls iceberg lettuce from the US market after cyclosporiasis outbreak",
+          "url": "https://www.theverge.com/science/967563/cyclospora-taylor-farms-taco-bell-iceberg-lettuce",
+          "publishedAt": "2026-07-17T18:15:26-04:00",
+          "description": "Food producer Taylor Farms released a statement on the Cyclospora outbreak Friday, confirming that it's \"voluntarily removing all iceberg lettuce sourced from central Mexico from the US market.\" Reuters reports that, according to a source, Taylor Farms told customers like Yum Brands owner Taco Bell and the food distributor Sysco on Thursday to pull shredded […]",
+          "author": "Richard Lawler"
+        },
+        {
+          "title": "Shark’s versatile ChillPill cooling system is back to its best price",
+          "url": "https://www.theverge.com/gadgets/967512/shark-chillpill-personal-fan-and-cooling-system-deal-sale",
+          "publishedAt": "2026-07-17T16:15:54-04:00",
+          "description": "Portable fans are one of the easiest ways to stay cool during the summer, and you don’t have to spend much to find a decent one. If you’re looking for something more versatile, though, Shark’s ChillPill Personal Fan and Cooling System combines a rechargeable fan with a dry-touch evaporative mister in a design that can […]",
+          "author": "Sheena Vasani"
+        },
+        {
+          "title": "TikTok is testing an AI likeness detection tool",
+          "url": "https://www.theverge.com/tech/967486/tiktok-ai-likeness-detection-tool",
+          "publishedAt": "2026-07-17T15:34:30-04:00",
+          "description": "TikTok is starting to test an opt-in tool that scans for AI likenesses and lets creators report them to the company, as spotted by social media consultant Matt Navarra. The tool is initially being tested with \"some\" US creators, TikTok US spokesperson Zachary Kizer tells The Verge. YouTube has been working on a similar tool […]",
+          "author": "Jay Peters"
+        },
+        {
+          "title": "Pebble founder Eric Migicovsky says his 30-day warranty is all about trust",
+          "url": "https://www.theverge.com/gadgets/967471/pebble-smartwatch-warranty-repairs-migicovsky-interview",
+          "publishedAt": "2026-07-17T15:14:42-04:00",
+          "description": "Pebble founder Eric Migicovsky says buyers of its new e-paper smartwatches should know what they're signing up for and trust Pebble to make things right if they run into issues, despite the short warranty. \"I think the most important thing is trust,\" Migicovsky told me in an interview this week. \"Do people trust the product […]",
+          "author": "Stevie Bonifield"
+        }
+      ]
+    },
+    {
+      "name": "Ars Technica",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+      "layer": "tech-general",
+      "ok": true,
+      "bytes": 73216,
+      "contentType": "text/xml; charset=utf-8",
+      "totalItems": 20,
+      "keptItems": 6,
+      "items": [
+        {
+          "title": "Google-backed satellites for wildfire detection launch as smoke chokes US, Canada",
+          "url": "https://arstechnica.com/space/2026/07/google-backed-satellites-for-wildfire-detection-launch-as-smoke-chokes-us-canada/",
+          "publishedAt": "Fri, 17 Jul 2026 19:50:18 +0000",
+          "description": "The FireSat program can spot wildfires that other satellites miss.",
+          "author": "Jeremy Hsu"
+        },
+        {
+          "title": "The Pentagon's Space Development Agency hasn't moved as fast as anyone would like",
+          "url": "https://arstechnica.com/space/2026/07/the-pentagons-space-development-agency-hasnt-moved-as-fast-as-anyone-would-like/",
+          "publishedAt": "Fri, 17 Jul 2026 19:19:42 +0000",
+          "description": "\"Missiles are being launched at the joint force every single day in [Operation] Epic Fury.\"",
+          "author": "Stephen Clark"
+        },
+        {
+          "title": "Hegseth wants a \"High-T\" military; doctors call it a clinical minefield",
+          "url": "https://arstechnica.com/health/2026/07/hegseth-wants-a-high-t-military-doctors-call-it-a-clinical-minefield/",
+          "publishedAt": "Fri, 17 Jul 2026 18:53:11 +0000",
+          "description": "\"We're turning the clock back on rational healthcare.\"",
+          "author": "Beth Mole"
+        },
+        {
+          "title": "Taco Bell iceberg lettuce identified as source of cyclosporiasis in 5 states",
+          "url": "https://arstechnica.com/health/2026/07/taco-bell-iceburg-lettuce-identified-as-source-of-cyclosporiasis-in-5-states/",
+          "publishedAt": "Fri, 17 Jul 2026 18:45:23 +0000",
+          "description": "Don't eat Taco Bell lettuce in Indiana, Kentucky, Michigan, Ohio, or West Virginia.",
+          "author": "Beth Mole"
+        },
+        {
+          "title": "Troubling new details emerge on diabetes ouster controversy",
+          "url": "https://arstechnica.com/science/2026/07/troubling-new-details-emerge-on-diabetes-ouster-controversy/",
+          "publishedAt": "Fri, 17 Jul 2026 17:08:05 +0000",
+          "description": "American Diabetes Association blocked publication of op-ed articles so the authors posted them as a preprint.",
+          "author": "Jennifer Ouellette"
+        },
+        {
+          "title": "Will Russia's answer to the Falcon 9 rocket ever take flight?",
+          "url": "https://arstechnica.com/space/2026/07/will-russias-answer-to-the-falcon-9-rocket-ever-take-flight/",
+          "publishedAt": "Fri, 17 Jul 2026 16:42:19 +0000",
+          "description": "Grasshopper-like tests could begin in 2028.",
+          "author": "Eric Berger"
+        }
+      ]
+    },
+    {
+      "name": "Machine Learning Mastery",
+      "url": "https://machinelearningmastery.com/feed/",
+      "layer": "tech-general",
+      "ok": true,
+      "bytes": 8792,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "totalItems": 10,
+      "keptItems": 0,
+      "items": []
+    },
+    {
+      "name": "KDnuggets",
+      "url": "https://www.kdnuggets.com/feed",
+      "layer": "tech-general",
+      "ok": true,
+      "bytes": 8426,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "totalItems": 10,
+      "keptItems": 1,
+      "items": [
+        {
+          "title": "Git Worktrees for AI Development",
+          "url": "https://www.kdnuggets.com/git-worktrees-for-ai-development",
+          "publishedAt": "Fri, 17 Jul 2026 14:00:33 +0000",
+          "description": "A Git worktree is a separate directory checked out from the same repository. You can have as many as you need, each on its own branch, all coexisting simultaneously on your filesystem.",
+          "author": "Shittu Olumide"
+        }
+      ]
+    }
+  ]
+}

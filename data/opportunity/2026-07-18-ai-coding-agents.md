@@ -1,177 +1,187 @@
-# 🔍 Discover · AI coding agents · 2026-07-18
+# 💡 机会 · AI coding agents · 2026-07-18
 
-> 窗口: 2026-07-18 前 30 天(部分高价值信号追溯到 2026 上半年) | 来源: HN + GitHub + 中文 RSS + Reddit | 共 5 个 cluster
-
+> 窗口: 2026-07-18 前 30 天 | 来源: HN + GitHub + 中文 RSS + Reddit | 共 4 个 cluster
 
 ▬▬▬▬▬▬▬▬
-
 
 ## 📌 TL;DR
 
-- **Claude Code 信任危机持续发酵**:英文社区爆出"隐写水印 + 源码 NPM 泄露 + 拒绝 OpenClaw commit"等连环争议,HN 单帖最高 2445/750 互动;中文 V2EX 同步出现"额度突然重置 / 5.6 模型消失"等焦虑。
-- **Vibe Coding 进入反思潮**:多位 2 年以上重度用户表态"回归手写"或"vibe + agentic 必须分清",HN 累计 4 条 800+ 互动贴;Reddit r/ClaudeCode 出现"我现在作为软件工程师的意义是什么"的高赞帖。
-- **CLI agent 工具链井喷**:GitHub 上 multi-harness skill 库已突破 4 万 stars(Juggler、Jules GUI agent 等 7 月新作涌现),围绕 Claude Code / Codex CLI / Gemini CLI 的"代理路由器"成为新热点。
-- **中文圈进入"实战焦虑期"**:V2EX 4 个 Codex/Claude 额度吐槽帖 + 多款中文开源工具(codexia / codex-switcher / codex-bridge 桥接 DeepSeek)集中爆发。
-- **WAIC 2026 把"Agent 原生 OS / 算力计费 / 技能支付"推到 C 位**:中国厂商正在把 Agent 从"会对话"推到"能办事 + 能计费"。
-
+- **Token 与上下文成本正在成为产品层问题**：Claude Code vs OpenCode 的 token overhead 讨论达到 1097 engagement，GitHub 上 codeburn 已获 8732 stars。
+- **Coding agent 的下一步不是再包一层聊天框，而是更好的工作台**：Juggler 获 396 engagement，讨论集中在 tree UI、worktree、sandbox、ACP 和远程协作。
+- **开源生态正在从“单个 agent”转向“可插拔 harness + skills + memory + security”**：OpenCode 187102 stars，ECC 230791 stars，多个新项目在补齐治理层。
 
 ▬▬▬▬▬▬▬▬
 
+## 🧩 Cluster 1 · Agent 的真正差异化转向成本、上下文与模型路由
 
-## 🧩 Cluster 1 · Claude Code 治理争议 + 性能衰退的双重信任危机
-
-**为什么重要**:这是目前英文圈最高互动话题(单帖 2445/750),直接关系到我们是否继续把 Claude Code 作为默认 coding agent 引擎;同时也是 V2EX 中文用户吐槽的源头(额度重置 + 模型消失)。
+**为什么重要**: Coding agent 越能自主调用工具，token、上下文和测试执行成本越容易失控。机会不在单纯再做一个 agent，而在做跨 Claude Code、Codex、OpenCode、Gemini 的成本控制与质量反馈层。
 
 **证据**
 
-- [Claude Code is steganographically marking requests — HN(2445/750)](https://news.ycombinator.com/item?id=48734373)
-- [Claude Code source code leaked via NPM map file — HN(2095/1022)](https://news.ycombinator.com/item?id=47584540)
-- [Claude Code refuses requests if commits mention OpenClaw — HN(1349/720)](https://news.ycombinator.com/item?id=47963204)
-- [Claude Code unusable for complex engineering tasks since Feb — HN(1364/753)](https://news.ycombinator.com/item?id=47660925)
-- [Anthropic 不允许 Claude Code 订阅使用 OpenClaw — HN(1099/827)](https://news.ycombinator.com/item?id=47633396)
+- [Claude Code sends 33k tokens before reading the prompt; OpenCode sends 7k — HN，engagement 1097](https://news.ycombinator.com/item?id=48883275)
+- [getagentseal/codeburn — GitHub，8732 stars，pushed 2026-07-18](https://github.com/getagentseal/codeburn)
+- [AI 智能体算力消耗过快，传统账单风控跟不上速度 — InfoQ 中国，2026-07-18](https://www.infoq.cn/article/secM60Za0CNxIYvQO47m)
+- [This is why we need local models and opensource harnesses — Reddit RSS，2026-07-13](https://old.reddit.com/r/LocalLLaMA/comments/1uvlwz0/this_is_why_we_need_local_models_and_opensource/)
 
-**Best Take**: "> These techniques mentioned in the article are just like anti-observation techniques used by some of the more sophisticated malware out there, however defeating them is pretty trivial. … Combating resellers and distillation seems like a very difficult problem indeed."
-—— @LPisGood, [HN 原贴](https://news.ycombinator.com/item?id=48734373)
-
+**Best Take**: "> Given they're incentivized to increase token use, what guarantees that higher token use improves the effectiveness of the agent and isn't just artificial padding?"
+—— @goda90, [HN 原贴](https://news.ycombinator.com/item?id=48883275)
 
 ▬▬▬▬▬▬▬▬
 
+## 🧩 Cluster 2 · Agent UX 从终端滚屏走向树状、可远程、可协作的工作台
 
-## 🧩 Cluster 2 · Vibe Coding 进入反思潮:从"全交给 LLM"到"分清 vibe vs agentic"
-
-**为什么重要**:这是决定下一阶段 coding agent 工具设计方向的关键信号——纯 vibe 模式已被资深用户证伪,工具层必须支持"规划 + review + 手动接管"的混合模式,这正是我们 pi-discord-agents 的核心定位。
+**为什么重要**: 用户已经接受 agent 执行代码，但不想接受不可追踪的 doom scroll。树状任务、可视化上下文、worktree、sandbox、ACP 和浏览器远程访问，构成了面向团队的第二层产品机会。
 
 **证据**
 
-- [Vibe coding and agentic engineering are getting closer than I'd like — HN(787/885)](https://news.ycombinator.com/item?id=48037128)
-- [After two years of vibecoding, I'm back to writing by hand — HN(865/634)](https://news.ycombinator.com/item?id=46765460)
-- [The cult of vibe coding is dogfooding run amok — HN(616/512)](https://news.ycombinator.com/item?id=47664912)
-- [Will vibe coding end like the maker movement? — HN(405/439)](https://news.ycombinator.com/item?id=47167931)
-- [Reddit: Fable is good enough that I question my value as engineer — r/ClaudeCode](https://old.reddit.com/r/ClaudeCode/comments/1ul74ti/ok_ill_admit_it_at_this_point_fable_is_good/)
+- [Show HN: Juggler — an open-source GUI coding agent — HN，engagement 396](https://news.ycombinator.com/item?id=48883305)
+- [Show HN: Rowboat — Open-source, local-first alternative to Claude Desktop — HN，engagement 317](https://news.ycombinator.com/item?id=48819808)
+- [chenhg5/cc-connect — 将本地 AI coding agents 接入飞书、Slack、Telegram、Discord 等 — GitHub，14134 stars，pushed 2026-07-17](https://github.com/chenhg5/cc-connect)
+- [AnyiWang/OpenCovibe — Local-first desktop app for AI coding agents — GitHub，237 stars，pushed 2026-07-12](https://github.com/AnyiWang/OpenCovibe)
 
-**Best Take**: "> People in the future are going to wonder what the hell we were thinking, when 30 years down the line everything is a hot mess of billions of lines of code generated by LLMs that no human has read almost any of it and is no longer possible for anyone to maintain neither with nor without LLMs."
-—— @QuantumNomad_, [HN 原贴](https://news.ycombinator.com/item?id=48037128)
-
+**Best Take**: "> The tree paradigm feels like the killer feature to me; not sure of anything else besides pi/omp that has it."
+—— @yowlingcat, [HN 原贴](https://news.ycombinator.com/item?id=48883305)
 
 ▬▬▬▬▬▬▬▬
 
+## 🧩 Cluster 3 · 可迁移的 skills、memory 与状态层正在成为 agent 基础设施
 
-## 🧩 Cluster 3 · CLI coding agent 工具链井喷:多 harness 编排 + GUI 化突围
-
-**为什么重要**:这是 GitHub 数据最确定的信号,4 万 stars 级别的 multi-harness skill 库 + JUCE 作者下场做 GUI agent(Juggler,7 月 12 日 Show HN),说明 CLI agent 已从"工具"演化为"生态",而 GUI 是公认下一阶段缺口——正好和 pi 这类终端 agent 形成互补机会。
+**为什么重要**: 用户切换 agent 的最大阻力不是安装，而是丢失既有 skills、项目上下文、决策记录和工作流。一个 provider-neutral 的状态层能让 agent 变成可替换执行器，而不是把用户锁在单一厂商内。
 
 **证据**
 
-- [Show HN: Juggler — open-source GUI coding agent by creator of JUCE — HN(278/118, 2026-07-12)](https://news.ycombinator.com/item?id=48883305)
-- [agentic-awesome-skills: 1,900+ skills for Claude Code/Cursor/Codex/Gemini CLI — GitHub(43,510 stars)](https://github.com/sickn33/agentic-awesome-skills)
-- [wshobson/agents: Multi-harness plugin marketplace — GitHub(37,994 stars)](https://github.com/wshobson/agents)
-- [router-for-me/CLIProxyAPI: 把 Antigravity/Codex/Claude/Grok 包装成 OpenAI 兼容 API — GitHub(43,114 stars)](https://github.com/router-for-me/CLIProxyAPI)
-- [OpenAI quietly adopting skills in ChatGPT and Codex CLI — HN(587/324)](https://news.ycombinator.com/item?id=46250332)
+- [affaan-m/ECC — skills、instincts、memory、security 与 research-first 的 agent harness — GitHub，230791 stars，pushed 2026-07-17](https://github.com/affaan-m/ECC)
+- [addyosmani/agent-skills — Production-grade engineering skills for AI coding agents — GitHub，79068 stars，pushed 2026-07-17](https://github.com/addyosmani/agent-skills)
+- [mathomhaus/guild — 跨 AI coding agents 的 shared context、memory 与 task coordination — GitHub，318 stars，pushed 2026-07-13](https://github.com/mathomhaus/guild)
+- [为什么 AI Agent 拿到数据却不会推理？可观测对象图语义层的设计与开源实践 — InfoQ 中国，2026-07-18](https://www.infoq.cn/article/KPd6YwU0Y1iCMGMakSmE)
+- [Show HN: Rowboat — Open-source, local-first alternative to Claude Desktop — HN，engagement 317](https://news.ycombinator.com/item?id=48819808)
 
-**Best Take**: "> I've watched amazing communities spring up around open agents like Opencode and Pi. People are getting into those because of their extensibility and being model-independent. … if you're a claude/codex user but want to escape the terminal (and let's face it, their GUI apps are also basically the same UX as a terminal but with nicer fonts), I'm trying to do something different here."
-—— @julesrms, [HN 原贴](https://news.ycombinator.com/item?id=48883305)
-
+**Best Take**: "> The whole should be better than the sum of the parts — the email client, notetaker, and surfaces all write back into one knowledge graph."
+—— @segmenta, [HN 原贴](https://news.ycombinator.com/item?id=48819808)
 
 ▬▬▬▬▬▬▬▬
 
+## 🧩 Cluster 4 · Agent 安全从“提示词提醒”升级为沙箱、策略与可验证评测
 
-## 🧩 Cluster 4 · 中文圈 Codex/Claude 实战焦虑 + 多账号生态雏形
-
-**为什么重要**:这是中文圈独有的痛点集合——额度焦虑 + 多账号切换 + 把 Codex 桥接到国产模型(DeepSeek / Xiaomi MiMo)。我们 pi-discord-agents 的中国用户大概率正在面对完全相同的问题,值得直接做成功能。
+**为什么重要**: 当 agent 能读代码、执行命令、访问 secrets 并修改 worktree，企业购买的不是“更聪明的聊天”，而是可审计的权限边界。沙箱、taint tracking、策略审批和 execution-verified evals 可以形成独立的 B2B 安全层。
 
 **证据**
 
-- [V2EX:codex 额度刚才又重置了,虽迟但到(2026-07-18)](https://www.v2ex.com/t/1228196)
-- [V2EX:claude 给额度暂时增加了,相当于重置?(2026-07-18)](https://www.v2ex.com/t/1228194)
-- [V2EX:Codex Tabs — 为 mac 上的 codex 添加分屏双任务、标签页(开源)](https://www.v2ex.com/t/1228203)
-- [GitHub:milisp/codexia — Codex CLI + Claude Code 任务调度/worktree/远程控制(826 stars)](https://github.com/milisp/codexia)
-- [GitHub:wujfeng712-ui/codex-bridge — Codex CLI 桥接 DeepSeek/Xiaomi MiMo(257 stars)](https://github.com/wujfeng712-ui/codex-bridge)
+- [h5i/h5i — Auditable workspaces、sandboxed worktrees 与 multi-agent orchestration — GitHub，470 stars，pushed 2026-07-16](https://github.com/h5i-dev/h5i)
+- [Gach0ng/AgentStalker — agent vulnerability benchmark、taint tracking proofs 与统一 AST — GitHub，125 stars，pushed 2026-06-18](https://github.com/Gach0ng/AgentStalker)
+- [Ju571nK/sigil — AI coding agents 的 AI-SPM 与 guard-surface scoring — GitHub，13 stars，pushed 2026-07-12](https://github.com/Ju571nK/sigil)
+- [jenishk20/vibesec-evals — execution-verified security evals 与 sandbox-verified patches — GitHub，2 stars，pushed 2026-07-16](https://github.com/jenishk20/vibesec-evals)
 
-**Best Take**: "> 先把终端环境统一,再用提示词把大模型的命令习惯掰过来。先安装 pwsh 7 和 Windows Terminal …… 现在这套环境谈不上多复杂。"
-—— @v2ex-1228204, [原帖](https://www.v2ex.com/t/1228204)
-
+**Best Take**: "> At a minimum, you need an inference endpoint: either cloud or local."
+—— @anonym29, [HN 原贴](https://news.ycombinator.com/item?id=48883275)
 
 ▬▬▬▬▬▬▬▬
 
+## 🎯 给你的机会(SaaS / App / 创业灵感)
 
-## 🧩 Cluster 5 · 中文 AI Agent 基建大爆发(WAIC 2026 主题):从对话走向办事 + 计费
+**机会 1 · AgentSpend：跨 coding agent 的成本与上下文控制台**
 
-**为什么重要**:WAIC 2026(7 月 17 日开幕)把"Agent 原生 OS / 算力计费 / 技能支付"推到 C 位,这是中国大厂(蚂蚁 / 腾讯 / 字节火山 / 阶跃)对 Agent 商业化的集体押注。对我们:Discord bridge 必须开始考虑 token 计费、agent 技能商店、跨厂商路由,而不是单一 Claude 集成。
+- **为什么现在做**: HN 上 token overhead 话题有 1097 engagement，codeburn 已积累 8732 stars；InfoQ 也指出 agent 算力消耗正在快到传统账单风控跟不上。先从可观测性切入，再做模型路由和预算策略。
+- **目标用户**: 同时使用 Claude Code、Codex、OpenCode 的独立开发者、AI 原生小团队和外包工作室。
+- **核心功能**:
+  - 读取本地 agent 日志，按项目、模型、工具调用和任务统计 token、延迟、失败率。
+  - 为不同任务设置上下文预算、模型 fallback、测试执行预算和异常告警。
+  - 将“成本”与 PR 是否通过、返工次数、测试覆盖变化关联起来。
+- **商业模式**: Freemium；本地 CLI 免费，团队协作、策略中心和历史分析订阅收费。
+- **竞品 / 参考**:
+  - [codeburn — GitHub](https://github.com/getagentseal/codeburn)
+  - [Claude Code vs OpenCode token overhead — HN](https://news.ycombinator.com/item?id=48883275)
+- **最小验证(MVP)**: 7 天内做一个 CLI 解析两种 agent 日志并生成成本、工具调用次数和失败任务的本地 HTML 报告。
+- **风险 / 难点**: 各 agent 日志格式和订阅计费口径不稳定；仅看 token 容易优化错目标，必须绑定任务质量指标。
 
-**证据**
+**机会 2 · AgentRoom：支持 ACP 的多人远程 coding agent 工作台**
 
-- [InfoQ:为什么 AI Agent 拿到数据却不会推理?可观测对象图语义层的设计与开源实践](https://www.infoq.cn/article/KPd6YwU0Y1iCMGMakSmE)
-- [InfoQ:AI 智能体算力消耗过快,传统账单风控跟不上速度](https://www.infoq.cn/article/secM60Za0CNxIYvQO47m)
-- [InfoQ:WAIC 2026 | 混元 Hy3 大模型首秀,腾讯上线 AI 技能支付体系](https://www.infoq.cn/article/FeWLPKLYDjWko8rJjxKq)
-- [InfoQ:搭载 Step AOS 智能体原生操作系统的 STEPX Neo 亮相 2026 WAIC](https://www.infoq.cn/article/62J9L28365BtFlSFxVjE)
-- [36kr:印奇在 WAIC 2026 开幕式 — 当智能体走进物理世界](https://36kr.com/p/3900439867147909)
+- **为什么现在做**: Juggler 的讨论明确暴露终端滚屏、tree UI、worktree、sandbox 和 ACP 的组合需求；cc-connect 则证明把本地 agent 接到团队消息平台已有明显关注度。
+- **目标用户**: 远程软件团队、需要让产品/设计参与 coding session 的创业公司，以及维护多个 agent harness 的技术负责人。
+- **核心功能**:
+  - 用树状任务视图展示 agent session、上下文、工具调用、diff 和测试状态。
+  - 通过 ACP 接入 Claude Code、Codex、OpenCode，支持浏览器远程访问和多人 steering。
+  - 每个任务隔离 worktree、权限和 secrets，支持人工 approval 与可回放审计。
+- **商业模式**: 团队订阅；按并发 session 和审计保留时长分层，BYO model subscription。
+- **竞品 / 参考**:
+  - [Juggler — HN](https://news.ycombinator.com/item?id=48883305)
+  - [cc-connect — GitHub](https://github.com/chenhg5/cc-connect)
+  - [Rowboat — HN](https://news.ycombinator.com/item?id=48819808)
+- **最小验证(MVP)**: 7 天内做一个 ACP/CLI 适配器加浏览器 session 页面，先实现一人远程观察、树状任务和 diff 审批。
+- **风险 / 难点**: ACP 与各 agent 的能力边界仍在演进；多人共享 session 的身份、权限和数据隔离很难靠 UI 解决。
 
-**Best Take**: "> 现在这套环境谈不上多复杂 …… 阿里 1688 将推出 AI 时代 B2B 交易互联互通开放标准;英特尔与 Google Cloud 宣布深化战略合作。"
-—— @36kr-3896564485572489, [原帖](https://36kr.com/p/3896564485572489)
+**机会 3 · SkillMesh：provider-neutral 的 agent skills 与项目记忆层**
 
+- **为什么现在做**: ECC、agent-skills 和 guild 的 stars 说明 skills、memory、coordination 已从个人配置变成独立生态；HN 用户也把“换 agent 会不会丢掉既有 edge”视为主要迁移障碍。
+- **目标用户**: 管理多个 coding agent 的高级开发者、开发团队的 AI enablement 负责人和需要复用工程规范的开源组织。
+- **核心功能**:
+  - 用版本化格式管理 skills、项目规则、决策记录、上下文 capsule 和工具权限。
+  - 将同一套 skill 编译或映射到 Claude Code、Codex、OpenCode 等不同 harness。
+  - 记录每次 agent 任务的输入、变更、验证结果，自动提炼可复用的项目记忆。
+- **商业模式**: 开源本地 CLI + 团队私有 registry、权限、同步和审计订阅。
+- **竞品 / 参考**:
+  - [ECC — GitHub](https://github.com/affaan-m/ECC)
+  - [agent-skills — GitHub](https://github.com/addyosmani/agent-skills)
+  - [guild — GitHub](https://github.com/mathomhaus/guild)
+- **最小验证(MVP)**: 7 天内定义一个 Markdown/JSON skill manifest，做两个 harness adapter 和一个可搜索的本地项目 memory store。
+- **风险 / 难点**: 不同 agent 的 system prompt、工具模型和权限模型不可完全等价；记忆污染和过期规则会直接降低代码质量。
+
+**机会 4 · GuardrailCI：coding agent 的沙箱与安全发布门禁**
+
+- **为什么现在做**: h5i 已把 auditable workspace、sandboxed worktree 和 multi-agent orchestration 合在一起；AgentStalker 与 vibesec-evals 则显示安全评测正在走向 benchmark 和真实执行验证。
+- **目标用户**: 允许 agent 修改生产代码的 SaaS 团队、企业内部开发平台和提供 coding agent 的模型/工具厂商。
+- **核心功能**:
+  - 为 agent 任务创建短生命周期沙箱，隔离文件、网络、secrets 和子进程。
+  - 用策略文件控制命令、目录、网络域名和高风险工具调用，所有例外需审批。
+  - 在 CI 中运行 prompt injection、越权、secret exfiltration 和危险 patch 的 execution-verified evals。
+- **商业模式**: B2B 订阅 + 按执行量计费；开源本地 runner，云端策略、报表和合规审计收费。
+- **竞品 / 参考**:
+  - [h5i — GitHub](https://github.com/h5i-dev/h5i)
+  - [AgentStalker — GitHub](https://github.com/Gach0ng/AgentStalker)
+  - [vibesec-evals — GitHub](https://github.com/jenishk20/vibesec-evals)
+- **最小验证(MVP)**: 7 天内用 Docker 做 secrets 隔离、命令 allowlist 和 10 个可复现安全测试，输出 CI 门禁结果。
+- **风险 / 难点**: 沙箱 escape、供应链攻击和 prompt injection 的攻防成本高；误报过多会让开发者绕过门禁。
 
 ▬▬▬▬▬▬▬▬
 
-
-## 🎯 给你(pi-discord-bridge)的具体机会
-
-- **机会 1 · 把 Cluster 3 翻译成产品功能** · Juggler、agentic-awesome-skills、CLIProxyAPI 的爆发说明:做一个 "跨 harness + 跨模型 + 跨 GUI/TUI 的 pi multi-agent dispatcher" 现在有现成生态可嫁接(指向 Cluster 3 的 Juggler + agentic-awesome-skills)。
-- **机会 2 · 直接吞下 Cluster 4 的中文用户痛点** · 自动多账号 Codex/Claude 切换 + 桥接 DeepSeek/Kimi/Qwen,做成一个 `/account switch` + `/provider route` 命令,目标用户就是 V2EX 那批吐槽额度的人(指向 Cluster 4 的 codexia + codex-switcher)。
-- **机会 3 · 提前布局 Cluster 5 的计费层** · WAIC 2026 显示中国大厂押注 "agent 算力计费 + 技能支付",Discord bridge 可以提前做 "agent 用量账单" 和 "skill 商店" 两个 hook,而不是事后补救(指向 Cluster 5 的 InfoQ 算力账单文章 + 腾讯 AI 技能支付)。
-- **机会 4 · 跑 Cluster 1 的反向 PR** · 既然 Claude Code 出现信任危机(指纹 + 限速),pi-discord-bridge 可以主打 "可观测 + 不锁定单一厂商 + 自托管",直接对应 HN/Reddit 的不满情绪。
-
-
-▬▬▬▬▬▬▬▬
-
-
-## 🔗 全部链接(去重)
+## 🔗 全部链接(去重,按 cluster)
 
 **Cluster 1**
-- [Claude Code is steganographically marking requests](https://news.ycombinator.com/item?id=48734373)
-- [Claude Code source code leaked via NPM map file](https://news.ycombinator.com/item?id=47584540)
-- [Claude Code refuses requests if commits mention OpenClaw](https://news.ycombinator.com/item?id=47963204)
-- [Claude Code unusable for complex engineering tasks](https://news.ycombinator.com/item?id=47660925)
-- [Anthropic no longer allowing Claude Code to use OpenClaw](https://news.ycombinator.com/item?id=47633396)
+- [Claude Code sends 33k tokens before reading the prompt](https://news.ycombinator.com/item?id=48883275)
+- [codeburn](https://github.com/getagentseal/codeburn)
+- [AI 智能体算力消耗过快](https://www.infoq.cn/article/secM60Za0CNxIYvQO47m)
+- [This is why we need local models and opensource harnesses](https://old.reddit.com/r/LocalLLaMA/comments/1uvlwz0/this_is_why_we_need_local_models_and_opensource/)
 
 **Cluster 2**
-- [Vibe coding and agentic engineering getting closer](https://news.ycombinator.com/item?id=48037128)
-- [After two years of vibecoding, back to writing by hand](https://news.ycombinator.com/item?id=46765460)
-- [The cult of vibe coding is dogfooding run amok](https://news.ycombinator.com/item?id=47664912)
-- [Will vibe coding end like the maker movement?](https://news.ycombinator.com/item?id=47167931)
-- [Reddit: Fable is good enough](https://old.reddit.com/r/ClaudeCode/comments/1ul74ti/ok_ill_admit_it_at_this_point_fable_is_good/)
+- [Juggler](https://news.ycombinator.com/item?id=48883305)
+- [Rowboat](https://news.ycombinator.com/item?id=48819808)
+- [cc-connect](https://github.com/chenhg5/cc-connect)
+- [OpenCovibe](https://github.com/AnyiWang/OpenCovibe)
 
 **Cluster 3**
-- [Juggler — open-source GUI coding agent](https://news.ycombinator.com/item?id=48883305)
-- [agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills)
-- [wshobson/agents](https://github.com/wshobson/agents)
-- [CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)
-- [OpenAI skills in ChatGPT and Codex CLI](https://news.ycombinator.com/item?id=46250332)
+- [ECC](https://github.com/affaan-m/ECC)
+- [agent-skills](https://github.com/addyosmani/agent-skills)
+- [guild](https://github.com/mathomhaus/guild)
+- [AI Agent 可观测对象图语义层](https://www.infoq.cn/article/KPd6YwU0Y1iCMGMakSmE)
 
 **Cluster 4**
-- [V2EX: codex 额度又重置](https://www.v2ex.com/t/1228196)
-- [V2EX: claude 给额度暂时增加](https://www.v2ex.com/t/1228194)
-- [V2EX: Codex Tabs mac 分屏](https://www.v2ex.com/t/1228203)
-- [GitHub: milisp/codexia](https://github.com/milisp/codexia)
-- [GitHub: wujfeng712-ui/codex-bridge](https://github.com/wujfeng712-ui/codex-bridge)
+- [h5i](https://github.com/h5i-dev/h5i)
+- [AgentStalker](https://github.com/Gach0ng/AgentStalker)
+- [sigil](https://github.com/Ju571nK/sigil)
+- [vibesec-evals](https://github.com/jenishk20/vibesec-evals)
 
-**Cluster 5**
-- [InfoQ: Agent 可观测对象图语义层](https://www.infoq.cn/article/KPd6YwU0Y1iCMGMakSmE)
-- [InfoQ: 智能体算力计费](https://www.infoq.cn/article/secM60Za0CNxIYvQO47m)
-- [InfoQ: 混元 Hy3 + AI 技能支付](https://www.infoq.cn/article/FeWLPKLYDjWko8rJjxKq)
-- [InfoQ: STEPX Neo + Step AOS](https://www.infoq.cn/article/62J9L28365BtFlSFxVjE)
-- [36kr: 印奇 WAIC 主题演讲](https://36kr.com/p/3900439867147909)
-
+**中文源直链**
+- [AI 智能体算力消耗过快 — InfoQ](https://www.infoq.cn/article/secM60Za0CNxIYvQO47m)
+- [AI Agent 拿到数据却不会推理 — InfoQ](https://www.infoq.cn/article/KPd6YwU0Y1iCMGMakSmE)
+- [[推广] gpt 倍率仅 0.03 — V2EX](https://www.v2ex.com/t/1228248#reply0)
+- [派早报：月之暗面发布 Kimi K3 — 少数派](https://sspai.com/post/112414)
 
 ▬▬▬▬▬▬▬▬
-
 
 ## 📡 执行透明度
 
-- HN Algolia: ✅(三 query 都拿到数据;首轮 query 过窄返回 0,改 query 后恢复)
-- GitHub GraphQL: ✅(claude code CLI agent / codex CLI openai 两个 query 都返回数据,过滤 90 天 push 后剩高质量 repo)
-- 中文 RSS: V2EX ✅(10 条)/ InfoQ-cn ✅(10 条)/ sspai ✅(10 条,但 sspai 内容偏消费电子,与 AI coding agents 弱相关,故未引用)/ 36kr ✅(10 条)
-- Reddit: r/ClaudeCode ✅(10 条)/ r/cursor ❌(HTTP 429 Too Many Requests,跳过不重试)
-- 探测:discover_probe_sources → HN ✅ GitHub ✅ Reddit ❌(429)
-
-
-▬▬▬▬▬▬▬▬
+- HN Algolia: ✅ 成功；按 engagement 取回结果，并仅采用 2026-06-18 至 2026-07-18 的相关信号
+- GitHub GraphQL: ✅ 成功；纳入 90 天内有 push 的仓库
+- 中文 RSS: V2EX ✅ / InfoQ 中国 ✅ / 少数派 ✅；V2EX 与少数派相关条目较少，已压缩为补充信号
+- Reddit: r/LocalLLaMA ✅ / r/ClaudeCode ❌（HTTP 429）/ r/Cursor ❌（HTTP 429）
+- Source probe: HN ✅ / GitHub ✅ / Reddit ❌（HTTP 429）
