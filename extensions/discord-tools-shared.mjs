@@ -45,6 +45,7 @@ export function getCfg() {
     CH_SYSTEM: process.env.CH_SYSTEM,
     CH_RSS: process.env.CH_RSS,
     CH_DAILY: process.env.CH_DAILY,
+    CH_DISCOVER: process.env.CH_DISCOVER,
   };
   for (const k of Object.keys(env)) {
     if (!env[k] && existsSync(ENV_PATH)) {
@@ -65,6 +66,7 @@ export function getCfg() {
       system:  env.CH_SYSTEM,
       rss:     env.CH_RSS,
       daily:   env.CH_DAILY,
+      discover: env.CH_DISCOVER,
     },
     labels: {
       memory: '🧠', ideas: '✨', build: '🔨',
