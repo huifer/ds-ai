@@ -58,14 +58,12 @@ export function buildDiscoverPrompt({ topic, dateKey, channelCategory = 'signal'
 
 ## 你已加载的工具
 
-| 工具名 | 用途 | 中文内容? |
-|---|---|---|
-| \`discover_search_hn({query, min_points, limit})\` | HN Algolia 搜索,按 engagement | ❌ |
-| \`discover_get_hn_thread({item_id, max_depth, max_comments})\` | HN 单帖 + 嵌套评论 | ❌ |
-| \`discover_search_github_repos({query, limit})\` | GitHub 仓库搜索(gh CLI) | ❌ |
-| \`discover_search_reddit_rss({subreddit, limit, time})\` | Reddit 子版 RSS | ❌ |
-| \`discover_fetch_rss({url, source_name, limit})\` | **通用 RSS 抓取(关键中文源)** | ✅ |
-| \`discover_probe_sources({})\` | 探测可用源 | — |
+- \`discover_search_hn({query, min_points, limit})\` — HN Algolia 搜索,按 engagement(英文)
+- \`discover_get_hn_thread({item_id, max_depth, max_comments})\` — HN 单帖 + 嵌套评论(英文 Best Take)
+- \`discover_search_github_repos({query, limit})\` — GitHub 仓库搜索,gh CLI(英文)
+- \`discover_search_reddit_rss({subreddit, limit, time})\` — Reddit 子版 RSS(英文,经常 429)
+- \`discover_fetch_rss({url, source_name, limit})\` — **通用 RSS 抓取,中文源主力**
+- \`discover_probe_sources({})\` — 探测可用源
 
 **推荐的中文 RSS feed 列表(全部 zero-key,可直接调 discover_fetch_rss)**:
 ${feedList}
@@ -114,7 +112,9 @@ ${feedList}
 
 > 窗口: ${dk} 前 30 天 | 来源: HN + GitHub + 中文 RSS + Reddit | 共 N 个 cluster
 
----
+
+▬▬▬▬▬▬▬▬
+
 
 ## 📌 TL;DR
 
@@ -122,7 +122,9 @@ ${feedList}
 - **要点 2**(1 行 + engagement)
 - **要点 3**(1 行 + engagement)
 
----
+
+▬▬▬▬▬▬▬▬
+
 
 ## 🧩 Cluster 1 · [主题一句话]
 
@@ -137,7 +139,9 @@ ${feedList}
 **Best Take**: "> 真实评论节选(≤200 字)"
 —— @author, [HN/Reddit 原贴](URL)
 
----
+
+▬▬▬▬▬▬▬▬
+
 
 ## 🧩 Cluster 2 · [主题一句话]
 
@@ -151,11 +155,15 @@ ${feedList}
 **Best Take**: "> ..."
 —— @author, [原贴](URL)
 
----
+
+▬▬▬▬▬▬▬▬
+
 
 (继续 Cluster 3-5)
 
----
+
+▬▬▬▬▬▬▬▬
+
 
 ## 🎯 给你(pi-discord-bridge)的具体机会
 
@@ -163,7 +171,9 @@ ${feedList}
 - **机会 2** · 简述 + ...
 - **机会 3** · 简述 + ...
 
----
+
+▬▬▬▬▬▬▬▬
+
 
 ## 🔗 全部链接(去重)
 
@@ -180,7 +190,9 @@ ${feedList}
 - [标题 — 36kr](URL)
 - [标题 — V2EX](URL)
 
----
+
+▬▬▬▬▬▬▬▬
+
 
 ## 📡 执行透明度
 
@@ -197,12 +209,15 @@ ${feedList}
 
 prefix 加 \`🔍 **【Discover · ${topic} · ${dk}】**\`。
 
----
+
+▬▬▬▬▬▬▬▬
+
 
 ## 硬约束(违反要重做)
 
 - **必须用中文**(专有名词 / URL / repo 名 保留原文)
 - **禁止 markdown 表格**(\`| col | col |\`)—— Discord 不渲染,会显示原始字符。**全用 bullet list**
+- **禁止三个减号 \`---\` 分隔符** —— Discord 显示为原始字符 \`---\`,不渲染为横线。用空行 + ▬▬▬ 字符 或 单纯空行 + emoji header 自带视觉分隔
 - **禁止 raw shell**(\`curl\` / \`python3\` 拼命令)
 - **禁止编造 engagement** —— 工具返回啥写啥
 - **每条证据必须带 URL** —— 不可点击的 bullet 等于废数据
@@ -213,8 +228,8 @@ prefix 加 \`🔍 **【Discover · ${topic} · ${dk}】**\`。
 
 ## Discord markdown 速查(避免踩坑)
 
-✅ 用:**bold** \`code\` \`\`\`block\`\`\` # header ## sub - bullet 1. numbered > quote --- divider 🔗 emoji
-❌ 不用:| table | col |(表格不渲染) <br>(不渲染) ~~strike~~ 部分客户端不渲染
+✅ 用:**bold** \`code\` \`\`\`block\`\`\` # header ## sub - bullet 1. numbered > quote 🔗 emoji ▬ ▬ ▬ 字符分隔
+❌ 不用:| table | col |(表格不渲染) <br>(不渲染) --- 三个减号(Discord 显示成原文,不渲染为分隔线) ~~strike~~
 \`\`\`
 
 开始。`;
