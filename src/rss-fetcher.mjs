@@ -27,6 +27,33 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+// ---- 代理引导:默认走 127.0.0.1:7897 (Clash Verge mixed-port) ----
+// 启动脚本(launchd / nohup)启的进程不继承系统代理,Node fetch 也会受影响。
+// 如果环境变量里已有代理,优先用环境变量的。
+const DEFAULT_PROXY = 'http://127.0.0.1:7897';
+if (!process.env.HTTPS_PROXY && !process.env.HTTP_PROXY && !process.env.ALL_PROXY) {
+  process.env.HTTPS_PROXY = DEFAULT_PROXY;
+  process.env.HTTP_PROXY = DEFAULT_PROXY;
+  process.env.ALL_PROXY = `socks5://${DEFAULT_PROXY.replace(/^https?:\/\//, '')}`;
+}
+
+// 动态加载 undici(作为 Node transitively available 依赖), 用 ProxyAgent 走代理
+// 重要:必须在第一次 fetch 之前 setGlobalDispatcher,否则 fetch 不走代理
+async function setupProxy() {
+  try {
+    const { ProxyAgent, setGlobalDispatcher, getGlobalDispatcher } = await import('undici');
+    const cur = getGlobalDispatcher();
+    // 避免重复包装
+    if (cur?.constructor?.name === 'ProxyAgent') return;
+    const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY || process.env.ALL_PROXY;
+    if (proxyUrl) {
+      setGlobalDispatcher(new ProxyAgent(proxyUrl));
+    }
+  } catch {
+    // undici 不可用就退到默认(纯直连),部分源会失败但不少源仍能抓
+  }
+}
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 const CFG_PATH = resolve(ROOT, 'config', 'rss-sources.json');
@@ -223,6 +250,7 @@ async function pMap(items, mapper, concurrency = 4) {
 
 // ---- main ----
 async function main() {
+  await setupProxy();
   const cfg = loadConfig();
   const fetchCfg = cfg.fetch || {};
   const concurrency = parseInt(args.concurrency || fetchCfg.concurrency || 4, 10);
