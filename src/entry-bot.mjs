@@ -25,7 +25,9 @@ import { createDiscordClient } from './discord-client.mjs';
 import { getDiscord } from '../extensions/discord-tools-shared.mjs';
 import { createScheduler } from './scheduler.mjs';
 import { runRssJob, RSS_JOB_ID, RSS_JOB_SCHEDULE } from './jobs/rss-daily.mjs';
-import { runDailySummaryJob, DAILY_JOB_ID, DAILY_JOB_SCHEDULE } from './jobs/daily-summary.mjs';
+import { runDailySummaryJob, DAILY_JOB_ID, DAILY_SUMMARY_SCHEDULE } from './jobs/daily-summary.mjs';
+import { runTokenTrendJob, TREND_JOB_ID, TREND_JOB_SCHEDULE, handleTrendCommand as runTrendHandler } from './jobs/token-trend.mjs';
+import { buildDiscoverPrompt } from './jobs/discover.mjs';
 
 // ---- 全局代理:launchd 启的进程没有 macOS 系统代理配置 ----
 try {
@@ -203,6 +205,18 @@ async function main() {
     tzOffsetHours: DAILY_JOB_SCHEDULE.tzOffsetHours,
     run: ({ dateKey }) => runDailySummaryJob({ dateKey, pi, discord, log }),
   });
+  sched.register({
+    id: TREND_JOB_ID,
+    hour: TREND_JOB_SCHEDULE.hour,
+    minute: TREND_JOB_SCHEDULE.minute,
+    tzOffsetHours: TREND_JOB_SCHEDULE.tzOffsetHours,
+    run: ({ dateKey }) => runTokenTrendJob({
+      dateKey,
+      days: cfg.trendDays || 14,
+      pi, discord, log,
+      channelId: cfg.channels.trend || cfg.channels.system,
+    }),
+  });
   sched.start();
   log(`调度器已启动 · jobs: ${sched.list().map((j) => `${j.id}@${j.hour}:${String(j.minute).padStart(2,'0')}`).join(', ')}`);
 
@@ -214,7 +228,21 @@ async function main() {
       await discord.react(msg, '🚫');
       return;
     }
-    const userText = `[Discord 用户 ${msg.author.username} 在 #主入口]\n\n${msg.content}`;
+    const text = (msg.content || '').trim();
+
+    // ---- 7a. !trend ... 直接同步处理,不走 LLM ----
+    if (text === '!trend' || text.startsWith('!trend ') || text.startsWith('!trend\t')) {
+      await handleTrendCommand(msg, text);
+      return;
+    }
+
+    // ---- 7a.1 !discover <topic> [channel] spawn Pi subprocess 跑偶发需求发现 ----
+    if (text === '!discover' || text.startsWith('!discover ') || text.startsWith('!discover\t')) {
+      await handleDiscoverCommand(msg, text);
+      return;
+    }
+
+    const userText = `[Discord 用户 ${msg.author.username} 在 #主入口]\n\n${text}`;
     log(`收到 Discord (${msg.author.username}): "${msg.content.slice(0, 80)}"`);
     try { await discord.react(msg, '⏳'); } catch {}
     pendingReply = msg;
@@ -231,6 +259,143 @@ async function main() {
       } catch {}
       pendingReply = null;
     }
+  }
+
+  // ---- 7b.1 !trend 命令处理(走 ccusage,不走 LLM) ----
+  //   !trend                默认 14 天详细报告(推 #📊 趋势)
+  //   !trend 7/30/90        指定窗口
+  //   !trend today          今日 vs 昨日
+  //   !trend month          本月累计
+  //   !trend model          按 model 拆
+  //   !trend agent          按 agent 拆
+  //   !trend cost           只看 cost
+  //   !trend help           帮助
+  async function handleTrendCommand(msg, text) {
+    try { await discord.react(msg, '⏳'); } catch {}
+    const parts = text.split(/\s+/).filter(Boolean);
+    const sub = (parts[1] || '').toLowerCase();
+    if (sub === 'help' || sub === '?') {
+      await msg.reply(
+        '📊 **!trend 命令**\n\n' +
+        '• `!trend` — 14 天详细报告(推 #📊 趋势)\n' +
+        '• `!trend 7/30/90` — 指定窗口天数\n' +
+        '• `!trend today` — 今日 vs 昨日对比\n' +
+        '• `!trend month` — 本月累计\n' +
+        '• `!trend model` — 按 model 拆(Top 25)\n' +
+        '• `!trend agent` — 按 agent 拆(claude / pi / opencode / codex / gemini)\n' +
+        '• `!trend cost` — 只看成本\n' +
+        '• `!trend help` — 本帮助',
+      ).catch(() => {});
+      try { await discord.removeReact(msg, '⏳'); } catch {}
+      return;
+    }
+    const r = await runTrendHandler({ args: sub, discord, log, cfg });
+    try { await discord.removeReact(msg, '⏳'); } catch {}
+    if (r?.reply) {
+      await msg.reply(r.reply).catch(async () => {
+        await discord.send(msg.channelId, r.reply).catch(() => {});
+      });
+    }
+  }
+
+  // ---- 7b.2 !discover 命令处理 ----
+  //  拦截用户在主入口的 !discover 调用,spawn 一个一次性 Pi subprocess 跑 8 步 pipeline。
+  //  trigger-job.mjs 内部加载 discover-tools extension,Pi 用结构化工具采集 + 自己的 LLM 合成。
+  //  跑完后 Pi 会自己推 entry channel + 目标 channel,brief 落 data/discovery/。
+  //
+  //  为什么不走主 Pi(长期 running 的那个):
+  //   - 主 Pi 在 streaming user message,新 prompt 会打断
+  //   - discover 要 1-3 分钟,阻塞用户后续消息
+  //   - 一次性 subprocess 更稳:失败不影响主 Pi 状态
+  async function handleDiscoverCommand(msg, text) {
+    const parts = text.split(/\s+/).filter(Boolean);
+    const topic = parts.slice(1).join(' ').trim();
+    if (!topic || topic === 'help' || topic === '?') {
+      await msg.reply(
+        '🔍 **!discover 命令 · 偶发需求发现**\n\n' +
+        '**用法**\n' +
+        '• `!discover <topic>` — 触发需求发现,brief 推 #📡 发现\n' +
+        '• `!discover <topic> <channel>` — 推指定频道\n' +
+        '  (可用:signal / build / ideas / memory / discover)\n' +
+        '• `!discover help` — 本帮助\n\n' +
+        '**背后**\n' +
+        '• spawn 一次性 Pi subprocess,加载 discover-tools extension\n' +
+        '• 数据采集走 HN Algolia / gh CLI / Reddit RSS(零 key)\n' +
+        '• AI 推理(聚类 / 合成 / 写 brief)在 Pi agent 自己的 LLM\n' +
+        '• 跑完会自动推 entry channel + 目标 channel + 落 data/discovery/\n\n' +
+        '**预计耗时** 1-3 分钟,跑完不用等',
+      ).catch(() => {});
+      return;
+    }
+    // 解析可选 channelCategory(最后一个词,且匹配已知 channel 名)
+    const knownCats = ['signal', 'build', 'ideas', 'memory', 'discover', 'system', 'journal'];
+    let channelCategory = 'signal';
+    let topicOnly = topic;
+    const tokens = topic.split(/\s+/);
+    const lastToken = tokens[tokens.length - 1]?.toLowerCase();
+    if (lastToken && knownCats.includes(lastToken) && tokens.length > 1) {
+      channelCategory = lastToken;
+      topicOnly = tokens.slice(0, -1).join(' ');
+    }
+    if (!topicOnly.trim()) {
+      await msg.reply('用法: `!discover <topic> [channel]`').catch(() => {});
+      return;
+    }
+
+    try { await discord.react(msg, '⏳'); } catch {}
+    log(`!discover triggered: topic="${topicOnly}" channel=${channelCategory}`);
+
+    // 给用户立刻反馈
+    await msg.reply(
+      `🔍 **需求发现已触发**\n\n` +
+      `**Topic**: \`${topicOnly}\`\n` +
+      `**Target channel**: #${channelCategory}\n` +
+      `**预计耗时**: 1-3 分钟\n\n` +
+      `Pi agent 跑完会自动推 entry channel + #${channelCategory}。你不用等,可以继续干别的。`
+    ).catch(() => {});
+
+    // spawn 一次性 Pi subprocess(完全复用 trigger-job.mjs)
+    const child = spawn('node', [
+      join(ROOT, 'scripts/trigger-job.mjs'),
+      'discover',
+      topicOnly,
+      channelCategory,
+    ], {
+      cwd: ROOT,
+      env: {
+        ...process.env,
+        // 强制走代理(launchd 子进程可能不继承)
+        HTTP_PROXY: 'http://127.0.0.1:7897',
+        HTTPS_PROXY: 'http://127.0.0.1:7897',
+        ALL_PROXY: 'socks5://127.0.0.1:7897',
+      },
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+
+    let stderrBuf = '';
+    child.stdout.on('data', () => { /* 透传到 orchestrator.log */ });
+    child.stderr.on('data', (d) => { stderrBuf += d.toString(); });
+    child.on('close', async (code) => {
+      try { await discord.removeReact(msg, '⏳'); } catch {}
+      if (code === 0) {
+        log(`!discover subprocess exited OK`);
+      } else {
+        log(`!discover subprocess failed: code=${code} stderr=${stderrBuf.slice(0, 500)}`);
+        try {
+          await msg.reply(
+            `😵 **discover 失败**\n\n` +
+            `\`trigger-job.mjs\` 退出码 \`${code}\`\n` +
+            `\`\`\`\n${stderrBuf.slice(0, 1500)}\n\`\`\`\n\n` +
+            `看 \`logs/trigger.log\` 完整日志`,
+          );
+        } catch {}
+      }
+    });
+    child.on('error', async (e) => {
+      log(`!discover spawn error: ${e.message}`);
+      try { await discord.removeReact(msg, '⏳'); } catch {}
+      try { await msg.reply(`😵 spawn trigger-job 失败: ${e.message}`); } catch {}
+    });
   }
 
   // ---- 8. 优雅退出 ----
