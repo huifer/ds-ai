@@ -16,11 +16,14 @@ export default function (pi) {
     label: 'discord_post_message',
     description:
       '把内容主动发到指定 Discord channel。' +
-      'category 可选值:memory / ideas / build / journal / signal / system / entry;' +
+      'category 可选值:memory / ideas / build / journal / signal / system / entry / rss / daily;' +
       '或直接传 channel_id(优先级高于 category)。' +
-      '一般用于把 #发现 信号、#系统 告警推到指定 channel。',
+      '一般用于把 #发现 信号、#系统 告警、RSS hub 推送、每日总结 推到对应 channel。' +
+      '如果 category 未列在上面但 .env 里有对应 CH_<X>,可以直接传 channel_id。',
     parameters: Type.Object({
-      category: Type.Optional(Type.String({ description: '类别名(自动映射到对应 channel)。' })),
+      category: Type.Optional(Type.String({
+        description: '类别名(自动映射到对应 channel)。可选值:memory / ideas / build / journal / signal / system / entry / rss / daily。',
+      })),
       channel_id: Type.Optional(Type.String({ description: '直接的 Discord channel ID(优先级高于 category)。' })),
       content: Type.String({ description: '要发送的内容。' }),
     }),

@@ -35,3 +35,20 @@ legacy/**/package-lock.json
 .idea/
 .vscode/
 *.swp
+# ---- Pi Agent 探索产生的"野生"文件(黑名单,被 add 时强制跳过)----
+# 任何 extensions/*-tools*.mjs / extensions/*-shared.mjs
+# 任何 src/jobs/discover.mjs / gh-daily.mjs / token-trend.mjs / discover-tools.mjs
+extensions/discover-tools.mjs
+extensions/discover-tools-shared.mjs
+extensions/gh-tools.mjs
+extensions/gh-tools-shared.mjs
+extensions/find-skills.mjs
+extensions/tavily-*.mjs
+src/jobs/discover.mjs
+src/jobs/gh-daily.mjs
+src/jobs/token-trend.mjs
+src/jobs/find-skills.mjs
+src/jobs/tavily-*.mjs
+scripts/token-stats.mjs
+scripts/find-skills.mjs
+scripts/tavily-*.mjs

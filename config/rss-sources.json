@@ -1,0 +1,373 @@
+{
+  "version": 2,
+  "updated": "2026-07-18",
+  "comment": "RSS hub 数据源清单。Pi Agent 跑 rss-daily 任务时读这个文件,逐个 curl 抓。完全绕开 web_search(Ollama 鉴权失败)。enabled=false 临时关闭,weight 决定 markdown 里出现顺序。所有 URL 已在 2026-07-18 用 curl 实测可用。",
+  "fetch": {
+    "concurrency": 4,
+    "timeoutMs": 15000,
+    "userAgent": "pi-discord-agents/2.0 (+https://github.com/zhangsan)",
+    "maxBytesPerFeed": 2000000,
+    "windowHours": 24,
+    "maxItemsPerFeed": 8
+  },
+  "sources": [
+    {
+      "layer": "hf",
+      "name": "Hugging Face Blog",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "enabled": true,
+      "weight": 10,
+      "note": "HF 官方博客,模型 / 数据集 / Space 发布解读"
+    },
+    {
+      "layer": "hf",
+      "name": "Daily AI Papers (papers.cool)",
+      "url": "https://papers.cool/arxiv/rss",
+      "enabled": true,
+      "weight": 9,
+      "note": "Arxiv 当日 AI/ML 热门论文(替代 jamesg.blog/hf-papers.xml,后者持续 502)"
+    },
+    {
+      "layer": "hf",
+      "name": "Transformers Library Releases",
+      "url": "https://github.com/huggingface/transformers/releases.atom",
+      "enabled": true,
+      "weight": 8,
+      "note": "Transformers 库 release"
+    },
+    {
+      "layer": "hf",
+      "name": "huggingface_hub Releases",
+      "url": "https://github.com/huggingface/huggingface_hub/releases.atom",
+      "enabled": true,
+      "weight": 7,
+      "note": "huggingface_hub 库 release"
+    },
+
+    {
+      "layer": "openai",
+      "name": "OpenAI News",
+      "url": "https://openai.com/news/rss.xml",
+      "enabled": true,
+      "weight": 10,
+      "note": "OpenAI 公司动态"
+    },
+    {
+      "layer": "openai",
+      "name": "OpenAI Status",
+      "url": "https://status.openai.com/history.rss",
+      "enabled": true,
+      "weight": 8,
+      "note": "API 故障 / 恢复"
+    },
+    {
+      "layer": "openai",
+      "name": "openai-python Releases",
+      "url": "https://github.com/openai/openai-python/releases.atom",
+      "enabled": true,
+      "weight": 7,
+      "note": "Python SDK release"
+    },
+    {
+      "layer": "openai",
+      "name": "openai-node Releases",
+      "url": "https://github.com/openai/openai-node/releases.atom",
+      "enabled": true,
+      "weight": 7,
+      "note": "Node SDK release"
+    },
+
+    {
+      "layer": "cloudflare",
+      "name": "Cloudflare Blog",
+      "url": "https://blog.cloudflare.com/rss/",
+      "enabled": true,
+      "weight": 10,
+      "note": "Cloudflare 官方博客,产品 / 故障复盘"
+    },
+    {
+      "layer": "cloudflare",
+      "name": "Cloudflare Blog - Engineering",
+      "url": "https://blog.cloudflare.com/tag/engineering/rss",
+      "enabled": true,
+      "weight": 9,
+      "note": "工程深度文章(Rust / Lua / Workers 底层)"
+    },
+    {
+      "layer": "cloudflare",
+      "name": "Cloudflare Status",
+      "url": "https://www.cloudflarestatus.com/history.rss",
+      "enabled": true,
+      "weight": 8,
+      "note": "故障 / 维护公告"
+    },
+    {
+      "layer": "cloudflare",
+      "name": "workerd Releases",
+      "url": "https://github.com/cloudflare/workerd/releases.atom",
+      "enabled": true,
+      "weight": 8,
+      "note": "Workers 运行时 release"
+    },
+    {
+      "layer": "cloudflare",
+      "name": "workers-sdk (Wrangler) Releases",
+      "url": "https://github.com/cloudflare/workers-sdk/releases.atom",
+      "enabled": true,
+      "weight": 8,
+      "note": "Wrangler CLI release"
+    },
+    {
+      "layer": "cloudflare",
+      "name": "Cloudflare Unified Changelog",
+      "url": "https://developers.cloudflare.com/changelog/rss/index.xml",
+      "enabled": true,
+      "weight": 9,
+      "maxBytes": 8000000,
+      "note": "R2 / D1 / Workers / KV / Pages / WAF 等所有产品 changelog 聚合(原源 4.6MB,默认 maxBytes 2MB 不够,这里提到 8MB)"
+    },
+
+    {
+      "layer": "anthropic",
+      "name": "Anthropic Claude SDK Python",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases.atom",
+      "enabled": true,
+      "weight": 8,
+      "note": "Python SDK release(anthropic.com 没公开 RSS,改监控 SDK)"
+    },
+    {
+      "layer": "anthropic",
+      "name": "Anthropic Claude SDK TypeScript",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases.atom",
+      "enabled": true,
+      "weight": 8,
+      "note": "TS SDK release"
+    },
+    {
+      "layer": "anthropic",
+      "name": "Anthropic Cookbook",
+      "url": "https://github.com/anthropics/anthropic-cookbook/releases.atom",
+      "enabled": true,
+      "weight": 6,
+      "note": "Cookbook 例子更新"
+    },
+
+    {
+      "layer": "ai-agent",
+      "name": "DeepMind Blog",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "enabled": true,
+      "weight": 8,
+      "note": "DeepMind 研究博客"
+    },
+    {
+      "layer": "ai-agent",
+      "name": "BAIR Blog (Berkeley)",
+      "url": "https://bair.berkeley.edu/blog/feed.xml",
+      "enabled": true,
+      "weight": 7,
+      "note": "Berkeley AI Research"
+    },
+    {
+      "layer": "ai-agent",
+      "name": "The Decoder",
+      "url": "https://the-decoder.com/feed/",
+      "enabled": true,
+      "weight": 7,
+      "note": "AI 行业新闻聚合"
+    },
+    {
+      "layer": "ai-agent",
+      "name": "LangChain Blog",
+      "url": "https://blog.langchain.dev/rss.xml",
+      "enabled": true,
+      "weight": 7,
+      "note": "Agent 编排框架"
+    },
+    {
+      "layer": "ai-agent",
+      "name": "Hacker News (front)",
+      "url": "https://hnrss.org/frontpage",
+      "enabled": true,
+      "weight": 8,
+      "note": "HN 首页,深度讨论"
+    },
+    {
+      "layer": "ai-agent",
+      "name": "Hacker News (best)",
+      "url": "https://hnrss.org/best",
+      "enabled": true,
+      "weight": 7,
+      "note": "HN 最佳"
+    },
+
+    {
+      "layer": "saas-outbound",
+      "name": "IndieHackers",
+      "url": "https://www.indiehackers.com/feed.xml",
+      "enabled": true,
+      "weight": 6,
+      "note": "独立开发者出海经验"
+    },
+    {
+      "layer": "saas-outbound",
+      "name": "ProductHunt Today",
+      "url": "https://www.producthunt.com/feed",
+      "enabled": true,
+      "weight": 6,
+      "note": "每日新品"
+    },
+    {
+      "layer": "saas-outbound",
+      "name": "Stripe Blog",
+      "url": "https://stripe.com/blog/feed.rss",
+      "enabled": true,
+      "weight": 8,
+      "note": "订阅 / 支付,你订阅经济的核心"
+    },
+    {
+      "layer": "saas-outbound",
+      "name": "SaaStr",
+      "url": "https://www.saastr.com/feed/",
+      "enabled": true,
+      "weight": 6,
+      "note": "B2B SaaS"
+    },
+
+    {
+      "layer": "media",
+      "name": "Unsplash Blog",
+      "url": "https://unsplash.com/blog/rss/",
+      "enabled": true,
+      "weight": 5,
+      "note": "图库方向(Photoshoot 相关)"
+    },
+    {
+      "layer": "media",
+      "name": "ffmpeg Releases",
+      "url": "https://git.ffmpeg.org/gitweb/ffmpeg.git/rss/atom",
+      "enabled": true,
+      "weight": 4,
+      "note": "视频处理底层"
+    },
+
+    {
+      "layer": "cn",
+      "name": "36氪",
+      "url": "https://36kr.com/feed",
+      "enabled": true,
+      "weight": 7,
+      "note": "出海 / 创业"
+    },
+    {
+      "layer": "cn",
+      "name": "少数派",
+      "url": "https://sspai.com/feed",
+      "enabled": true,
+      "weight": 6,
+      "note": "工具 / 效率"
+    },
+    {
+      "layer": "cn",
+      "name": "InfoQ 中文",
+      "url": "https://www.infoq.cn/feed.xml",
+      "enabled": true,
+      "weight": 6,
+      "note": "工程"
+    },
+    {
+      "layer": "cn",
+      "name": "雷锋网",
+      "url": "https://www.leiphone.com/feed",
+      "enabled": true,
+      "weight": 5,
+      "note": "AI / 硬件"
+    },
+    {
+      "layer": "cn",
+      "name": "虎嗅",
+      "url": "https://www.huxiu.com/rss",
+      "enabled": true,
+      "weight": 5,
+      "note": "商业 / 创业"
+    },
+
+    {
+      "layer": "github",
+      "name": "GitHub Trending (weekly)",
+      "url": "https://mshibanami.github.io/GitHubTrendingRSS/weekly/all.xml",
+      "enabled": true,
+      "weight": 7,
+      "note": "本周 trending 仓库"
+    },
+    {
+      "layer": "github",
+      "name": "Pi Coding Agent Releases",
+      "url": "https://github.com/badlogic/pi-mono/releases.atom",
+      "enabled": true,
+      "weight": 9,
+      "note": "你 24h 在用的 Pi Agent"
+    },
+    {
+      "layer": "github",
+      "name": "Supabase Releases",
+      "url": "https://github.com/supabase/supabase/releases.atom",
+      "enabled": true,
+      "weight": 7,
+      "note": "Supabase 平台 release"
+    },
+
+    {
+      "layer": "tech-general",
+      "name": "TechCrunch",
+      "url": "https://techcrunch.com/feed/",
+      "enabled": true,
+      "weight": 5,
+      "note": "海外科技"
+    },
+    {
+      "layer": "tech-general",
+      "name": "The Verge",
+      "url": "https://www.theverge.com/rss/index.xml",
+      "enabled": true,
+      "weight": 5,
+      "note": "科技 / 设备"
+    },
+    {
+      "layer": "tech-general",
+      "name": "Ars Technica",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+      "enabled": true,
+      "weight": 5,
+      "note": "工程深度"
+    },
+    {
+      "layer": "tech-general",
+      "name": "Machine Learning Mastery",
+      "url": "https://machinelearningmastery.com/feed/",
+      "enabled": true,
+      "weight": 5,
+      "note": "ML 实战教程"
+    },
+    {
+      "layer": "tech-general",
+      "name": "KDnuggets",
+      "url": "https://www.kdnuggets.com/feed",
+      "enabled": true,
+      "weight": 5,
+      "note": "数据科学 / ML"
+    }
+  ],
+  "layers": {
+    "hf": "Hugging Face",
+    "openai": "OpenAI",
+    "cloudflare": "Cloudflare",
+    "anthropic": "Anthropic",
+    "ai-agent": "AI / Agent / 研究",
+    "saas-outbound": "出海 SaaS",
+    "media": "图片 / 媒体 / 视频",
+    "cn": "中文媒体",
+    "github": "GitHub / 工具栈",
+    "tech-general": "通用科技 / ML"
+  }
+}
