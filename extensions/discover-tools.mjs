@@ -3,7 +3,7 @@
 import { Type } from '@sinclair/typebox';
 import {
   hnAlgoliaSearch, hnGetItem, githubRepoSearch,
-  redditRssTop, probeAvailableSources,
+  redditRssTop, probeAvailableSources, fetchRss,
 } from './discover-tools-shared.mjs';
 
 export default function (pi) {
@@ -86,6 +86,27 @@ export default function (pi) {
     execute: async (_id) => {
       const probes = await probeAvailableSources();
       return { content: [{ type: 'text', text: JSON.stringify({ ok: true, probes }, null, 2) }], isError: false };
+    },
+  });
+
+  pi.registerTool({
+    name: 'discover_fetch_rss',
+    label: 'discover_fetch_rss',
+    description:
+      '通用 RSS/Atom 抓取。返回结构化 entries(title/url/published/summary)。' +
+      '适配 WordPress / RSSHub / V2EX / 少数派 / 36氪 / 掘金 / 虎嗅 / InfoQ 等。' +
+      '**核心用途**:拉中文技术博客和社区 feed,补齐 HN/GitHub/Reddit 没有的中文信号。',
+    parameters: Type.Object({
+      url: Type.String({ description: '完整 RSS/Atom URL,例如 https://www.v2ex.com/feed/tab/tech' }),
+      source_name: Type.Optional(Type.String({ description: '人类可读的来源名,例如 v2ex/36kr/sspai,会出现在返回里' })),
+      limit: Type.Optional(Type.Number({ description: '最多返回几条,默认 15' })),
+    }),
+    execute: async (_id, args) => {
+      const r = await fetchRss(args.url, {
+        sourceName: args.source_name,
+        limit: args.limit ?? 15,
+      });
+      return { content: [{ type: 'text', text: JSON.stringify(r, null, 2) }], isError: !r.ok };
     },
   });
 }

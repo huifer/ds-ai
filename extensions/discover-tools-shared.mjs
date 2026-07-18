@@ -163,6 +163,77 @@ function decodeXmlEntities(s) {
   return s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&apos;/g, "'");
 }
 
+export async function fetchRss(url, { sourceName = null, limit = 15, timeoutMs = 15_000 } = {}) {
+  // 通用 RSS/Atom 抓取。返回结构化 entries。
+  // 适配 WordPress / RSSHub / V2EX / 少数派 / 36氪 / 掘金 等。
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const r = await fetch(url, {
+      signal: ctrl.signal,
+      headers: {
+        'user-agent': 'pi-discord-bridge/discover-tools',
+        'accept': 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*',
+      },
+    });
+    if (!r.ok) return { ok: false, source: sourceName || 'rss', error: `HTTP ${r.status} ${r.statusText}`, url };
+    const xml = await r.text();
+    const entries = parseRssXml(xml, limit);
+    return { ok: true, source: sourceName || 'rss', url, count: entries.length, entries };
+  } catch (e) {
+    return { ok: false, source: sourceName || 'rss', error: e?.name === 'AbortError' ? 'timeout' : (e?.message || String(e)), url };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function parseRssXml(xml, limit) {
+  const entries = [];
+  // RSS 2.0: <item>
+  const itemRe = /<item\b[^>]*>([\s\S]*?)<\/item>/gi;
+  let m;
+  while ((m = itemRe.exec(xml)) && entries.length < limit) {
+    const body = m[1];
+    const title = (body.match(/<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/i) || [])[1] || '';
+    const rawLink = (body.match(/<link(?:\s[^>]*)?>([\s\S]*?)<\/link>/i) || [])[1] ||
+                 (body.match(/<guid[^>]*>([\s\S]*?)<\/guid>/i) || [])[1] || '';
+  // 去掉 CDATA 包裹(36氪 等)
+  const link = rawLink.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '\$1').trim();
+    const pubDate = (body.match(/<pubDate>([\s\S]*?)<\/pubDate>/i) || [])[1] ||
+                    (body.match(/<dc:date>([\s\S]*?)<\/dc:date>/i) || [])[1] || '';
+    const desc = (body.match(/<description>([\s\S]*?)<\/description>/i) || [])[1] || '';
+    if (!title.trim()) continue;
+    entries.push({
+      title: decodeXmlEntities(title.trim()).slice(0, 200),
+      url: link.trim(),
+      published: pubDate.trim(),
+      summary: stripHtml(desc).slice(0, 280),
+    });
+  }
+  // Atom: <entry>
+  if (entries.length === 0) {
+    const entryRe = /<entry>([\s\S]*?)<\/entry>/gi;
+    while ((m = entryRe.exec(xml)) && entries.length < limit) {
+      const body = m[1];
+      const title = (body.match(/<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/i) || [])[1] || '';
+      const linkEl = body.match(/<link[^>]*href="([^"]+)"[^>]*\/?>/i);
+      const link = linkEl ? linkEl[1] : '';
+      const updated = (body.match(/<updated>([\s\S]*?)<\/updated>/i) || [])[1] ||
+                      (body.match(/<published>([\s\S]*?)<\/published>/i) || [])[1] || '';
+      const summary = (body.match(/<summary(?:\s[^>]*)?>([\s\S]*?)<\/summary>/i) || [])[1] ||
+                      (body.match(/<content(?:\s[^>]*)?>([\s\S]*?)<\/content>/i) || [])[1] || '';
+      if (!title.trim()) continue;
+      entries.push({
+        title: decodeXmlEntities(title.trim()).slice(0, 200),
+        url: link.trim(),
+        published: updated.trim(),
+        summary: stripHtml(summary).slice(0, 280),
+      });
+    }
+  }
+  return entries;
+}
+
 export async function probeAvailableSources() {
   return Promise.all([
     hnAlgoliaSearch('test', { minPoints: 1, hitsPerPage: 1 }).then(r => ({ source: 'hn', ok: r.ok })),
