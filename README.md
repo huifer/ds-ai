@@ -92,13 +92,19 @@ tail -f ~/pi-discord-bridge/logs/orchestrator.log  # 实时日志
 launchctl kickstart -k "gui/$(id -u)/com.zhangsan.pi-discord-agents"  # 重启
 node ~/pi-discord-bridge/scripts/smoke-test.mjs "ping?"  # 不连 Discord,只测 RPC + extension
 
-# --- 一次性频道创建(已经建好可忽略) ---
-node ~/pi-discord-bridge/scripts/create-channels.mjs
+# --- 一次性频道创建 ---
+node ~/pi-discord-bridge/scripts/create-channels.mjs           # 资讯 / 每日总结 频道
+node ~/pi-discord-bridge/scripts/create-opportunity-channel.mjs # 💡 机会 频道
 
 # --- 手动触发定时任务(跳过等待) ---
 node ~/pi-discord-bridge/scripts/trigger-job.mjs rss             # 立刻跑 RSS hub
 node ~/pi-discord-bridge/scripts/trigger-job.mjs daily            # 立刻跑每日总结
 node ~/pi-discord-bridge/scripts/trigger-job.mjs rss 2026-07-17   # 指定日期
+
+# --- 偶发机会发现(取代旧的 !discover) ---
+node ~/pi-discord-bridge/scripts/trigger-job.mjs opportunity "AI coding agents"  # 默认推 #💡 机会
+node ~/pi-discord-bridge/scripts/trigger-job.mjs opportunity "Cursor vs Codex" build  # 推 #🔨 工程
+node ~/pi-discord-bridge/scripts/trigger-job.mjs discover "topic"   # 兼容旧名
 ```
 
 ---
@@ -114,7 +120,7 @@ node ~/pi-discord-bridge/scripts/trigger-job.mjs rss 2026-07-17   # 指定日期
 
 ---
 
-## 🌐 Discord 频道清单(9 个)
+## 🌐 Discord 频道清单(10 个)
 
 | Channel | 用途 | 自动写入方 |
 |---|---|---|
@@ -123,10 +129,13 @@ node ~/pi-discord-bridge/scripts/trigger-job.mjs rss 2026-07-17   # 指定日期
 | `#✨ 灵感` | idea / hack | Pi |
 | `#🔨 工程` | 代码 / 部署 / commit | Pi |
 | `#🌿 日记` | 心情 / 反思 | Pi |
-| `#📡 发现` | 24/7 信号(路由到这里) | Pi |
 | `#🛠 系统` | 告警 / 诊断 | Pi / daemon |
 | `#📰 资讯` | **RSS hub 每日推送** | 调度器 → Pi |
 | `#🌙 每日总结` | **每日工作总结** | 调度器 → Pi |
+| `#💡 机会` | **偶发机会发现**(深度调研 + SaaS 灵感) | `!opportunity` 手动 |
+
+注:之前 `#📡 发现`(CH_SIGNAL)与 `#📰 资讯`名字容易混淆,被合并进 `#💡 机会`。
+`!discover` 仍可用(向后兼容 alias)。
 
 ---
 
@@ -215,6 +224,18 @@ sched.start();
 6. 每天 12:00 北京时间自动推 `#📰 资讯`,23:00 自动推 `#🌙 每日总结`
 
 不需要 ID、不需要指令前缀,**自然语言就够**。
+
+**手动触发机会发现**(偶发):
+
+```
+!opportunity AI coding agents            # 推 #💡 机会(默认)
+!opportunity Cursor vs Codex build       # 推 #🔨 工程
+!opportunity Rust MCP server ideas       # 推 #✨ 灵感
+!opportunity help                        # 查帮助
+!discover <topic>                        # 兼容旧名,等价于 !opportunity
+```
+
+底层: spawn 一次性 Pi subprocess,加载 `discover-tools` extension,走 HN + GitHub + 中文 RSS + Reddit 多源采集 + AI 合成。`!opportunity` 走主 Pi(daemon 那个),`!opportunity <topic>` spawn 子进程(避免阻塞主对话)。
 
 ## ⚠️ Pi Agent 的探索行为(踩过的坑)
 
