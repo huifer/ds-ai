@@ -1,0 +1,327 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-19T23:50:00Z",
+  "agents": [
+    {
+      "id": "chief",
+      "displayName": "Chief",
+      "description": "战略协调、审批仲裁、跨 Agent 冲突处理。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "high" },
+      "runtime": { "sessionScope": "persistent", "idleTtlMinutes": 120, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/chief/skills/approval-handle.skill.md",
+        "agent-core/agents/chief/skills/status-read.skill.md",
+        "agent-core/agents/chief/skills/cost-read.skill.md",
+        "agent-core/agents/chief/skills/memory-read.skill.md",
+        "agent-core/agents/chief/skills/restart.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "founder", "current-project", "agent-internal"], "writeScope": "agent-internal" },
+      "tools": ["approval", "scheduler", "audit"],
+      "channels": { "main": "CH_CONTROL_DASH" }
+    },
+    {
+      "id": "intake",
+      "displayName": "Intake",
+      "description": "每日 23:50 拉取 GitHub commits、Pi Session、Discord、飞书摘要。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "medium" },
+      "runtime": { "sessionScope": "daily", "idleTtlMinutes": 60, "maxConcurrency": 1 },
+      "skills": [
+        "agent-core/agents/intake/skills/daily-intake.skill.md",
+        "agent-core/agents/intake/skills/github-fetch.skill.md",
+        "agent-core/agents/intake/skills/pi-session-fetch.skill.md",
+        "agent-core/agents/intake/skills/discord-summary.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "current-project"], "writeScope": "agent-internal" },
+      "tools": ["github", "pi", "discord"],
+      "channels": { "main": "CH_DAILY_MATERIAL" }
+    },
+    {
+      "id": "distill",
+      "displayName": "Distill",
+      "description": "候选评分、生成 brief、推送 #主快讯 / #main-feed。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "high" },
+      "runtime": { "sessionScope": "daily", "idleTtlMinutes": 60, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/distill/skills/privacy-redact.skill.md",
+        "agent-core/agents/distill/skills/fact-check.skill.md",
+        "agent-core/agents/distill/skills/brand-voice-zh.skill.md",
+        "agent-core/agents/distill/skills/brand-voice-en.skill.md",
+        "agent-core/agents/distill/skills/distill-run.skill.md",
+        "agent-core/agents/distill/skills/distill-brief.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "founder", "current-project", "content", "agent-internal"], "writeScope": "content" },
+      "tools": ["editor-card", "discord"],
+      "channels": { "main": "CH_DOMESTIC_MAIN" }
+    },
+    {
+      "id": "renderer",
+      "displayName": "Renderer",
+      "description": "渲染 HTML / PDF / 截图，套品牌色与版式。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "medium" },
+      "runtime": { "sessionScope": "per-artifact", "idleTtlMinutes": 45, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/renderer/skills/platform-render.skill.md",
+        "agent-core/agents/renderer/skills/html-render.skill.md",
+        "agent-core/agents/renderer/skills/react-render.skill.md",
+        "agent-core/agents/renderer/skills/video-render.skill.md"
+      ],
+      "memory": { "readScopes": ["content", "agent-internal"], "writeScope": "agent-internal" },
+      "tools": ["playwright", "puppeteer", "s3"],
+      "channels": { "main": "CH_CONTROL_DASH" }
+    },
+    {
+      "id": "publisher",
+      "displayName": "Publisher",
+      "description": "推送外平台与本地草稿；任何外发都需审批。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "medium" },
+      "runtime": { "sessionScope": "per-artifact", "idleTtlMinutes": 45, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/publisher/skills/platform-publish.skill.md",
+        "agent-core/agents/publisher/skills/platform-domestic.skill.md",
+        "agent-core/agents/publisher/skills/platform-overseas.skill.md",
+        "agent-core/agents/publisher/skills/x-thread.skill.md",
+        "agent-core/agents/publisher/skills/newsletter.skill.md"
+      ],
+      "memory": { "readScopes": ["content"], "writeScope": "content" },
+      "tools": ["discord", "scheduled-publish"],
+      "channels": { "main": "CH_CONTROL_DASH" }
+    },
+    {
+      "id": "qa",
+      "displayName": "QA",
+      "description": "数据回收、内容复盘、Agent 心跳、记忆治理。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "low" },
+      "runtime": { "sessionScope": "daily", "idleTtlMinutes": 60, "maxConcurrency": 1 },
+      "skills": [
+        "agent-core/agents/qa/skills/qa-report.skill.md",
+        "agent-core/agents/qa/skills/health-report.skill.md",
+        "agent-core/agents/qa/skills/metrics-fetch.skill.md",
+        "agent-core/agents/qa/skills/memory-governance.skill.md",
+        "agent-core/agents/qa/skills/test-plan.skill.md",
+        "agent-core/agents/qa/skills/acceptance.skill.md",
+        "agent-core/agents/qa/skills/defect.skill.md"
+      ],
+      "memory": { "readScopes": ["content", "agent-internal"], "writeScope": "agent-internal" },
+      "tools": ["discord", "scheduler"],
+      "channels": { "main": "CH_AGENT_STATUS" }
+    },
+    {
+      "id": "privacy",
+      "displayName": "Privacy",
+      "description": "脱敏 / Secret 检测 / 客户名替换。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "medium" },
+      "runtime": { "sessionScope": "per-artifact", "idleTtlMinutes": 30, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/privacy/skills/privacy-redact.skill.md",
+        "agent-core/agents/privacy/skills/secret-detect.skill.md",
+        "agent-core/agents/privacy/skills/client-anonymize.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "current-project"], "writeScope": "agent-internal" },
+      "tools": ["scanner"],
+      "channels": { "main": "CH_CONTROL_DASH" }
+    },
+    {
+      "id": "fact-check",
+      "displayName": "Fact Check",
+      "description": "事实校验、证据绑定、引用规范。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "high" },
+      "runtime": { "sessionScope": "per-artifact", "idleTtlMinutes": 30, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/fact-check/skills/fact-check.skill.md",
+        "agent-core/agents/fact-check/skills/evidence-bind.skill.md",
+        "agent-core/agents/fact-check/skills/citation.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "current-project"], "writeScope": "agent-internal" },
+      "tools": ["scanner", "github"],
+      "channels": { "main": "CH_CONTROL_DASH" }
+    },
+    {
+      "id": "sales",
+      "displayName": "Sales",
+      "description": "线索、资格判断、跟进。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "medium" },
+      "runtime": { "sessionScope": "per-thread", "idleTtlMinutes": 30, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/sales/skills/lead-capture.skill.md",
+        "agent-core/agents/sales/skills/lead-list.skill.md",
+        "agent-core/agents/sales/skills/qualification.skill.md",
+        "agent-core/agents/sales/skills/follow-up.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "business", "sales"], "writeScope": "sales" },
+      "tools": ["crm", "discord"],
+      "channels": { "main": "CH_SALES_LEADS" }
+    },
+    {
+      "id": "solution",
+      "displayName": "Solution",
+      "description": "需求发现、方案、PRD、行业模板。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "high" },
+      "runtime": { "sessionScope": "per-project", "idleTtlMinutes": 60, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/solution/skills/discovery.skill.md",
+        "agent-core/agents/solution/skills/prd-v01.skill.md",
+        "agent-core/agents/solution/skills/prd-v10.skill.md",
+        "agent-core/agents/solution/skills/prd-diff.skill.md",
+        "agent-core/agents/solution/skills/research-notebook.skill.md",
+        "agent-core/agents/solution/skills/runtime-research.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "current-project", "business", "fde-knowledge", "industry"], "writeScope": "fde-knowledge" },
+      "tools": ["prd", "knowledge-pack", "research"],
+      "channels": { "main": "CH_OPPORTUNITY_SOLUTION" }
+    },
+    {
+      "id": "cost",
+      "displayName": "Cost",
+      "description": "工时、成本、毛利估算。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "medium" },
+      "runtime": { "sessionScope": "per-project", "idleTtlMinutes": 60, "maxConcurrency": 1 },
+      "skills": [
+        "agent-core/agents/cost/skills/estimate.skill.md",
+        "agent-core/agents/cost/skills/cost-calc.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "business", "fde-knowledge"], "writeScope": "agent-internal" },
+      "tools": ["estimate"],
+      "channels": { "main": "CH_QUOTE" }
+    },
+    {
+      "id": "quote",
+      "displayName": "Quote",
+      "description": "报价生成、版本、折扣流程。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "medium" },
+      "runtime": { "sessionScope": "per-project", "idleTtlMinutes": 60, "maxConcurrency": 1 },
+      "skills": [
+        "agent-core/agents/quote/skills/estimate.skill.md",
+        "agent-core/agents/quote/skills/discount.skill.md",
+        "agent-core/agents/quote/skills/quote-version.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "business", "fde-knowledge"], "writeScope": "fde-knowledge" },
+      "tools": ["pdf", "discord"],
+      "channels": { "main": "CH_QUOTE" }
+    },
+    {
+      "id": "bid",
+      "displayName": "Bid",
+      "description": "招标分析、合规矩阵、标书。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "high" },
+      "runtime": { "sessionScope": "per-project", "idleTtlMinutes": 60, "maxConcurrency": 1 },
+      "skills": [
+        "agent-core/agents/bid/skills/tender-ingestion.skill.md",
+        "agent-core/agents/bid/skills/compliance-matrix.skill.md",
+        "agent-core/agents/bid/skills/bid-package.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "business", "fde-knowledge", "industry"], "writeScope": "fde-knowledge" },
+      "tools": ["pdf", "docx"],
+      "channels": { "main": "CH_BID" }
+    },
+    {
+      "id": "contract",
+      "displayName": "Contract Ops",
+      "description": "合同风险、履约义务、风险登记。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "high" },
+      "runtime": { "sessionScope": "per-project", "idleTtlMinutes": 60, "maxConcurrency": 1 },
+      "skills": [
+        "agent-core/agents/contract/skills/contract-summarize.skill.md",
+        "agent-core/agents/contract/skills/risk-register.skill.md",
+        "agent-core/agents/contract/skills/obligation-matrix.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "business", "fde-knowledge"], "writeScope": "fde-knowledge" },
+      "tools": ["pdf", "docx"],
+      "channels": { "main": "CH_CONTRACT_OPS" }
+    },
+    {
+      "id": "pm",
+      "displayName": "PM",
+      "description": "项目计划、里程碑、风险、RAID、周报。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "medium" },
+      "runtime": { "sessionScope": "per-project", "idleTtlMinutes": 60, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/pm/skills/project-bootstrap.skill.md",
+        "agent-core/agents/pm/skills/project-list.skill.md",
+        "agent-core/agents/pm/skills/plan-build.skill.md",
+        "agent-core/agents/pm/skills/weekly-report.skill.md",
+        "agent-core/agents/pm/skills/raid.skill.md",
+        "agent-core/agents/pm/skills/stage-gate.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "current-project", "business", "fde-knowledge"], "writeScope": "fde-knowledge" },
+      "tools": ["plan", "kanban", "discord"],
+      "channels": { "main": "CH_PROJECT_MGMT" }
+    },
+    {
+      "id": "delivery",
+      "displayName": "FDE Delivery",
+      "description": "FDE 客户实施、集成、部署、运行支持。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "high" },
+      "runtime": { "sessionScope": "per-project", "idleTtlMinutes": 60, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/delivery/skills/poc-plan.skill.md",
+        "agent-core/agents/delivery/skills/integration.skill.md",
+        "agent-core/agents/delivery/skills/deploy.skill.md",
+        "agent-core/agents/delivery/skills/incident.skill.md",
+        "agent-core/agents/delivery/skills/runbook.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "current-project", "fde-knowledge"], "writeScope": "fde-knowledge" },
+      "tools": ["shell", "ssh", "kubernetes", "playwright"],
+      "channels": { "main": "CH_FDE_DELIVERY" }
+    },
+    {
+      "id": "cs",
+      "displayName": "Customer Success",
+      "description": "客户健康度、QBR、续费、案例、文档化。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "medium" },
+      "runtime": { "sessionScope": "per-thread", "idleTtlMinutes": 30, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/cs/skills/health-report.skill.md",
+        "agent-core/agents/cs/skills/qbr.skill.md",
+        "agent-core/agents/cs/skills/renewal-brief.skill.md",
+        "agent-core/agents/cs/skills/case-study.skill.md",
+        "agent-core/agents/cs/skills/knowledge-redact.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "business", "fde-knowledge"], "writeScope": "fde-knowledge" },
+      "tools": ["discord", "pdf"],
+      "channels": { "main": "CH_CUSTOMER_SUCCESS" }
+    },
+    {
+      "id": "finance",
+      "displayName": "Finance Ops",
+      "description": "开票、应收、提醒、毛利、回款。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "medium" },
+      "runtime": { "sessionScope": "per-project", "idleTtlMinutes": 60, "maxConcurrency": 1 },
+      "skills": [
+        "agent-core/agents/finance/skills/invoice-request.skill.md",
+        "agent-core/agents/finance/skills/reminder.skill.md",
+        "agent-core/agents/finance/skills/margin-report.skill.md",
+        "agent-core/agents/finance/skills/cash-flow.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "business", "finance"], "writeScope": "finance" },
+      "tools": ["pdf", "excel", "discord"],
+      "channels": { "main": "CH_INVOICE_AR" }
+    },
+    {
+      "id": "coding",
+      "displayName": "Coding",
+      "description": "Demo / MVP / 内部工具代码生成。加载 react-design / component-library / react-vite 等 Skill。",
+      "model": { "primary": "minimax-cn/MiniMax-M3", "thinking": "high" },
+      "runtime": { "sessionScope": "per-project", "idleTtlMinutes": 45, "maxConcurrency": 2 },
+      "skills": [
+        "agent-core/agents/coding/skills/read-foundation.skill.md",
+        "agent-core/agents/coding/skills/react-design.skill.md",
+        "agent-core/agents/coding/skills/component-library.skill.md",
+        "agent-core/agents/coding/skills/react-vite.skill.md",
+        "agent-core/agents/coding/skills/react-router.skill.md",
+        "agent-core/agents/coding/skills/tailwind-v4.skill.md",
+        "agent-core/agents/coding/skills/shadcn-ui.skill.md",
+        "agent-core/agents/coding/skills/tanstack-query.skill.md",
+        "agent-core/agents/coding/skills/msw-mock.skill.md",
+        "agent-core/agents/coding/skills/react-testing.skill.md",
+        "agent-core/agents/coding/skills/zenbuild-design-tokens.skill.md",
+        "agent-core/agents/coding/skills/pnpm-install.skill.md",
+        "agent-core/agents/coding/skills/codespace-build.skill.md",
+        "agent-core/agents/coding/skills/react-demo.skill.md",
+        "agent-core/agents/coding/skills/zip-folder.skill.md"
+      ],
+      "memory": { "readScopes": ["company", "founder", "current-project", "fde-knowledge", "agent-internal"], "writeScope": "fde-knowledge" },
+      "tools": ["shell", "pnpm", "vite", "playwright"],
+      "channels": { "main": "CH_FDE_DELIVERY" }
+    }
+  ]
+}
