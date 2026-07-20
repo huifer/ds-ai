@@ -1,0 +1,106 @@
+{
+  "$schema": "agent-channel-mapping-v1",
+  "comment": "扩展 agent 频道映射,补充 registry.json 中未声明的频道",
+  "agents": {
+    "chief": {
+      "channels": ["总控台", "agent-状态", "审批中心", "深度讨论", "主入口"],
+      "role": "总控、跨 agent 协调、状态监控"
+    },
+    "intake": {
+      "channels": ["今日素材", "主快讯"],
+      "role": "每日内容采集入口"
+    },
+    "distill": {
+      "channels": ["主快讯", "今日素材", "main-feed", "raw-materials"],
+      "role": "内容蒸馏、brief 生成"
+    },
+    "renderer": {
+      "channels": ["preview-公众号", "preview-小红书", "preview-视频号", "preview-抖音", "preview-x", "preview-producthunt", "preview-newsletter", "preview-youtube", "preview-linkedin"],
+      "role": "渲染产物到各平台预览频道"
+    },
+    "publisher": {
+      "channels": ["publish-公众号", "publish-小红书", "publish-视频号", "publish-抖音", "publish-x", "publish-producthunt", "publish-newsletter"],
+      "role": "发布到外部平台"
+    },
+    "qa": {
+      "channels": ["agent-状态", "测试发布", "生产运维", "测试与验收"],
+      "role": "QA 检查、测试、报告"
+    },
+    "privacy": {
+      "channels": ["今日素材", "工程沉淀"],
+      "role": "内容脱敏、隐私保护"
+    },
+    "fact-check": {
+      "channels": ["今日素材", "工程沉淀"],
+      "role": "事实核查、引用规范"
+    },
+    "sales": {
+      "channels": ["销售线索", "商机与方案", "机会发现", "机会", "每日任务"],
+      "role": "线索管理、跟进、客户管理"
+    },
+    "solution": {
+      "channels": ["商机与方案", "产品规划", "架构评审", "深度讨论"],
+      "role": "需求发现、PRD、方案设计"
+    },
+    "cost": {
+      "channels": ["报价", "项目管理"],
+      "role": "成本估算、毛利"
+    },
+    "quote": {
+      "channels": ["报价", "标书"],
+      "role": "报价生成、折扣"
+    },
+    "bid": {
+      "channels": ["标书", "销售线索"],
+      "role": "投标分析、合规"
+    },
+    "contract": {
+      "channels": ["合同运营", "商机与方案"],
+      "role": "合同风险、履约"
+    },
+    "pm": {
+      "channels": ["项目管理", "fde-客户交付", "每日任务", "每日总结"],
+      "role": "项目计划、RAID、周报"
+    },
+    "delivery": {
+      "channels": ["fde-客户交付", "生产运维", "测试发布"],
+      "role": "FDE 交付、部署、事故"
+    },
+    "cs": {
+      "channels": ["客户成功", "客户资料", "工程沉淀"],
+      "role": "客户健康度、QBR、续费"
+    },
+    "finance": {
+      "channels": ["开票与回款", "用量"],
+      "role": "开票、应收、提醒"
+    },
+    "coding": {
+      "channels": ["软件开发", "工程", "系统", "工程沉淀", "fde-客户交付"],
+      "role": "Demo / MVP / 内部工具代码生成"
+    },
+    "seo": {
+      "channels": ["seo-geo", "外链业务", "市场研究"],
+      "role": "SEO/GEO 关键词、内容、外链优化"
+    },
+    "marketing": {
+      "channels": ["marketing-growth", "市场研究", "机会发现", "增长复盘"],
+      "role": "营销策略、增长复盘、市场调研"
+    },
+    "dev": {
+      "channels": ["软件开发", "工程", "系统", "工程沉淀"],
+      "role": "通用开发支持(代码评审、调试、技术咨询)"
+    },
+    "dreaming": {
+      "channels": ["📜-夜游记"],
+      "role": "遐思、主动思考、记忆蒸馏"
+    },
+    "asset": {
+      "channels": ["文件收件箱", "文件交付", "内容资产", "客户资料", "记忆库", "灵感", "资讯", "用量", "招聘与商务", "通用", "每日总结", "每日任务"],
+      "role": "资产归档、记忆治理、文件管理"
+    },
+    "orchestrator": {
+      "channels": ["主入口", "总控台"],
+      "role": "主入口编排器、跨 agent 协调"
+    }
+  }
+}
