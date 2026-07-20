@@ -10,10 +10,16 @@ logs/launchd.*.log
 
 # ---- pi sessions ----
 sessions/
+data/multi-agent-sessions/      # 多 Agent 系统 Session 持久化
 
 # ---- generated data (本地沉淀,可重建) ----
 data/rss/
 data/daily-summary/
+data/memory/                       # 长期记忆:JSON+MD(本地状态,人工/git 都可读)
+data/memory/mongo/                # MongoDB WiredTiger + journal(本地状态,量大)
+data/memory/backups/              # mongodump 输出(可选)
+data/memory/stats.json
+data/memory/*.log
 
 # ---- node ----
 node_modules/
@@ -37,7 +43,7 @@ legacy/**/package-lock.json
 *.swp
 # ---- Pi Agent 探索产生的"野生"文件(黑名单,被 add 时强制跳过)----
 # 任何 extensions/*-tools*.mjs / extensions/*-shared.mjs
-# 任何 src/jobs/discover.mjs / gh-daily.mjs / token-trend.mjs / discover-tools.mjs
+# 任何 src/jobs/discover.mjs / gh-daily.mjs / discover-tools.mjs
 extensions/discover-tools.mjs
 extensions/discover-tools-shared.mjs
 extensions/gh-tools.mjs
@@ -46,9 +52,7 @@ extensions/find-skills.mjs
 extensions/tavily-*.mjs
 src/jobs/discover.mjs
 src/jobs/gh-daily.mjs
-src/jobs/token-trend.mjs
 src/jobs/find-skills.mjs
 src/jobs/tavily-*.mjs
-scripts/token-stats.mjs
 scripts/find-skills.mjs
 scripts/tavily-*.mjs
