@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-label="ds-ai: 数据结构 × 人工智能">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="300" fill="url(#bg)"/>
+
+  <!-- 左侧装饰：节点 -->
+  <g opacity="0.85">
+    <circle cx="120" cy="80"  r="6" fill="#22d3ee"/>
+    <circle cx="60"  cy="150" r="5" fill="#a78bfa"/>
+    <circle cx="180" cy="180" r="4" fill="#22d3ee"/>
+    <circle cx="90"  cy="220" r="5" fill="#a78bfa"/>
+    <line x1="120" y1="80"  x2="180" y2="180" stroke="#22d3ee" stroke-width="1" opacity="0.5"/>
+    <line x1="60"  y1="150" x2="180" y2="180" stroke="#a78bfa" stroke-width="1" opacity="0.5"/>
+    <line x1="60"  y1="150" x2="90"  y2="220" stroke="#22d3ee" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- 右侧装饰：堆栈 -->
+  <g opacity="0.85">
+    <rect x="1060" y="80"  width="80" height="14" rx="3" fill="#a78bfa"/>
+    <rect x="1075" y="105" width="80" height="14" rx="3" fill="#22d3ee"/>
+    <rect x="1060" y="130" width="80" height="14" rx="3" fill="#a78bfa"/>
+    <rect x="1075" y="155" width="80" height="14" rx="3" fill="#22d3ee"/>
+    <rect x="1060" y="180" width="80" height="14" rx="3" fill="#a78bfa"/>
+  </g>
+
+  <!-- 主标题 -->
+  <text x="600" y="155" text-anchor="middle"
+        font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+        font-size="86" font-weight="800" fill="#f8fafc">ds-ai</text>
+
+  <!-- 副标题 -->
+  <text x="600" y="200" text-anchor="middle"
+        font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+        font-size="22" font-weight="500" fill="url(#accent)">
+    数据结构 × 人工智能
+  </text>
+
+  <!-- 描述 -->
+  <text x="600" y="235" text-anchor="middle"
+        font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+        font-size="14" font-weight="400" fill="#94a3b8">
+    Data Structures meet Artificial Intelligence
+  </text>
+</svg>
