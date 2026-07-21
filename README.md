@@ -2,6 +2,12 @@
 
 **Discord ↔ Pi Agent (RPC mode) 桥接 daemon** — 单入口对话 + 多频道沉淀 + 长期记忆 + 7×24 守护 + 每日定时任务。
 
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/Node-%E2%89%A518-green.svg)](package.json)
+[![Status](https://img.shields.io/badge/Status-Production-success.svg)]()
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-2.1-blue.svg)](CODE_OF_CONDUCT.md)
+
 > v2 架构:用 Pi 官方的 RPC 子进程模式,**不再用 TUI + tmux**。零 `ctx stale`,零 5 次重试,
 > 启动从 ~10s 降到 ~200ms,assistant 输出支持流式转发。
 >
