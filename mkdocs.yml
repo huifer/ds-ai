@@ -1,0 +1,164 @@
+---
+# ─────────────────────────────────────────────────────────────
+# strata-ai · MkDocs 配置
+# 主题：Material（暗色为主，浅色可切换）
+# ─────────────────────────────────────────────────────────────
+
+site_name: strata-ai
+site_description: >-
+  The strata beneath AI — connect classical data structures with
+  AI/ML algorithms. 数据结构 × 人工智能。
+site_author: Zen Huifer
+
+site_url: https://huifer.github.io/strata-ai/
+repo_url: https://github.com/huifer/strata-ai
+repo_name: huifer/strata-ai
+
+docs_dir: docs
+
+# 跨目录链接（指向仓库根的 CONTRIBUTING.md / CHANGELOG.md 等）允许
+strict: false
+validation:
+  links:
+    not_found: warn
+    absolute_links: ignore
+    unrecognized_links: ignore
+    anchors: ignore
+
+# ──────────────── 主题 ────────────────
+theme:
+  name: material
+  language: zh
+  favicon: assets/favicon-32.png
+  logo: assets/logo.png
+  icon:
+    repo: fontawesome/brands/github
+
+  font:
+    text: Noto Sans SC + Inter
+    code: JetBrains Mono
+
+  palette:
+    # 暗色优先
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: cyan
+      accent: light blue
+      toggle:
+        icon: material/weather-night
+        name: 切换到浅色
+    # 浅色
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到暗色
+
+  features:
+    - navigation.instant          # 即时导航（无整页刷新）
+    - navigation.tracking         # URL 锚点跟随滚动
+    - navigation.tabs             # 顶层导航用 tabs
+    - navigation.sections         # 章节可折叠
+    - navigation.indexes          # section 可作为索引页
+    - navigation.top              # 返回顶部
+    - navigation.footer           # 页脚上一页/下一页
+    - toc.follow                  # 目录跟随滚动
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy           # 代码块一键复制
+    - content.code.annotate
+    - content.tabs.link           # 内容 tabs 全局联动
+    - content.action.edit         # 跳到 GitHub 编辑
+    - content.action.view         # 查看源码
+    - content.action.star         # 一键 Star
+
+  # 源码编辑链接（贡献者一键跳到对应文件）
+  edit_uri: edit/main/docs/
+
+# ──────────────── 插件 ────────────────
+plugins:
+  - search:
+      lang:
+        - en
+        - zh
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: date
+      fallback_to_build_date: true
+  - awesome-pages
+  - material/tags
+
+# ──────────────── 扩展 Markdown ────────────────
+markdown_extensions:
+  - admonition            # 提示块：!!! note / !!! warning
+  - attr_list             # {: .class }
+  - def_list              # 定义列表
+  - footnotes             # 脚注
+  - md_in_html            # 在 HTML 里写 Markdown
+  - tables                # GFM 表格
+  - toc:
+      permalink: true
+      toc_depth: 4
+  - pymdownx.details      # 可折叠 admonition
+  - pymdownx.superfences  # 嵌套代码块 / Mermaid / 公式
+  - pymdownx.tabbed:      # tabs 语法
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde        # ~~删除线~~
+  - pymdownx.caret        # ^上标^
+  - pymdownx.mark         # ==高亮==
+  - pymdownx.smartsymbols # 自动转换符号 (c → © 等)
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      social_url_shorthand: true
+  - pymdownx.arithmatex:  # KaTeX 公式
+      generic: true
+
+# ──────────────── 站点导航 ────────────────
+nav:
+  - 首页: index.md
+  - 项目总览: 01-overview.md
+  - 内容目录:
+      - 完整目录: 目录.md
+
+# 之后章节补齐后，扩展为：
+# nav:
+#   - 首页: index.md
+#   - 总览: 01-overview.md
+#   - 基础结构:
+#       - 02 数组与向量: 02-array-vector.md
+#       - 03 栈与队列: 03-stack-queue.md
+#       - 04 堆: 04-heap.md
+#       - 05 树: 05-tree.md
+#       - 06 图: 06-graph.md
+#       - 07 哈希表: 07-hash.md
+#   - 进阶结构: 08-advanced.md
+#   - 内容索引: 目录.md
+
+# ──────────────── 额外 ────────────────
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/huifer
+      name: GitHub
+  generator: false  # 隐藏 "Made with Material for MkDocs"
+
+extra_css:
+  - assets/css/extra.css
+
+extra_javascript:
+  - assets/js/mathjax.js  # 备用：MathJax 配置（KaTeX 失败时回退）

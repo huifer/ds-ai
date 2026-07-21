@@ -1,0 +1,72 @@
+name: Deploy Docs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - ".github/workflows/docs.yml"
+      - "assets/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: deploy
+  id-token: write
+
+# 不让多个 docs 部署并发
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build MkDocs site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # git-revision-date 插件需要历史
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install \
+            mkdocs \
+            mkdocs-material \
+            mkdocs-material[imaging] \
+            mkdocs-git-revision-date-localized-plugin \
+            mkdocs-awesome-pages-plugin \
+            mkdocs-material-extensions \
+            pymdown-extensions \
+            pillow
+
+      - name: Build site
+        run: |
+          # 暂不使用 --strict：章节陆续补齐阶段，目录/链接警告较多
+          mkdocs build --site-dir public
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
