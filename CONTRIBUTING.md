@@ -1,6 +1,6 @@
 # 贡献指南
 
-感谢你考虑为 **ds-ai** 做出贡献！🎉
+感谢你考虑为 **strata-ai** 做出贡献！🎉
 
 本项目欢迎任何形式的贡献，无论你是修改一个错别字、补充一个示例，还是提出全新章节。
 
@@ -147,7 +147,7 @@ refactor: 重构 examples/ 目录结构
 
 不确定从哪开始？
 
-- 看 [Issues](https://github.com/huifer/ds-ai/issues) 里的 `good first issue` 标签
+- 看 [Issues](https://github.com/huifer/strata-ai/issues) 里的 `good first issue` 标签
 - 在 Discussions 里发起提问
 - 直接联系 Maintainer
 

@@ -31,8 +31,24 @@
   - 更新日志（CHANGELOG.md）
   - Issue 与 PR 模板
 - 📚 docs/ 目录骨架与第一章《项目总览》
-- 🎨 assets/ 目录用于存放图示素材
+- 🎨 assets/ 目录用于存放图示素材（含 banner.svg）
 
 ### Notes
 - 仓库正式从空仓进入内容建设阶段
 - 欢迎以小步快跑方式提 PR：错别字、补充示例、新章节均可
+
+---
+
+## [0.1.1] - 计划中
+
+### Changed
+- 🎨 **项目命名**：原 `ds-ai` 重命名为 **`strata-ai`**
+  - 理念：数据结构是 AI 算法的"底层地层（strata）"
+  - Tagline：**The Strata Beneath AI**
+  - 副标语：**Data Structures, Layered for AI**
+- 🖼️ 重做 `assets/banner.svg`（左侧地层视觉 + 右侧 AI 节点视觉）
+- 📝 README 重写：增加 banner、tagline、双语副标语
+
+### Action Required（手动）
+- 在 GitHub 端 Settings → General → "Rename repository" 把 `ds-ai` 改为 `strata-ai`
+- GitHub 会自动把旧 URL 重定向到新 URL，无需修改 README 里的链接（已统一改完）

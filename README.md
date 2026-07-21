@@ -1,14 +1,19 @@
 <div align="center">
 
-# 🧠 ds-ai
+<img src="assets/banner.svg" alt="strata-ai banner" width="100%"/>
 
-### 数据结构 × 人工智能：从基础结构到 AI 算法的桥梁
+# 🪨 strata-ai
+
+### The Strata Beneath AI
 
 [![Status](https://img.shields.io/badge/Status-Active-success.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Language](https://img.shields.io/badge/Language-中文%20%7C%20English-orange.svg)]()
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Repo Size](https://img.shields.io/badge/Size-Lightweight-yellowgreen.svg)]()
+
+**Data Structures, Layered for AI**
+*把数据结构当作 AI 算法的底层地层，一层一层铺给你看。*
 
 [项目简介](#-项目简介) • [核心特色](#-核心特色) • [快速开始](#-快速开始) • [内容目录](#-内容目录) • [贡献](#-贡献) • [许可](#-许可协议)
 
@@ -18,9 +23,9 @@
 
 ## 📖 项目简介
 
-**ds-ai** 是一个面向开发者与学习者的开源项目，专注于 **数据结构（Data Structures）与人工智能（AI）算法的结合**。
+**strata-ai** 是一个面向开发者与学习者的开源项目，专注于 **数据结构（Data Structures）与人工智能（AI）算法的结合**。
 
-> 经典的数据结构不是 AI 的"历史包袱"，而是 AI 算法的**底层积木**：堆支撑优先队列、树支撑决策与语法、图支撑知识图谱与注意力、哈希支撑 Embedding 检索……本项目把这些连接一一摊开。
+> 经典的数据结构不是 AI 的"历史包袱"，而是 AI 算法的**底层地层（strata）**：堆支撑优先队列、树支撑决策与语法、图支撑知识图谱与注意力、哈希支撑 Embedding 检索……本项目把这些连接一一摊开。
 
 我们不重复造"教科书轮子"，而是回答一个具体的问题：
 
@@ -57,8 +62,8 @@
 ### 1. 克隆仓库
 
 ```bash
-git clone https://github.com/huifer/ds-ai.git
-cd ds-ai
+git clone https://github.com/huifer/strata-ai.git
+cd strata-ai
 ```
 
 ### 2. 阅读顺序建议
@@ -135,7 +140,7 @@ pip install numpy torch matplotlib networkx  # 按需安装
 
 ## 🛣️ Roadmap
 
-- [x] 项目立项与开源资料初始化
+- [x] 项目立项与开源资料初始化（v0.1.0）
 - [ ] 完成基础 7 章内容（数组 → 哈希）
 - [ ] 完成进阶 5 章内容（Trie → B 树 / LSM）
 - [ ] 增加 LLM 专题：KV-Cache、PagedAttention、RAG 检索
@@ -143,6 +148,7 @@ pip install numpy torch matplotlib networkx  # 按需安装
 - [ ] 增加多模态专题：稀疏 Attention 与 FlashAttention
 - [ ] 引入交互式 Notebook 版本
 - [ ] 国际化（English version）
+- [ ] 项目更名：`ds-ai` → `strata-ai`（建议在 GitHub 端 Rename Repository）
 
 ---
 
@@ -176,7 +182,7 @@ pip install numpy torch matplotlib networkx  # 按需安装
 
 ## 📬 联系方式
 
-- GitHub Issues: [提交问题](https://github.com/huifer/ds-ai/issues)
+- GitHub Issues: [提交问题](https://github.com/huifer/strata-ai/issues)
 - 讨论群：见项目主页
 
 ---
