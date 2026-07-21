@@ -12,6 +12,11 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Repo Size](https://img.shields.io/badge/Size-Lightweight-yellowgreen.svg)]()
 
+[![PyPI](https://img.shields.io/pypi/v/strata-ai?logo=pypi&logoColor=white)](https://pypi.org/project/strata-ai/)
+[![Python](https://img.shields.io/pypi/pyversions/strata-ai?logo=python&logoColor=white)](https://pypi.org/project/strata-ai/)
+[![Docs](https://img.shields.io/badge/docs-huifer.github.io%2Fstrata--ai-blue?logo=materialformkdocs&logoColor=white)](https://huifer.github.io/strata-ai/)
+[![GitHub Pages](https://img.shields.io/badge/site-GitHub%20Pages-blue?logo=github)](https://huifer.github.io/strata-ai/)
+
 **Data Structures, Layered for AI**
 *把数据结构当作 AI 算法的底层地层，一层一层铺给你看。*
 
@@ -43,6 +48,8 @@
 - 🇨🇳 **中文为主，英文并列**：术语同时给出中英文，方便对照阅读。
 - 🛠️ **渐进式深度**：从"是什么"到"为什么"，再到"怎么用"，三段式。
 - 📚 **持续更新**：跟踪 SOTA（2024+）的新结构，如 FlashAttention 的 Tiling、RAG 的 HNSW、KV-Cache 的 Ring Buffer。
+- 📦 **PyPI 一键安装**：`pip install strata-ai` 即可在脚本里复用最小工具函数与示例。
+- 🌐 **独立文档站**：[huifer.github.io/strata-ai](https://huifer.github.io/strata-ai/) 由 MkDocs Material 自动构建。
 
 ---
 
@@ -59,14 +66,48 @@
 
 ## 🚀 快速开始
 
-### 1. 克隆仓库
+### 方式 A：当作文档 / 示例库（最常见）
 
 ```bash
 git clone https://github.com/huifer/strata-ai.git
 cd strata-ai
 ```
 
-### 2. 阅读顺序建议
+然后阅读 [`docs/`](docs/) 目录、运行 [`examples/`](examples/)。
+
+### 方式 B：当作 Python 包（适合脚本化复用）
+
+```bash
+pip install strata-ai
+```
+
+```python
+>>> import strata_ai
+>>> strata_ai.version()
+'0.1.1'
+>>> strata_ai.info()
+'strata-ai 0.1.1 | author: Zen Huifer | license: MIT | repo: https://github.com/huifer/strata-ai'
+```
+
+可选依赖组（按需安装）：
+
+```bash
+pip install "strata-ai[numpy]"     # 数值 / 矩阵相关示例
+pip install "strata-ai[torch]"     # 深度学习示例
+pip install "strata-ai[graph]"     # 图 / NetworkX 示例
+pip install "strata-ai[viz]"       # matplotlib 可视化
+pip install "strata-ai[docs]"      # 本地构建文档站
+pip install "strata-ai[dev]"       # 测试 / lint / mypy
+pip install "strata-ai[all]"       # 全部
+```
+
+### 方式 C：阅读在线文档站
+
+👉 [huifer.github.io/strata-ai](https://huifer.github.io/strata-ai/)
+
+由 MkDocs Material 渲染，支持全文搜索、暗/亮主题切换、代码一键复制。
+
+### 阅读顺序建议
 
 零基础读者建议按以下顺序阅读 `docs/` 目录：
 
@@ -78,17 +119,6 @@ cd strata-ai
 6. `06-graph.md` —— 图与 GNN、知识图谱
 7. `07-hash.md` —— 哈希与 Attention、近邻检索
 8. `08-advanced.md` —— 高级结构与 SOTA 应用
-
-### 3. 运行示例
-
-```bash
-# 推荐使用 uv / conda / venv 任一方式创建环境
-python -m venv .venv
-source .venv/bin/activate
-pip install numpy torch matplotlib networkx  # 按需安装
-```
-
-每个章节的 `examples/` 子目录都包含可直接运行的最小示例。
 
 ---
 
@@ -141,6 +171,10 @@ pip install numpy torch matplotlib networkx  # 按需安装
 ## 🛣️ Roadmap
 
 - [x] 项目立项与开源资料初始化（v0.1.0）
+- [x] 项目改名 `ds-ai` → `strata-ai`（v0.1.1）
+- [x] PyPI 包发布：`pip install strata-ai`
+- [x] 文档站：MkDocs Material + GitHub Pages 自动部署
+- [x] Logo / Banner 多尺寸 PNG（logo, favicon, apple-touch-icon, social-card）
 - [ ] 完成基础 7 章内容（数组 → 哈希）
 - [ ] 完成进阶 5 章内容（Trie → B 树 / LSM）
 - [ ] 增加 LLM 专题：KV-Cache、PagedAttention、RAG 检索
@@ -148,7 +182,7 @@ pip install numpy torch matplotlib networkx  # 按需安装
 - [ ] 增加多模态专题：稀疏 Attention 与 FlashAttention
 - [ ] 引入交互式 Notebook 版本
 - [ ] 国际化（English version）
-- [ ] 项目更名：`ds-ai` → `strata-ai`（建议在 GitHub 端 Rename Repository）
+- [ ] 项目更名 `ds-ai` → `strata-ai`（建议在 GitHub 端 Rename Repository）
 
 ---
 
@@ -183,6 +217,8 @@ pip install numpy torch matplotlib networkx  # 按需安装
 ## 📬 联系方式
 
 - GitHub Issues: [提交问题](https://github.com/huifer/strata-ai/issues)
+- 文档站: [huifer.github.io/strata-ai](https://huifer.github.io/strata-ai/)
+- PyPI: [pypi.org/project/strata-ai](https://pypi.org/project/strata-ai/)
 - 讨论群：见项目主页
 
 ---

@@ -1,0 +1,54 @@
+name: Lint & Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  markdown-link-check:
+    name: Markdown links & Python syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate Markdown links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --exclude-loopback --exclude-mail
+          failOnError: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate Python examples compile
+        run: |
+          set -e
+          echo "🔍 Checking all Python examples compile..."
+          find examples -name "*.py" -print0 | xargs -0 -n1 python -m py_compile
+
+      - name: Validate SVG XML
+        run: |
+          set -e
+          echo "🔍 Checking SVG files are well-formed XML..."
+          for f in $(find assets -name "*.svg"); do
+            python -c "import xml.etree.ElementTree as ET; ET.parse('$f')" && echo "✅ $f"
+          done
+
+      - name: Validate JSON/YAML
+        run: |
+          set -e
+          echo "🔍 Checking YAML files are well-formed..."
+          python -c "import yaml; list(yaml.safe_load_all(open('mkdocs.yml')))" && echo "✅ mkdocs.yml"
+          for f in $(find .github -name "*.yml" -o -name "*.yaml"); do
+            python -c "import yaml; list(yaml.safe_load_all(open('$f')))" && echo "✅ $f"
+          done

@@ -19,6 +19,49 @@
 
 ---
 
+## [0.1.1] - 2025-XX-XX
+
+### Added
+- 🎨 **项目命名**：原 `ds-ai` 重命名为 **`strata-ai`**
+  - 理念：数据结构是 AI 算法的"底层地层（strata）"
+  - Tagline：**The Strata Beneath AI**
+  - 副标语：**Data Structures, Layered for AI**
+- 🖼️ **完整 Logo / Banner 资产**
+  - `assets/banner.svg` + `assets/banner.png`（README 头部）
+  - `assets/logo.png`（方形 logo，512×512）
+  - `assets/favicon.png` + `favicon-16.png` + `favicon-32.png` + `favicon-64.png`
+  - `assets/apple-touch-icon.png`（180×180）
+  - `assets/social-card.png`（1280×640，Open Graph / Twitter Card）
+- 📦 **PyPI 包发布**
+  - `pip install strata-ai`
+  - 包名：`strata-ai` / 导入名：`strata_ai`
+  - Optional groups：`numpy` / `torch` / `graph` / `viz` / `docs` / `dev` / `all`
+  - PEP 561 兼容（`py.typed`）
+- 🌐 **GitHub Pages 文档站**
+  - MkDocs Material 主题（暗/亮色切换）
+  - 自动部署：`.github/workflows/docs.yml`
+  - 站点地址：`https://huifer.github.io/strata-ai/`
+- 🔧 **CI / 自动化**
+  - `.github/workflows/lint.yml`：Markdown 链接 + Python 语法 + SVG XML 检查
+  - `.github/workflows/docs.yml`：MkDocs 构建 + GitHub Pages 部署
+  - `.github/workflows/release.yml`：PyPI 自动发布（Trusted Publishing / OIDC）
+- 📝 **新文件**
+  - `pyproject.toml`（PEP 621）+ `requirements.txt` + `requirements-dev.txt`
+  - `mkdocs.yml` + `docs/index.md` + `docs/assets/css/extra.css` + `docs/assets/js/mathjax.js`
+  - `strata_ai/__init__.py` + `strata_ai/py.typed` + `strata_ai/structures/__init__.py`
+- 📖 README 重写：增加 banner、tagline、PyPI/Docs 徽章、3 种快速开始方式
+
+### Action Required（手动）
+- 在 GitHub 端 Settings → General → "Rename repository" 把 `ds-ai` 改为 `strata-ai`
+- 在 GitHub 端 Settings → Pages → Source 选 "GitHub Actions"（启用 Pages）
+- 在 PyPI 端配置 Trusted Publishing（Project → Publishing → Add pending publisher）
+  - Owner：`huifer`
+  - Repository：`strata-ai`
+  - Workflow：`release.yml`
+- 第一次手动发布：本地 `python -m build && twine upload dist/*`（或通过 Release event 触发）
+
+---
+
 ## [0.1.0] - 2025-XX-XX
 
 ### Added
@@ -36,19 +79,3 @@
 ### Notes
 - 仓库正式从空仓进入内容建设阶段
 - 欢迎以小步快跑方式提 PR：错别字、补充示例、新章节均可
-
----
-
-## [0.1.1] - 计划中
-
-### Changed
-- 🎨 **项目命名**：原 `ds-ai` 重命名为 **`strata-ai`**
-  - 理念：数据结构是 AI 算法的"底层地层（strata）"
-  - Tagline：**The Strata Beneath AI**
-  - 副标语：**Data Structures, Layered for AI**
-- 🖼️ 重做 `assets/banner.svg`（左侧地层视觉 + 右侧 AI 节点视觉）
-- 📝 README 重写：增加 banner、tagline、双语副标语
-
-### Action Required（手动）
-- 在 GitHub 端 Settings → General → "Rename repository" 把 `ds-ai` 改为 `strata-ai`
-- GitHub 会自动把旧 URL 重定向到新 URL，无需修改 README 里的链接（已统一改完）
