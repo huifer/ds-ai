@@ -1,0 +1,64 @@
+/* ─────────────────────────────────────────────────────────────
+   strata-ai · MkDocs 额外样式
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --strata-cyan: #22d3ee;
+  --strata-purple: #a78bfa;
+  --strata-bg: #0b1220;
+}
+
+/* 让 hero/banner 占据更舒服的视觉 */
+.md-typeset .strata-hero {
+  margin: 2.5rem 0 3rem;
+  text-align: center;
+}
+
+.md-typeset .strata-hero img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.18);
+}
+
+/* 自定义提示块配色（沿用品牌色） */
+.md-typeset .admonition.strata {
+  border-color: var(--strata-cyan);
+}
+
+.md-typeset .admonition.strata > .admonition-title {
+  background-color: rgba(34, 211, 238, 0.1);
+  color: var(--strata-cyan);
+}
+
+.md-typeset .admonition.strata > p {
+  border-left: 0.2rem solid var(--strata-cyan);
+}
+
+/* 内容表格美化 */
+.md-typeset table:not([class]) {
+  font-size: 0.85em;
+}
+
+/* 章节锚点 hover 出现 */
+.md-typeset .headerlink {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.md-typeset h1:hover .headerlink,
+.md-typeset h2:hover .headerlink,
+.md-typeset h3:hover .headerlink,
+.md-typeset h4:hover .headerlink {
+  opacity: 1;
+}
+
+/* 让代码块在窄屏也能舒适阅读 */
+.md-typeset pre > code {
+  font-size: 0.82em;
+}
+
+/* 页脚小尾巴 */
+.md-footer-meta {
+  font-size: 0.7em;
+  opacity: 0.7;
+}
