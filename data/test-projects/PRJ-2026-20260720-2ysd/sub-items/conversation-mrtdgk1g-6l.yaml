@@ -1,0 +1,17 @@
+id: conversation-mrtdgk1g-6l
+type: conversation
+content:
+  summary: 用户需求：做个飞书机器人
+  keyPoints:
+    - 需要支持飞书
+    - 主要功能：消息推送
+  decisions: []
+  pending:
+    - 等待用户提供更多信息
+  nextAction: 等待用户回复
+  turns:
+
+aiGenerated: false
+createdBy: ai
+projectId: PRJ-2026-20260720-2ysd
+createdAt: "2026-07-20T15:20:59.764Z"

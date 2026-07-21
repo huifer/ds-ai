@@ -119,6 +119,10 @@ find ~/.workbuddy ~/.zcode ~/.pi ~/.gemini ~/.kiro ~/.claude \\
 - <观察 1>
 - <观察 2>
 
+## 🌙 昨夜遐思
+
+<如果 data/dreams/DREAMS.md 中有 ${dateKey} 的条目,读取后用 1-2 句话概括昨夜遐思的核心洞察。如果没有,写"昨夜无梦"。>
+
 ---
 _数据切片: 共读取 X 个文件 / Y 字符 · 漏斗率 Z%_
 \`\`\`

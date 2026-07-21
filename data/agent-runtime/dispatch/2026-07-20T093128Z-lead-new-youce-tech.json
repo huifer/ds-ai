@@ -1,0 +1,60 @@
+{
+  "dispatchId": "DISPATCH-20260720-093128-lead-new-youce-tech",
+  "at": "2026-07-20T09:31:28Z",
+  "source": {
+    "channelId": "1527730710410956841",
+    "channelName": "#主入口",
+    "userRaw": "公司：右侧科技，联系人：张三，职位：CTO，电话：138-0013-8000，来源：官网"
+  },
+  "route": {
+    "command": "!lead new",
+    "agentId": "sales",
+    "skill": "lead-capture",
+    "skillPath": "agent-core/agents/sales/skills/lead-capture.skill.md",
+    "channelId": "1527730730418044991",
+    "channelName": "#销售线索",
+    "confidence": 0.92,
+    "reason": "用户提供完整结构化客户基础信息（公司名/联系人/职位/电话/来源），匹配 lead-capture 的录入语义；缺失字段（need/industry/budget）由 sales agent 在 lead.json 中标 '待补'。"
+  },
+  "payload": {
+    "command": "!lead new",
+    "args": {
+      "name": "右侧科技",
+      "contact": "张三 / CTO / 138-0013-8000",
+      "problem": "待补（用户未提供具体需求）"
+    },
+    "extractedFields": {
+      "company": "右侧科技",
+      "contact": "张三",
+      "position": "CTO",
+      "phone": "138-0013-8000",
+      "source": "官网",
+      "need": "待补",
+      "industry": "待补",
+      "budget": "待补"
+    },
+    "dupeCheck": {
+      "checkedScope": "data/business/leads/*.json",
+      "matchedExistingLead": false,
+      "matchedCompany": false,
+      "matchedContact": false,
+      "matchedPhone": false,
+      "note": "数据目录中无'右侧科技'/'张三'/'138-0013-8000'任一字段，新线索合法创建。"
+    }
+  },
+  "approval": {
+    "required": false,
+    "reason": "lead-capture 不涉及外部动作或财务承诺，按 §3.3 路由无需审批。"
+  },
+  "expectedOutput": {
+    "files": [
+      "data/business/leads/LEAD-YYYYMMDD-XXXX.json",
+      "data/sales/LEAD-YYYYMMDD-XXXX.md"
+    ],
+    "discordChannelId": "1527730730418044991",
+    "replyTemplate": "✅ 已录入线索 `LEAD-...`\n下一步: !lead qualify LEAD-..."
+  },
+  "status": "dispatched",
+  "consumedBy": null,
+  "consumedAt": null
+}

@@ -408,6 +408,28 @@ export class AgentRegistry {
   }
 
   /**
+   * 获取 agent 的主频道 ID
+   * registry.json 中 channels.main 对应的环境变量名 → process.env[envKey] → ID
+   */
+  getPrimaryChannelId(agentId) {
+    const def = this.agents.get(agentId);
+    if (!def) return null;
+    const channelsById = def.channelsById ?? {};
+    const mainKey = channelsById.main ?? channelsById['main'];
+    if (!mainKey) return null;
+    return process.env[mainKey] ?? null;
+  }
+
+  /**
+   * 获取 agent 的主频道名称
+   */
+  getPrimaryChannelName(agentId) {
+    const id = this.getPrimaryChannelId(agentId);
+    if (!id) return null;
+    return this.idToName.get(id) ?? null;
+  }
+
+  /**
    * 通过 skill 查找 agent
    */
   getBySkill(skill) {

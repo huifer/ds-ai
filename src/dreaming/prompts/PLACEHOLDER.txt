@@ -1,0 +1,3 @@
+<!-- ~/pi-discord-agents/src/dreaming/prompts/PLACEHOLDER.txt -->
+<!-- 占位 — PR2/PR3 在这里加真正的 prompt 模板 -->
+<!-- 模板命名约定:rem-lian-zhu.txt / rem-gui-cang.txt / rem-ming-tai.txt / deep-scorer.txt / diary-writer.txt -->

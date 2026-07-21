@@ -1,0 +1,12 @@
+{
+  "id": "RND-20260719-0476",
+  "type": "render",
+  "createdAt": "2026-07-19T20:32:45.312Z",
+  "candidateId": "CNT-20260719-7846",
+  "platform": "newsletter",
+  "format": "markdown",
+  "body": "# 帮一个跨境电商客户用 Rust 写了一个高性能的订单聚合 API，用了 axum + tokio + sqlx，QPS \n\n> Zenbuild · Build with intention · 评分 33/40\n\n---\n\n帮一个跨境电商客户用 Rust 写了一个高性能的订单聚合 API，用了 axum + tokio + sqlx，QPS 从 200 提升到 5000，延迟从 200ms 降到 15ms，commit def5678ab 部署在 https://github.com/huifer/order-aggregator\n\n---\n\n© 2026 Zenbuild · All rights reserved",
+  "bytes": 455,
+  "llmEnhanced": false,
+  "status": "rendered"
+}

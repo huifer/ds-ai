@@ -1,0 +1,35 @@
+{
+  "id": "CNT-20260721-6348",
+  "type": "candidate",
+  "createdAt": "2026-07-21T00:00:35.952Z",
+  "materialId": "MAT-20260720-6843",
+  "title": "只有定时采集指令，暂不具备发布价值",
+  "brief": "素材仅包含定时采集指令，缺少真实工作内容、证据与可供读者使用的信息。",
+  "content": "scheduled intake",
+  "rawContent": "scheduled intake",
+  "privacyFindings": [],
+  "factCheck": {
+    "totalClaims": 0,
+    "supported": 0,
+    "unsupported": 0,
+    "details": [],
+    "passed": true
+  },
+  "score": {
+    "scores": {
+      "authenticity": 1,
+      "evidence": 0,
+      "audience-value": 0,
+      "novelty": 0,
+      "brand-fit": 1,
+      "virality": 0,
+      "reusability": 0,
+      "privacy-safety": 5
+    },
+    "total": 7,
+    "max": 40
+  },
+  "llmEnhanced": true,
+  "status": "ready",
+  "platforms": []
+}

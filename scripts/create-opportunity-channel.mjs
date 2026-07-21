@@ -3,8 +3,8 @@
 // 一次性:在 GUILD 里建 #💡 机会 频道,自动写 CH_OPPORTUNITY=<id> 到 .env
 //
 // 为什么要这个频道:
-//   - 旧的 #📡 发现(CH_SIGNAL)和 #📰 资讯(CH_RSS)容易混淆
-//   - 新频道 #💡 机会 用于 !opportunity 命令推送
+//   - #机会统一承载历史 Discover 信号和新的深度机会调研
+//   - #资讯只承载每日 RSS 新闻流
 //   - 内容形态:深度调研 + SaaS/App 创业灵感(不是新闻流)
 
 import { Client, GatewayIntentBits, ChannelType, PermissionFlagsBits } from 'discord.js';
@@ -71,7 +71,7 @@ async function main() {
     opportunityChannel = await guild.channels.create({
       name: CHANNEL_NAME,
       type: ChannelType.GuildText,
-      topic: '💡 机会发现 · !opportunity <topic> 触发的深度调研 + SaaS/App 创业灵感。取代 #📡 发现(频道名混淆问题)',
+      topic: '💡 机会发现 · !opportunity <topic> 触发的深度调研 + SaaS/App 创业灵感 · 完整机会 brief 的唯一输出频道',
       permissionOverwrites: [
         {
           id: guild.roles.everyone.id,

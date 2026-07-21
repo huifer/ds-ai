@@ -1,0 +1,43 @@
+{
+  "id": "CNT-20260719-8293",
+  "type": "candidate",
+  "createdAt": "2026-07-19T23:18:07.697Z",
+  "materialId": "MAT-20260719-7767",
+  "title": "!intake",
+  "brief": "",
+  "content": "!intake",
+  "rawContent": "!intake",
+  "privacyFindings": [],
+  "factCheck": {
+    "totalClaims": 0,
+    "supported": 0,
+    "unsupported": 0,
+    "details": [],
+    "passed": true
+  },
+  "score": {
+    "scores": {
+      "authenticity": 4,
+      "evidence": 2,
+      "audience-value": 3,
+      "novelty": 3,
+      "brand-fit": 4,
+      "virality": 2,
+      "reusability": 4,
+      "privacy-safety": 5
+    },
+    "total": 27,
+    "max": 40
+  },
+  "llmEnhanced": false,
+  "status": "ready",
+  "platforms": [
+    "wechat",
+    "xiaohongshu",
+    "x",
+    "newsletter"
+  ],
+  "privacyChecked": true,
+  "factChecked": true,
+  "factCheckLlmEnhanced": false
+}

@@ -63,6 +63,72 @@ function parseEnv(text) {
   return out;
 }
 
+const OPPORTUNITY_CHANNEL_KEYS = {
+  opportunity: 'CH_OPPORTUNITY',
+  build: 'CH_BUILD',
+  ideas: 'CH_IDEAS',
+  memory: 'CH_MEMORY',
+};
+
+function opportunityOutputPath(topic, dateKey) {
+  const slug = String(topic).toLowerCase()
+    .replace(/[^a-z0-9一-龥]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 50) || 'topic';
+  return resolve(ROOT, 'data', 'opportunity', `${dateKey}-${slug}.md`);
+}
+
+async function sendLongDiscord(channel, fullText, prefix = '') {
+  const MAX = 1900;
+  let rest = prefix + fullText;
+  const ids = [];
+  while (rest.length > 0) {
+    let cut = rest.length;
+    if (rest.length > MAX) {
+      cut = rest.lastIndexOf('\n\n', MAX);
+      if (cut < MAX * 0.5) cut = rest.lastIndexOf('\n', MAX);
+      if (cut < MAX * 0.5) cut = MAX;
+    }
+    const more = rest.length > cut;
+    const body = rest.slice(0, cut) + (more ? '\n\n' : '');
+    const sent = await channel.send(body);
+    ids.push(sent.id);
+    rest = rest.slice(cut).replace(/^\n+/, '');
+    if (rest.length > 0) await new Promise((r) => setTimeout(r, 250));
+  }
+  return ids;
+}
+
+async function publishOpportunityFile({ env, topic, dateKey, channelCategory, outputPath }) {
+  if (!existsSync(outputPath)) return { published: false, reason: `brief 不存在: ${outputPath}` };
+  const envKey = OPPORTUNITY_CHANNEL_KEYS[channelCategory];
+  const channelId = env[envKey];
+  if (!channelId) return { published: false, reason: `${envKey} 未配置` };
+
+  const { Client, GatewayIntentBits, ChannelType } = await import('discord.js');
+  const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
+  try {
+    await client.login(env.DISCORD_TOKEN);
+    const channel = await client.channels.fetch(channelId);
+    if (!channel || channel.type !== ChannelType.GuildText) {
+      throw new Error(`目标不是文字频道: ${channelId}`);
+    }
+    const content = readFileSync(outputPath, 'utf8');
+    const prefix = `💡 **【机会 · ${topic} · ${dateKey}】**\n\n`;
+    const messageIds = await sendLongDiscord(channel, content, prefix);
+
+    if (env.CH_ENTRY && env.CH_ENTRY !== channelId) {
+      const entry = await client.channels.fetch(env.CH_ENTRY);
+      if (entry?.type === ChannelType.GuildText) {
+        await entry.send(`✅ 机会发现完成：<#${channelId}>\n本地 brief：\`${outputPath.replace(`${ROOT}/`, '')}\``);
+      }
+    }
+    return { published: true, channelId, messageIds };
+  } finally {
+    await client.destroy();
+  }
+}
+
 async function main() {
   const envPath = resolve(ROOT, '.env');
   if (!existsSync(envPath)) {
@@ -76,18 +142,66 @@ async function main() {
   const { buildRssPrompt } = await import('../src/jobs/rss-daily.mjs');
   const { buildDailySummaryPrompt } = await import('../src/jobs/daily-summary.mjs');
   const { buildOpportunityPrompt } = await import('../src/jobs/opportunity.mjs');
+  const { runTokenUsageJob, handleUsageCommand } = await import('../src/jobs/token-usage.mjs');
+
+  // ---- token 用量任务:不走 Pi,直接在当前进程调 ccusage + ECharts 渲染 PNG 推 Discord ----
+  if (kind === 'usage' || kind === 'trend') {
+    const sub = process.argv[3] || '';
+    const { Client, GatewayIntentBits, ChannelType } = await import('discord.js');
+    const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
+    await client.login(env.DISCORD_TOKEN);
+    const chId = env.CH_USAGE || env.CH_TREND || env.CH_SYSTEM;
+    if (!chId) { console.error('❌ .env 缺 CH_USAGE/CH_TREND/CH_SYSTEM'); process.exit(1); }
+    const channel = await client.channels.fetch(chId);
+    if (!channel || channel.type !== ChannelType.GuildText) { console.error('❌ channel not text'); process.exit(1); }
+    const discord = {
+      send: async (cid, text) => {
+        const c = await client.channels.fetch(cid);
+        const MAX = 1900;
+        if (text.length <= MAX) { await c.send(text); return; }
+        let rest = text;
+        while (rest.length > 0) {
+          if (rest.length <= MAX) { await c.send(rest); break; }
+          let cut = rest.lastIndexOf('\n\n', MAX);
+          if (cut < MAX * 0.5) cut = rest.lastIndexOf('\n', MAX);
+          if (cut < MAX * 0.5) cut = MAX;
+          await c.send(rest.slice(0, cut));
+          rest = rest.slice(cut).replace(/^\n+/, '');
+          await new Promise((r) => setTimeout(r, 250));
+        }
+      },
+      client,
+      sendPng: async (cid, pngBuffer, caption) => {
+        const c = await client.channels.fetch(cid);
+        await c.send({ content: caption, files: [{ attachment: pngBuffer, name: 'token-usage.png' }] });
+      },
+    };
+    const cfg = { channels: { usage: env.CH_USAGE, trend: env.CH_TREND, system: env.CH_SYSTEM, entry: env.CH_ENTRY } };
+    if (sub && !/^\d+$/.test(sub)) {
+      log(`[trigger] usage 子命令: ${sub}`);
+      const r = await handleUsageCommand({ args: sub, discord, log, cfg });
+      log(`reply: ${r?.reply || '(无)'}`);
+    } else {
+      const days = parseInt(sub || env.USAGE_DAYS || env.TREND_DAYS || '14', 10) || 14;
+      log(`[trigger] usage 详细报告: ${days}d → #${env.CH_USAGE || env.CH_TREND ? '用量' : '系统'}`);
+      await runTokenUsageJob({ dateKey, days, pi: null, discord, log, channelId: chId });
+    }
+    await client.destroy();
+    log('👋 done');
+    process.exit(0);
+  }
 
   let prompt;
   let jobNameSuffix = dateKey;
+  let opportunityMeta = null;
   const baseExts = [
     join(ROOT, 'extensions', 'discord-tools.mjs'),
     join(ROOT, 'extensions', 'file-tools.mjs'),
   ];
-  const extsByKind = {
-    opportunity: [join(ROOT, 'extensions', 'discover-tools.mjs')],
-    discover: [join(ROOT, 'extensions', 'discover-tools.mjs')],   // alias
-  };
-  const exts = [...baseExts, ...(extsByKind[kind] || [])];
+  const opportunityExt = join(ROOT, 'extensions', 'discover-tools.mjs');
+  const exts = (kind === 'opportunity' || kind === 'discover')
+    ? [join(ROOT, 'extensions', 'file-tools.mjs'), opportunityExt]
+    : baseExts;
 
   if (kind === 'rss') {
     prompt = buildRssPrompt({ dateKey });
@@ -98,11 +212,22 @@ async function main() {
       throw new Error(`${kind} 模式必须传 topic: node scripts/trigger-job.mjs ${kind} "<topic>"`);
     }
     const topic = extraArg;
-    const channelCategory = args[1] || 'opportunity';
+    const requestedCategory = args[1] || 'opportunity';
+    const channelCategory = requestedCategory === 'discover' ? 'opportunity' : requestedCategory;
+    const envKey = OPPORTUNITY_CHANNEL_KEYS[channelCategory];
+    if (!envKey || !env[envKey]) {
+      throw new Error(`机会目标频道未配置或不支持: ${requestedCategory}`);
+    }
     prompt = buildOpportunityPrompt({ topic, dateKey, channelCategory });
     const slug = String(topic).toLowerCase().replace(/[^a-z0-9一-龥]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
     jobNameSuffix = `${dateKey}-${slug}`;
-    log(`${kind} topic="${topic}" → channel=${channelCategory}`);
+    opportunityMeta = {
+      topic,
+      dateKey,
+      channelCategory,
+      outputPath: opportunityOutputPath(topic, dateKey),
+    };
+    log(`${kind} topic="${topic}" → channel=${channelCategory} output=${opportunityMeta.outputPath}`);
   } else {
     throw new Error(`未知任务: ${kind}(只支持 rss / daily / opportunity / discover)`);
   }
@@ -119,12 +244,12 @@ async function main() {
       CH_MEMORY: env.CH_MEMORY,
       CH_IDEAS: env.CH_IDEAS,
       CH_BUILD: env.CH_BUILD,
-      CH_JOURNAL: env.CH_JOURNAL,
-      CH_SIGNAL: env.CH_SIGNAL,
       CH_SYSTEM: env.CH_SYSTEM,
       CH_RSS: env.CH_RSS,
       CH_DAILY: env.CH_DAILY,
-      CH_DISCOVER: env.CH_DISCOVER,
+      CH_GH: env.CH_GH,
+      CH_USAGE: env.CH_USAGE || env.CH_TREND,
+      CH_TREND: env.CH_TREND || env.CH_USAGE,
       CH_OPPORTUNITY: env.CH_OPPORTUNITY,
     },
     args: [
@@ -136,7 +261,6 @@ async function main() {
   });
 
   let assistantBuffer = '';
-  let lastMessageLength = 0;
   pi.onEvent((ev) => {
     if (ev.type === 'message_update' && ev.message?.role === 'assistant') {
       const delta = ev.assistantMessageEvent;
@@ -147,7 +271,7 @@ async function main() {
     }
     if (ev.type === 'message_end' && ev.message?.role === 'assistant') {
       log(`\n[Pi 输出 ${assistantBuffer.length} chars]`);
-      lastMessageLength = assistantBuffer.length;
+      assistantBuffer = '';
     }
     if (ev.type === 'tool_execution_end') {
       log(`[tool] ${ev.toolName} 完成`);
@@ -161,18 +285,35 @@ async function main() {
   await pi.start();
   await new Promise((r) => setTimeout(r, 500));
 
-  log(`注入 prompt (${prompt.length} chars)`);
-  await pi.prompt(prompt);
-
-  const TIMEOUT_MS = 30 * 60_000;
-  const POLL_MS = 5_000;
-  const start = Date.now();
-  while (Date.now() - start < TIMEOUT_MS) {
-    await new Promise((r) => setTimeout(r, POLL_MS));
+  const TIMEOUT_MS = opportunityMeta ? 4 * 60_000 : 30 * 60_000;
+  let taskError = null;
+  try {
+    log(`注入 prompt (${prompt.length} chars)`);
+    await pi.prompt(prompt);
+    await pi.waitForIdle(TIMEOUT_MS);
+    log('任务已 settled');
+  } catch (e) {
+    taskError = e;
+    log(`Pi 任务未正常 settled: ${e.message}`);
+  } finally {
+    log('任务结束,关闭 Pi…');
+    await pi.stop().catch((e) => log(`关闭 Pi 失败: ${e.message}`));
   }
 
-  log(`任务结束,关闭 Pi…`);
-  await pi.stop();
+  if (opportunityMeta) {
+    try {
+      const published = await publishOpportunityFile({ env, ...opportunityMeta });
+      if (!published.published) throw new Error(published.reason);
+      log(`机会 brief 已可靠推送 channel=${published.channelId} messages=${published.messageIds.length}`);
+      // Pi 只要成功写出了 brief,即使模型在最后一步超时,任务仍然有可交付产物。
+      taskError = null;
+    } catch (e) {
+      taskError = taskError || e;
+      log(`机会 brief 推送失败: ${e.message}`);
+    }
+  }
+
+  if (taskError) throw taskError;
   log('👋 done');
   process.exit(0);
 }

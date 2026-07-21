@@ -1,0 +1,12 @@
+{
+  "id": "RND-20260719-4821",
+  "type": "render",
+  "createdAt": "2026-07-19T20:32:33.817Z",
+  "candidateId": "CNT-20260719-7269",
+  "platform": "wechat",
+  "format": "markdown",
+  "body": "# 今天用 React + TypeScript + Vite + TanStack Query 给客户做了一个 SaaS \n\n> 杭州 OPC 张三 · 一人公司 · 评分 33/40\n\n---\n\n今天用 React + TypeScript + Vite + TanStack Query 给客户做了一个 SaaS 数据分析平台的 Demo，用了 shadcn/ui 组件库，commit abc1234ef 部署在 https://github.com/huifer/demo，客户反馈界面专业、数据可视化清晰。\n\n---\n\n© 2026 杭州 OPC 张三 · All rights reserved",
+  "bytes": 446,
+  "llmEnhanced": false,
+  "status": "rendered"
+}

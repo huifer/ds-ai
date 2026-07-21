@@ -1,0 +1,49 @@
+{
+  "id": "xiasi-2026-07-19-lian-zhu-gqdiuo",
+  "type": "lian-zhu",
+  "theme": null,
+  "triggeredBy": "manual",
+  "dateKey": "2026-07-19",
+  "startedAt": "2026-07-19T18:54:14.824Z",
+  "durationMs": 79802,
+  "endedAt": "2026-07-19T18:55:35.145Z",
+  "status": "completed",
+  "phases": {
+    "light": {
+      "status": "ok",
+      "signals": 0,
+      "candidates": 18,
+      "mood": "neutral"
+    },
+    "rem": {
+      "status": "ok",
+      "candidatesIn": 3,
+      "llmCalls": 3
+    },
+    "deep": {
+      "status": "ok",
+      "scored": 3,
+      "kept": 3
+    }
+  },
+  "artifacts": [
+    "xiasi-2026-07-19-lian-zhu-gqdiuo-03",
+    "xiasi-2026-07-19-lian-zhu-gqdiuo-02",
+    "xiasi-2026-07-19-lian-zhu-gqdiuo-01"
+  ],
+  "tokens": {
+    "in": 0,
+    "out": 0,
+    "total": 0
+  },
+  "errors": [],
+  "budgetSnapshot": {
+    "dateKey": "2026-07-19",
+    "tokensIn": 0,
+    "tokensOut": 0,
+    "total": 0,
+    "dailyLimit": 5000000,
+    "remaining": 5000000,
+    "over": false
+  }
+}

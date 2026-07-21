@@ -1,0 +1,38 @@
+- id: PRJ-20260720-8022
+  alias: testproj
+  industry: ai-agent
+  line: FDE
+  stage: setup
+  repo: PRJ-20260720-8022
+  channel:
+    pm: CH_PROJECT_MGMT
+    demo: CH_FDE_DELIVERY
+  created_at: 2026-07-20T04:27:11.497Z
+  owner: huifer
+- id: PRJ-20260720-4172
+  alias: testproj
+  industry: ai-agent
+  line: FDE
+  stage: setup
+  repo: PRJ-20260720-4172
+  created_at: 2026-07-20T04:24:03.231Z
+  owner: huifer
+- id: PRJ-20260720-7114
+  alias: Acme
+  industry: saas
+  line: FDE
+  stage: setup
+  repo: PRJ-20260720-7114
+  channel:
+    pm: 
+    demo: 
+  created_at: 2026-07-20T01:24:10.664Z
+  owner: huifer
+- id: PRJ-20260719-3880
+  alias: integ-test
+  industry: saas
+  line: FDE
+  stage: setup
+  repo: PRJ-20260719-3880
+  created_at: 2026-07-19T20:32:16.315Z
+  owner: huifer

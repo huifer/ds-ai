@@ -1,0 +1,12 @@
+{
+  "progress": true,
+  "logs": false,
+  "summary": true,
+  "archive_auto": true,
+  "approval_push": false,
+  "daily_summary": false,
+  "reminder": false,
+  "alert": true,
+  "content_render": true,
+  "content_auto_queue": false
+}

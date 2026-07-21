@@ -1,0 +1,20 @@
+id: PRJ-2026-20260720-vzji
+title: 开发-飞书机器人
+type: tech
+meta:
+  createdAt: "2026-07-20T15:10:39.387Z"
+  updatedAt: "2026-07-20T15:10:39.387Z"
+  createdBy: user
+  status: active
+links:
+  sessionId: "123456:test-user"
+stats:
+  turnCount: 0
+  summaryCount: 0
+  documentCount: 0
+  taskTotal: 0
+  taskDone: 0
+  conversationCount: 2
+subItems: []
+createdAt: "2026-07-20T15:10:39.387Z"
+updatedAt: "2026-07-20T15:10:39.390Z"

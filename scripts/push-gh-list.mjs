@@ -8,8 +8,9 @@
 import { execFile } from 'node:child_process';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { promisify } from 'node:util';
-import { resolve, dirname } from 'node:path';
+import { resolve } from 'node:path';
 import { homedir } from 'node:os';
+import { readWatchFile } from '../src/gh-watch.mjs';
 
 const execFileP = promisify(execFile);
 const ROOT = resolve(homedir(), 'pi-discord-agents');
@@ -124,8 +125,7 @@ async function main() {
     console.error(`❌ 仓库池文件不存在: ${WATCH_FILE}`);
     process.exit(1);
   }
-  const watch = JSON.parse(readFileSync(WATCH_FILE, 'utf8'));
-  const repos = watch.repos || [];
+  const { repos } = readWatchFile(WATCH_FILE);
   console.log(`📋 仓库池: ${repos.length} 个 → ${repos.join(', ') || '(空)'}\n`);
 
   if (repos.length === 0) {

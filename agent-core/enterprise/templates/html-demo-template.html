@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zenbuild · FDE Demo · <span data-bind="project.title">Untitled</span></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { primary: '#0F172A', accent: '#22D3EE', highlight: '#FACC15' },
+            surface: '#F8FAFC', text: '#0F172A', muted: '#475569'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Lora', 'Georgia', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background: #F8FAFC; color: #0F172A; }
+    .brand-serif { font-family: 'Lora', Georgia, serif; }
+    [data-card] { transition: transform .15s ease, box-shadow .15s ease; }
+    [data-card]:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(15,23,42,.08); }
+  </style>
+</head>
+<body class="min-h-screen">
+  <!-- Header -->
+  <header class="bg-brand-primary text-white">
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <p class="text-xs uppercase tracking-widest text-cyan-200" data-bind="project.brand">Zenbuild</p>
+      <h1 class="text-4xl md:text-5xl font-bold brand-serif mt-3" data-bind="project.title">Loading…</h1>
+      <p class="mt-3 text-slate-300 max-w-2xl" data-bind="project.tagline">Loading…</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a data-href="project.cta.href" data-bind="project.cta.label"
+           class="inline-flex items-center gap-2 rounded-full bg-cyan-400 text-slate-900 px-5 py-2 text-sm font-semibold hover:bg-cyan-300">→</a>
+        <span data-bind="project.badge"
+              class="inline-flex items-center rounded-full border border-white/30 px-3 py-1 text-xs uppercase tracking-widest"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-6xl mx-auto px-6 py-10 space-y-10">
+    <!-- Hero image / stat row -->
+    <section class="grid md:grid-cols-3 gap-4" data-template="stats"></section>
+
+    <!-- Primary interaction -->
+    <section data-card class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+      <h2 class="text-2xl font-semibold brand-serif" data-bind="features.title">Primary Interaction</h2>
+      <p class="text-sm text-slate-500 mt-1" data-bind="features.subtitle">Click a scenario and watch the live mock.</p>
+      <div class="mt-4 grid md:grid-cols-2 gap-4">
+        <div data-template="scenarios" class="space-y-2"></div>
+        <div class="bg-surface rounded-xl p-4 min-h-[160px]" data-template="response"></div>
+      </div>
+    </section>
+
+    <!-- Data visualisation -->
+    <section data-card class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+      <h2 class="text-2xl font-semibold brand-serif" data-bind="chart.title">Live Metrics</h2>
+      <p class="text-sm text-slate-500 mt-1" data-bind="chart.subtitle">Mock values rendered from <code>mock-data.json</code>.</p>
+      <div class="mt-4" data-template="chart"></div>
+    </section>
+
+    <!-- Boundaries -->
+    <section data-card class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+      <h2 class="text-2xl font-semibold brand-serif">Demo Boundaries</h2>
+      <ul class="mt-3 space-y-2 text-sm" data-template="boundaries"></ul>
+    </section>
+
+    <!-- Contact -->
+    <section data-card class="bg-brand-primary text-white rounded-2xl p-6">
+      <h2 class="text-2xl font-semibold brand-serif">Contact</h2>
+      <p class="text-sm text-cyan-100 mt-2" data-bind="contact.note">Demo delivered by Zenbuild · <span data-bind="project.owner">huifer</span></p>
+      <div class="mt-4 grid sm:grid-cols-2 gap-3 text-sm" data-template="contact"></div>
+    </section>
+  </main>
+
+  <footer class="text-center text-xs text-slate-400 py-8">
+    © <span data-bind="project.year">2026</span> · Zenbuild · Local data only · No backend
+  </footer>
+
+  <!-- Templates -->
+  <template id="tpl-stat">
+    <div class="bg-white rounded-2xl p-5 border border-slate-200" data-card>
+      <p class="text-xs uppercase tracking-widest text-slate-400" data-bind="label"></p>
+      <p class="text-3xl font-bold mt-2" data-bind="value"></p>
+      <p class="text-xs text-slate-500 mt-1" data-bind="delta"></p>
+    </div>
+  </template>
+
+  <template id="tpl-scenario">
+    <button class="w-full text-left rounded-xl border border-slate-200 hover:border-cyan-400 hover:bg-cyan-50 px-4 py-3 transition">
+      <p class="font-semibold" data-bind="title"></p>
+      <p class="text-xs text-slate-500 mt-1" data-bind="hint"></p>
+    </button>
+  </template>
+
+  <template id="tpl-boundary">
+    <li class="flex gap-2"><span data-bind="icon"></span><span data-bind="text"></span></li>
+  </template>
+
+  <template id="tpl-contact">
+    <a class="rounded-xl bg-white/10 hover:bg-white/20 px-4 py-3 border border-white/20" data-href data-bind="label"></a>
+  </template>
+
+  <script>
+    const bindAll = (root) => {
+      root.querySelectorAll('[data-bind]').forEach((el) => {
+        const path = el.dataset.bind;
+        const v = path.split('.').reduce((a, k) => (a == null ? a : a[k]), state);
+        if (v == null) return;
+        if (path === 'project.cta.href') el.setAttribute('href', v);
+        else if (el.children.length === 0) el.textContent = v;
+        else el.textContent = v;
+      });
+      root.querySelectorAll('[data-href]').forEach((el) => {
+        const v = state[el.dataset.href.split('.')[0]]?.[el.dataset.href.split('.')[1]];
+        if (v) el.setAttribute('href', v);
+      });
+    };
+    const fillList = (selector, tplId, items) => {
+      const host = document.querySelector(selector);
+      const tpl = document.getElementById(tplId);
+      items.forEach((item) => {
+        const node = tpl.content.cloneNode(true);
+        bindAll(node);
+        host.appendChild(node);
+      });
+    };
+    let state = {};
+    const render = () => {
+      document.documentElement.lang = state.project?.lang || 'en';
+      bindAll(document.body);
+      fillList('[data-template="stats"]', 'tpl-stat', state.stats || []);
+      fillList('[data-template="scenarios"]', 'tpl-scenario', state.scenarios || []);
+      fillList('[data-template="boundaries"]', 'tpl-boundary', state.boundaries || []);
+      fillList('[data-template="contact"]', 'tpl-contact', state.contactChannels || []);
+      const chart = document.querySelector('[data-template="chart"]');
+      if (state.chart && state.chart.bars) {
+        chart.innerHTML = '<div class="grid grid-cols-' + state.chart.bars.length + ' gap-3">' + state.chart.bars.map((b) => `
+          <div class="rounded-lg bg-cyan-50 p-3 border border-cyan-200">
+            <p class="text-xs text-cyan-700">${b.label}</p>
+            <p class="text-2xl font-bold mt-1">${b.value}</p>
+            <p class="text-xs text-cyan-600 mt-1">${b.note || ''}</p>
+          </div>`).join('') + '</div>';
+      }
+      const resp = document.querySelector('[data-template="response"]');
+      resp.innerHTML = '<p class="text-sm text-slate-500">Pick a scenario to see a mock response.</p>';
+      document.querySelectorAll('[data-template="scenarios"] > button').forEach((btn, i) => {
+        btn.addEventListener('click', () => {
+          const s = (state.scenarios || [])[i];
+          const r = (state.responses || {})[s.id];
+          if (!r) return;
+          resp.innerHTML = '<p class="text-sm font-semibold text-brand-primary">' + r.title + '</p>' +
+            '<p class="text-sm text-slate-700 mt-2 whitespace-pre-line">' + r.body + '</p>' +
+            '<p class="text-xs text-slate-400 mt-2">mock response · latency ' + r.latencyMs + ' ms</p>';
+        });
+      });
+    };
+    fetch('mock-data.json').then((r) => r.json()).then((d) => { state = d; render(); });
+  </script>
+</body>
+</html>

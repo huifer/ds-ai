@@ -1,0 +1,15 @@
+{"at":"2026-07-20T03:54:41.428Z","agent":"project","kind":"project","content":"项目 X 已立项,阶段:开发中","tags":["project:x","status"]}
+{"at":"2026-07-20T03:54:41.428Z","agent":"project","kind":"fact","content":"客户 ABC 公司需要项目 X 的报价","tags":["customer:abc","project:x","from:sales","broadcast:true"]}
+{"at":"2026-07-20T03:56:41.350Z","agent":"project","kind":"project","content":"项目 X 已立项,阶段:开发中","tags":["project:x","status"]}
+{"at":"2026-07-20T03:56:41.350Z","agent":"project","kind":"fact","content":"客户 ABC 公司需要项目 X 的报价","tags":["customer:abc","project:x","from:sales","broadcast:true"]}
+{"at":"2026-07-20T03:57:22.424Z","agent":"project","kind":"project","content":"项目 X 已立项,阶段:开发中","tags":["project:x","status"]}
+{"at":"2026-07-20T03:57:22.425Z","agent":"project","kind":"fact","content":"客户 ABC 公司需要项目 X 的报价","tags":["customer:abc","project:x","from:sales","broadcast:true"]}
+{"at":"2026-07-20T03:57:25.228Z","agent":"project","kind":"project","content":"项目 X 已立项,阶段:开发中","tags":["project:x","status"]}
+{"at":"2026-07-20T03:57:25.228Z","agent":"project","kind":"fact","content":"客户 ABC 公司需要项目 X 的报价","tags":["customer:abc","project:x","from:sales","broadcast:true"]}
+{"at":"2026-07-20T04:19:30.197Z","agent":"project","kind":"project","content":"项目 X 已立项,阶段:开发中","tags":["project:x","status"]}
+{"at":"2026-07-20T04:19:30.201Z","agent":"project","kind":"fact","content":"客户 ABC 公司需要项目 X 的报价","tags":["customer:abc","project:x","from:sales","broadcast:true"]}
+{"at":"2026-07-20T04:42:07.291Z","agent":"project","kind":"project","content":"项目 X 已立项,阶段:开发中","tags":["project:x","status"]}
+{"at":"2026-07-20T04:42:07.293Z","agent":"project","kind":"fact","content":"客户 ABC 公司需要项目 X 的报价","tags":["customer:abc","project:x","from:sales","broadcast:true"]}
+{"at":"2026-07-20T09:31:28Z","agent":"orchestrator","kind":"route","content":"用户输入结构化销售线索（右侧科技/张三/CTO/138-0013-8000/官网）→ 路由 !lead new → sales agent · lead-capture · 频道 #销售线索；去重检查通过（无匹配）。","tags":["dispatch:sales","skill:lead-capture","channel:1527730730418044991","dispatchId:DISPATCH-20260720-093128-lead-new-youce-tech","customer:右侧科技"]}
+{"at":"2026-07-20T09:31:28Z","agent":"orchestrator","kind":"fact","content":"新客户 '右侧科技' 出现在销售线索入口；联系人张三（CTO），来源官网；需求/行业/预算待补。","tags":["customer:右侧科技","source:官网","status:new"]}
+{"at":"2026-07-20T12:00:00+08:00","agent":"orchestrator","kind":"fact","subject":"LEAD-20260720-2085-quote-pdf","content":"已将右侧科技 AI 消防工单处理平台初步报价渲染为 3 页 A4 PDF，并发送至 Discord 主入口；本地路径 data/projects/ai-xiaofang-gongdan-chuli-pingtai/QUOTE.pdf。","tags":["lead:LEAD-20260720-2085","artifact:quote-pdf","delivery:discord"]}

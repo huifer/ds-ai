@@ -1,0 +1,18 @@
+id: conversation-mrtd8wcm-mz
+type: conversation
+content:
+  summary: "主题：!project
+最新：!summary"
+  keyPoints:
+    - 支持消息推送和指令处理
+  decisions: []
+  pending: []
+  nextAction: 继续执行或等待用户指示
+  turns:
+    start: 1
+    end: 7
+    count: 9
+aiGenerated: false
+createdBy: ai
+projectId: PRJ-2026-20260720-460h
+createdAt: "2026-07-20T15:15:02.470Z"

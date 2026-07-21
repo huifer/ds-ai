@@ -1,0 +1,15 @@
+id: decision-mrtdgk1i-ba
+type: decision
+content:
+  decision: 使用 Node.js + discord.js
+  reason:
+    - 社区活跃
+    - 文档完善
+  alternatives: []
+  tradeoffs: []
+  decidedBy: user
+  status: proposed
+aiGenerated: false
+createdBy: ai
+projectId: PRJ-2026-20260720-2ysd
+createdAt: "2026-07-20T15:20:59.766Z"

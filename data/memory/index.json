@@ -1,0 +1,624 @@
+[
+  {
+    "id": "mem_1784612350536_测试记忆",
+    "kind": "idea",
+    "scope": "user",
+    "subject": "测试记忆",
+    "content": "这是一个测试记忆",
+    "tags": [
+      "test"
+    ],
+    "source": null,
+    "confidence": 0.9,
+    "revision": 1,
+    "supersedes": [],
+    "status": "active",
+    "createdAt": "2026-07-21T05:39:10.536Z",
+    "updatedAt": "2026-07-21T05:39:10.536Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784465063355_old-expired-idea",
+    "kind": "idea",
+    "scope": "user",
+    "subject": "old-expired-idea",
+    "content": "这是一个已过期的旧想法",
+    "tags": [
+      "idea"
+    ],
+    "source": null,
+    "confidence": 0.55,
+    "revision": 6,
+    "supersedes": [
+      "mem_1784465063355_old-expired-idea"
+    ],
+    "status": "expired",
+    "createdAt": "2026-07-19T12:44:23.355Z",
+    "updatedAt": "2026-07-19T13:31:29.061Z",
+    "expiresAt": "2026-07-17T12:48:13.809Z"
+  },
+  {
+    "id": "mem_1784459674018_graphql-vs-rest",
+    "kind": "decision",
+    "scope": "user",
+    "subject": "graphql-vs-rest",
+    "content": "GraphQL 的类型系统很好，但学习曲线比 REST 高",
+    "tags": [
+      "api",
+      "architecture"
+    ],
+    "source": null,
+    "confidence": 0.75,
+    "revision": 3,
+    "supersedes": [
+      "mem_1784459674018_graphql-vs-rest"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T11:14:34.018Z",
+    "updatedAt": "2026-07-19T12:55:03.169Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-21T03:36:18.362Z"
+  },
+  {
+    "id": "mem_1784465063423_vague-idea",
+    "kind": "idea",
+    "scope": "user",
+    "subject": "vague-idea",
+    "content": "有点想法",
+    "tags": [
+      "idea"
+    ],
+    "source": null,
+    "confidence": 0.55,
+    "revision": 2,
+    "supersedes": [
+      "mem_1784465063423_vague-idea"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T12:44:23.423Z",
+    "updatedAt": "2026-07-19T12:55:03.134Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784465063384_use-javascript",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "use-javascript",
+    "content": "不用 TypeScript，改用 JavaScript",
+    "tags": [
+      "javascript",
+      "preference"
+    ],
+    "source": null,
+    "confidence": 0.8,
+    "revision": 5,
+    "supersedes": [
+      "mem_1784465063384_use-javascript"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T12:44:23.384Z",
+    "updatedAt": "2026-07-19T12:48:13.848Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-21T03:36:18.363Z"
+  },
+  {
+    "id": "mem_1784465063306_error-handling",
+    "kind": "constraint",
+    "scope": "user",
+    "subject": "error-handling",
+    "content": "错误处理必须记录日志，不能静默失败",
+    "tags": [
+      "error-handling",
+      "constraint"
+    ],
+    "source": null,
+    "confidence": 0.95,
+    "revision": 5,
+    "supersedes": [
+      "mem_1784465063306_error-handling"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T12:44:23.306Z",
+    "updatedAt": "2026-07-19T12:48:13.754Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-21T03:36:18.364Z"
+  },
+  {
+    "id": "mem_1784465063277_feature-idea",
+    "kind": "idea",
+    "scope": "user",
+    "subject": "feature-idea",
+    "content": "给 bot 添加 /search 命令，支持搜索历史消息",
+    "tags": [
+      "feature",
+      "idea"
+    ],
+    "source": null,
+    "confidence": 0.7,
+    "revision": 5,
+    "supersedes": [
+      "mem_1784465063277_feature-idea"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T12:44:23.277Z",
+    "updatedAt": "2026-07-19T12:48:13.719Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784458406997_rpc-vs-tui",
+    "kind": "decision",
+    "scope": "user",
+    "subject": "rpc-vs-tui",
+    "content": "用 RPC 模式而不是 TUI（启动快且无 ctx stale）",
+    "tags": [
+      "architecture",
+      "performance"
+    ],
+    "source": null,
+    "confidence": 0.95,
+    "revision": 11,
+    "supersedes": [
+      "mem_1784458406997_rpc-vs-tui"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T10:53:26.997Z",
+    "updatedAt": "2026-07-19T12:48:13.687Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-21T03:36:18.368Z"
+  },
+  {
+    "id": "mem_1784465063453_no-tags",
+    "kind": "decision",
+    "scope": "user",
+    "subject": "no-tags",
+    "content": "这是一个决策但没有标签",
+    "tags": [],
+    "source": null,
+    "confidence": 0.8,
+    "revision": 1,
+    "supersedes": [],
+    "status": "active",
+    "createdAt": "2026-07-19T12:44:23.453Z",
+    "updatedAt": "2026-07-19T12:44:23.453Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-21T03:36:18.372Z"
+  },
+  {
+    "id": "mem_1784459674022_production-https",
+    "kind": "constraint",
+    "scope": "user",
+    "subject": "production-https",
+    "content": "生产环境必须启用 HTTPS，不能使用 HTTP",
+    "tags": [
+      "security",
+      "constraint"
+    ],
+    "source": null,
+    "confidence": 0.95,
+    "revision": 2,
+    "supersedes": [
+      "mem_1784459674022_production-https"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T11:14:34.022Z",
+    "updatedAt": "2026-07-19T11:31:08.605Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-21T03:36:18.373Z"
+  },
+  {
+    "id": "mem_1784459674014_prefer-neovim",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "prefer-neovim",
+    "content": "用 Neovim 而不是 Vim，因为插件生态更好",
+    "tags": [
+      "editor",
+      "preference"
+    ],
+    "source": null,
+    "confidence": 0.75,
+    "revision": 7,
+    "supersedes": [
+      "mem_1784459674014_prefer-neovim"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T11:14:34.014Z",
+    "updatedAt": "2026-07-19T11:31:08.595Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-21T03:36:18.373Z"
+  },
+  {
+    "id": "mem_1784458407023_error-handling-must-log",
+    "kind": "constraint",
+    "scope": "user",
+    "subject": "error-handling-must-log",
+    "content": "错误处理必须记录日志，不能静默失败",
+    "tags": [
+      "error-handling",
+      "constraint"
+    ],
+    "source": null,
+    "confidence": 0.95,
+    "revision": 6,
+    "supersedes": [
+      "mem_1784458407023_error-handling-must-log"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T10:53:27.023Z",
+    "updatedAt": "2026-07-19T11:31:08.590Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-21T03:36:18.375Z"
+  },
+  {
+    "id": "mem_1784460016163_prefer-rust",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "prefer-rust",
+    "content": "我喜欢用 Rust",
+    "tags": [
+      "language"
+    ],
+    "source": null,
+    "confidence": 0.8,
+    "revision": 5,
+    "supersedes": [
+      "mem_1784460016163_prefer-rust"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T11:20:16.163Z",
+    "updatedAt": "2026-07-19T11:31:02.527Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-19T12:27:32.910Z"
+  },
+  {
+    "id": "mem_1784460016137_prefer-typescript",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "prefer-typescript",
+    "content": "我喜欢用 TypeScript",
+    "tags": [
+      "language"
+    ],
+    "source": null,
+    "confidence": 0.8,
+    "revision": 5,
+    "supersedes": [
+      "mem_1784460016137_prefer-typescript"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T11:20:16.137Z",
+    "updatedAt": "2026-07-19T11:31:02.489Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-19T12:27:32.910Z"
+  },
+  {
+    "id": "mem_1784460641794_allow-http",
+    "kind": "constraint",
+    "scope": "user",
+    "subject": "allow-http",
+    "content": "允许使用 HTTP",
+    "tags": [
+      "security"
+    ],
+    "source": null,
+    "confidence": 0.5,
+    "revision": 2,
+    "supersedes": [
+      "mem_1784460641794_allow-http"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T11:30:41.794Z",
+    "updatedAt": "2026-07-19T11:31:02.446Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784460016033_use-microservices",
+    "kind": "decision",
+    "scope": "user",
+    "subject": "use-microservices",
+    "content": "使用微服务而不是单体架构",
+    "tags": [
+      "architecture"
+    ],
+    "source": null,
+    "confidence": 0.85,
+    "revision": 5,
+    "supersedes": [
+      "mem_1784460016033_use-microservices"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T11:20:16.033Z",
+    "updatedAt": "2026-07-19T11:31:02.373Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784460016220_use-redis",
+    "kind": "decision",
+    "scope": "user",
+    "subject": "use-redis",
+    "content": "使用 Redis 作为缓存",
+    "tags": [
+      "database",
+      "redis"
+    ],
+    "source": null,
+    "confidence": 0.9,
+    "revision": 3,
+    "supersedes": [
+      "mem_1784460016220_use-redis"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T11:20:16.220Z",
+    "updatedAt": "2026-07-19T11:30:41.928Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784460016193_use-postgres",
+    "kind": "decision",
+    "scope": "user",
+    "subject": "use-postgres",
+    "content": "使用 PostgreSQL 作为数据库",
+    "tags": [
+      "database",
+      "postgres"
+    ],
+    "source": null,
+    "confidence": 0.9,
+    "revision": 3,
+    "supersedes": [
+      "mem_1784460016193_use-postgres"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T11:20:16.193Z",
+    "updatedAt": "2026-07-19T11:30:41.900Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784459986577_prefer-typescript-dev",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "prefer-typescript-dev",
+    "content": "偏好使用 TypeScript 进行开发，可以避免类型相关的错误",
+    "tags": [
+      "typescript",
+      "preference"
+    ],
+    "source": null,
+    "confidence": 0.8,
+    "revision": 4,
+    "supersedes": [
+      "mem_1784459986577_prefer-typescript-dev"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T11:19:46.577Z",
+    "updatedAt": "2026-07-19T11:30:41.557Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784458414092_high-access",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "high-access",
+    "content": "高访问记忆",
+    "tags": [
+      "test"
+    ],
+    "source": null,
+    "confidence": 0.8,
+    "revision": 3,
+    "supersedes": [
+      "mem_1784458414092_high-access"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T10:53:34.092Z",
+    "updatedAt": "2026-07-19T10:54:23.349Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784446187741_use-javascript",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "use-javascript",
+    "content": "不用 TypeScript，改用 JavaScript",
+    "tags": [
+      "javascript",
+      "preference"
+    ],
+    "source": null,
+    "confidence": 0.8,
+    "revision": 1,
+    "supersedes": [],
+    "status": "active",
+    "createdAt": "2026-07-19T07:29:47.741Z",
+    "updatedAt": "2026-07-19T07:29:47.741Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784446134001_error-handling-must-log",
+    "kind": "constraint",
+    "scope": "user",
+    "subject": "error-handling-must-log",
+    "content": "错误处理必须记录日志，不能静默失败",
+    "tags": [
+      "error-handling",
+      "constraint"
+    ],
+    "source": null,
+    "confidence": 0.95,
+    "revision": 2,
+    "supersedes": [
+      "mem_1784446134001_error-handling-must-log"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T07:28:54.001Z",
+    "updatedAt": "2026-07-19T07:29:47.681Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-19T07:29:47.710Z"
+  },
+  {
+    "id": "mem_1784446133971_rpc-vs-tui",
+    "kind": "decision",
+    "scope": "user",
+    "subject": "rpc-vs-tui",
+    "content": "用 RPC 模式而不是 TUI（启动快且无 ctx stale）",
+    "tags": [
+      "architecture",
+      "performance"
+    ],
+    "source": null,
+    "confidence": 0.95,
+    "revision": 2,
+    "supersedes": [
+      "mem_1784446133971_rpc-vs-tui"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T07:28:53.971Z",
+    "updatedAt": "2026-07-19T07:29:47.651Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-19T07:29:47.710Z"
+  },
+  {
+    "id": "mem_1784446133905_use-typescript",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "use-typescript",
+    "content": "总是用 TypeScript 开发新项目，避免类型错误",
+    "tags": [
+      "typescript",
+      "preference"
+    ],
+    "source": null,
+    "confidence": 0.85,
+    "revision": 2,
+    "supersedes": [
+      "mem_1784446133905_use-typescript"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T07:28:53.905Z",
+    "updatedAt": "2026-07-19T07:29:47.584Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-19T07:29:47.711Z"
+  },
+  {
+    "id": "mem_1784446134059_high-access",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "high-access",
+    "content": "高访问记忆",
+    "tags": [
+      "test"
+    ],
+    "source": null,
+    "confidence": 0.8,
+    "revision": 1,
+    "supersedes": [],
+    "status": "active",
+    "createdAt": "2026-07-19T07:28:54.059Z",
+    "updatedAt": "2026-07-19T07:28:54.059Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-19T07:29:47.711Z"
+  },
+  {
+    "id": "mem_1784446101931_high-access",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "high-access",
+    "content": "高访问记忆",
+    "tags": [
+      "test"
+    ],
+    "source": null,
+    "confidence": 0.8,
+    "revision": 2,
+    "supersedes": [
+      "mem_1784446101931_high-access"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T07:28:21.931Z",
+    "updatedAt": "2026-07-19T07:28:42.867Z",
+    "expiresAt": null
+  },
+  {
+    "id": "mem_1784444850267_error-handling-must-log",
+    "kind": "constraint",
+    "scope": "user",
+    "subject": "error-handling-must-log",
+    "content": "错误处理必须记录日志，不能静默失败",
+    "tags": [
+      "error-handling",
+      "constraint"
+    ],
+    "source": null,
+    "confidence": 0.95,
+    "revision": 3,
+    "supersedes": [
+      "mem_1784444850267_error-handling-must-log"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T07:07:30.267Z",
+    "updatedAt": "2026-07-19T07:28:42.812Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-19T07:28:42.839Z"
+  },
+  {
+    "id": "mem_1784444850247_rpc-vs-tui",
+    "kind": "decision",
+    "scope": "user",
+    "subject": "rpc-vs-tui",
+    "content": "用 RPC 模式而不是 TUI（启动快且无 ctx stale）",
+    "tags": [
+      "architecture",
+      "performance"
+    ],
+    "source": null,
+    "confidence": 0.95,
+    "revision": 3,
+    "supersedes": [
+      "mem_1784444850247_rpc-vs-tui"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T07:07:30.247Z",
+    "updatedAt": "2026-07-19T07:28:42.781Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-19T07:28:42.840Z"
+  },
+  {
+    "id": "mem_1784444850251_use-typescript",
+    "kind": "preference",
+    "scope": "user",
+    "subject": "use-typescript",
+    "content": "总是用 TypeScript 开发新项目，避免类型错误",
+    "tags": [
+      "typescript",
+      "preference"
+    ],
+    "source": null,
+    "confidence": 0.85,
+    "revision": 6,
+    "supersedes": [
+      "mem_1784444850251_use-typescript"
+    ],
+    "status": "active",
+    "createdAt": "2026-07-19T07:07:30.251Z",
+    "updatedAt": "2026-07-19T07:28:42.715Z",
+    "expiresAt": null,
+    "accessCount": 1,
+    "lastAccessedAt": "2026-07-19T07:28:42.840Z"
+  }
+]

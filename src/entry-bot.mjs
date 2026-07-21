@@ -46,6 +46,12 @@ import { ContextCompressor, HybridStrategy } from './orchestrator/context-compre
 import { MultiAgentManager } from './orchestrator/agent-manager.mjs';
 import { TeamEngine } from './orchestrator/team-engine.mjs';
 import { MemoryBridge } from './orchestrator/memory-bridge.mjs';
+
+// ---- 新 Session 隔离系统 ----
+import { SessionKey, INTENT_TYPES, LayeredSessionManager, ContextInheritanceManager } from './runtime/session/index.mjs';
+
+// ---- 新 Agent Team 系统 ----
+import { createTeam, TEAM_TEMPLATES, TeamTask, AGENT_TYPES, COLLABORATION_MODES } from './runtime/team/index.mjs';
 import {
   addWatchedRepo,
   readWatchFile,
@@ -198,6 +204,11 @@ async function main() {
   let multiAgentManager = null;
   let teamEngine = null;
 
+  // ---- 新 Session 隔离系统 ----
+  let layeredSessionManager = null;
+  let contextInheritance = null;
+  let agentTeams = new Map(); // name -> Team
+
   if (multiAgentEnabled) {
     try {
       const multiAgentRegistry = new MultiAgentRegistry({ rootDir: ROOT, log });
@@ -248,6 +259,35 @@ async function main() {
       });
 
       log(`✅ 多 Agent 系统已启用 (sessions=${sessionPool.list().length}, agents=${multiAgentRegistry.list().length})`);
+
+      // ---- 初始化新的 Session 隔离系统 ----
+      layeredSessionManager = new LayeredSessionManager({
+        rootDir: ROOT,
+        log,
+        maxTurnsBeforeCompress: parseInt(process.env.SESSION_MAX_TURNS || '20', 10),
+        maxTokensBeforeCompress: parseInt(process.env.SESSION_MAX_TOKENS || '60000', 10),
+        keepRecentTurns: parseInt(process.env.SESSION_KEEP_RECENT || '5', 10),
+        idleMinutesBeforeArchive: parseInt(process.env.SESSION_IDLE_MINUTES || '30', 10),
+      });
+
+      contextInheritance = new ContextInheritanceManager({
+        sessionManager: layeredSessionManager,
+        memoryStore,
+        log,
+      });
+
+      // ---- 初始化预定义 Teams ----
+      if (process.env.TEAM_ENABLED !== 'false') {
+        const devTeam = createTeam(TEAM_TEMPLATES.DEVELOPMENT);
+        agentTeams.set('dev', devTeam);
+        const contentTeam = createTeam(TEAM_TEMPLATES.CONTENT);
+        agentTeams.set('content', contentTeam);
+        const salesTeam = createTeam(TEAM_TEMPLATES.SALES);
+        agentTeams.set('sales', salesTeam);
+        log(`✅ Agent Teams 已加载: ${agentTeams.size} 个团队`);
+      }
+
+      log(`✅ Session 隔离系统已启用 (layers=6d:channel/user/project/task/intent/agent)`);
     } catch (e) {
       log(`⚠️ 多 Agent 系统初始化失败,降级到原有逻辑: ${e.message}`);
       multiAgentEnabled = false;
@@ -831,6 +871,29 @@ async function main() {
     log(`[discord] 收到消息 channel=${msg.channelId} user=${msg.author.username}: "${(msg.content || '').slice(0, 40)}"`);
     const text = (msg.content || '').trim();
 
+    // ---- 新 Session 隔离系统:命令处理 ----
+    if (layeredSessionManager && text.startsWith('!')) {
+      if (/^!session(?:s)?\s+(status|stats)$/i.test(text)) {
+        const stats = layeredSessionManager.getStats();
+        await msg.reply(`📊 **Session 统计**\n\n- 总数: ${stats.total}\n- 按状态: active=${stats.byState?.active || 0}, idle=${stats.byState?.idle || 0}`).catch(() => {});
+        return;
+      }
+    }
+
+    // ---- !teams list:显示所有 Agent Teams ----
+    if (/^!team(?:s)?\s+list$/i.test(text)) {
+      if (agentTeams.size === 0) {
+        await msg.reply('❌ 暂无可用的 Agent Teams').catch(() => {});
+      } else {
+        const lines = ['🤖 **Agent Teams**'];
+        for (const [name, team] of agentTeams) {
+          lines.push(`**${team.name}** (${name}): ${team.agents.size} agents, ${team.workflow?.length || 0} 步`);
+        }
+        await msg.reply(lines.join('\n').slice(0, 1900)).catch(() => {});
+      }
+      return;
+    }
+
     // ---- 多 Agent 系统:Team 协作命令 ----
     if (multiAgentEnabled && teamEngine && text.startsWith('!')) {
       const teamMatch = teamEngine.match(text);
@@ -879,6 +942,25 @@ async function main() {
         }
         await discord.removeReact(msg, '🤝').catch(() => {});
         return;
+      }
+    }
+
+    // ---- Session 隔离:自动创建/更新 Session ----
+    if (layeredSessionManager && !text.startsWith('!')) {
+      try {
+        const intentType = SessionKey.inferIntent(text);
+        const session = layeredSessionManager.getOrCreate({
+          channelId: msg.channelId,
+          userId: msg.author.id,
+          intentType,
+        });
+        if (intentType !== session.layers.intent?.type) {
+          layeredSessionManager.updateIntent(session.key, intentType);
+        }
+        layeredSessionManager.addTurn(session.key, 'user', text, Math.ceil(text.length / 4));
+        log(`[session] ${session.key.slice(0, 40)}... level=${session.level} intent=${intentType}`);
+      } catch (e) {
+        log(`[session] Session 更新失败: ${e.message}`);
       }
     }
 
@@ -1730,6 +1812,7 @@ ${context}`;
     try { if (agentManager) await agentManager.shutdown(); } catch {}
     try { if (dreamer) await dreamer.shutdown(); } catch {}
     try { if (dreamingPi) await dreamingPi.stop(); } catch {}
+    try { if (layeredSessionManager) layeredSessionManager.shutdown(); } catch {}
     try { await pi.stop(); } catch {}
     try { await discord.destroy(); } catch {}
     if (memoryStore) await memoryStore.compact();

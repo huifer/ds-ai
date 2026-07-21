@@ -1,29 +1,24 @@
 {
   "name": "pi-discord-bridge",
   "version": "2.0.0",
+  "description": "Discord ↔ Pi Agent (RPC mode) 桥接 daemon — 单入口对话 + 多频道沉淀 + 7×24 守护 + 每日定时任务。",
   "type": "module",
-  "description": "Discord <-> Pi Agent (RPC mode) bridge daemon \u2014 \u4e00\u4e2a Node \u8fdb\u7a0b,sleep forever,\u65e0 TUI",
-  "keywords": [
-    "discord",
-    "pi-agent",
-    "rpc",
-    "headless",
-    "bot"
-  ],
-  "author": "zhangsan",
-  "license": "MIT",
-  "main": "./src/entry-bot.mjs",
+  "main": "src/entry-bot.mjs",
   "scripts": {
     "start": "node src/entry-bot.mjs",
     "dev": "node src/entry-bot.mjs 2>&1 | tee -a logs/orchestrator.log",
     "status": "bash scripts/status.sh",
-    "discover": "node scripts/trigger-job.mjs discover"
+    "discover": "node scripts/trigger-job.mjs discover",
+    "test": "node --test --test-concurrency=1 test/*.test.mjs"
   },
   "dependencies": {
     "@earendil-works/pi-coding-agent": "*",
+    "@resvg/resvg-js": "^2.6.2",
     "@sinclair/typebox": "^0.34.52",
     "discord.js": "^14.27.0",
-    "global-agent": "^4.1.3"
+    "echarts": "^6.1.0",
+    "global-agent": "^4.1.3",
+    "marked": "^18.0.6"
   },
   "engines": {
     "node": ">=18"

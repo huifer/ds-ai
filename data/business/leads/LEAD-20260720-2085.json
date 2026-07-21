@@ -1,0 +1,40 @@
+{
+  "id": "LEAD-20260720-2085",
+  "lead_id": "LEAD-20260720-2085",
+  "company": "右侧科技",
+  "contact": "张三（CTO）/ 138-0013-8000",
+  "contact_detail": {
+    "name": "张三",
+    "title": "CTO",
+    "phone": "138-0013-8000"
+  },
+  "source": "官网",
+  "need": "客户想了解 AI 消防工单处理平台，具体场景、痛点、现有系统、时间窗口待 discovery。",
+  "industry": "fire-protection / public-safety",
+  "industry_catalogue": "ai-agent",
+  "budget": "50 万 RMB",
+  "budget_rmb": 500000,
+  "product": "AI 消防工单处理平台",
+  "product_pinyin_dir": "ai-xiaofang-gongdan-chuli-pingtai",
+  "stage": "new",
+  "status": "new",
+  "createdAt": "2026-07-20T12:00:00+08:00",
+  "created_at": "2026-07-20",
+  "raw": "我有个客户想了解 AI 消防工单处理平台，预算 50 万。公司：右侧科技，联系人：张三，职位：CTO，电话：138-0013-8000，来源：官网",
+  "qualification": {
+    "budget_confirmed": true,
+    "decision_maker": true,
+    "need_clarified": false,
+    "timeline_clarified": false,
+    "authority": "CTO 级决策方",
+    "score": "B+（预算到位、决策人清晰、需求待深挖）"
+  },
+  "next_action": "discovery call：核实消防工单场景、接入现有系统、交付窗口、决策链",
+  "related_leads": [
+    "LEAD-20260720-1962（同一公司，另一联系人李四 VP，预算 80 万，需合并跟进）"
+  ],
+  "artifacts": {
+    "prd": "data/projects/ai-xiaofang-gongdan-chuli-pingtai/PRD.md",
+    "quote": "data/projects/ai-xiaofang-gongdan-chuli-pingtai/QUOTE.md"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "MAT-20260719-2843",
+  "type": "material",
+  "createdAt": "2026-07-19T20:32:32.067Z",
+  "source": "今天用 React + TypeScript + Vite + TanStack Query 给客户做了一个 SaaS 数据分析平台的 Demo，用了 shadcn/ui 组件库，commit abc1234ef 部署在 https://github.com/huifer/demo，客户反馈界面专业、数据可视化清晰。",
+  "channelId": "1528455009245728803",
+  "userId": "system",
+  "rawText": "今天用 React + TypeScript + Vite + TanStack Query 给客户做了一个 SaaS 数据分析平台的 Demo，用了 shadcn/ui 组件库，commit abc1234ef 部署在 https://github.com/huifer/demo，客户反馈界面专业、数据可视化清晰。",
+  "status": "intaked"
+}

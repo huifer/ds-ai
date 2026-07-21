@@ -1,0 +1,21 @@
+
+# ===== 新频道配置 (待填入 Channel ID) =====
+# TODO: 创建 #项目 后填入 ID
+# CH_PROJECT=
+# TODO: 创建 #产出 后填入 ID
+# CH_OUTPUT=
+# TODO: 创建 #归档 后填入 ID
+# CH_ARCHIVE=
+# TODO: 创建 #内容-公众号 后填入 ID
+# CH_CONTENT_WECHAT=
+# TODO: 创建 #内容-小红书 后填入 ID
+# CH_CONTENT_XHS=
+# TODO: 创建 #内容-视频号 后填入 ID
+# CH_CONTENT_VIDEO=
+# TODO: 创建 #内容-X 后填入 ID
+# CH_CONTENT_X=
+# TODO: 创建 #内容-Newsletter 后填入 ID
+# CH_CONTENT_NEWSLETTER=
+# TODO: 创建 #提醒 后填入 ID
+# CH_REMINDER=
+# ===== 频道迁移完成前保留旧配置 =====

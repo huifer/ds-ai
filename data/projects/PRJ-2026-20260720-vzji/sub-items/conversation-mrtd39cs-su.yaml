@@ -1,0 +1,16 @@
+id: conversation-mrtd39cs-su
+type: conversation
+content:
+  summary: 帮我做个飞书机器人
+  keyPoints: []
+  decisions: []
+  pending: []
+  nextAction: 等待进一步沟通
+  turns:
+    start: 1
+    end: 1
+    count: 1
+aiGenerated: false
+createdBy: ai
+projectId: PRJ-2026-20260720-vzji
+createdAt: "2026-07-20T15:10:39.388Z"

@@ -1,0 +1,9 @@
+{"at":"2026-07-20T03:54:41.428Z","agent":"sales","kind":"fact","content":"客户 ABC 公司预算 50 万,需要 30 天交付","tags":["customer:abc","budget"]}
+{"at":"2026-07-20T03:56:41.350Z","agent":"sales","kind":"fact","content":"客户 ABC 公司预算 50 万,需要 30 天交付","tags":["customer:abc","budget"]}
+{"at":"2026-07-20T03:57:22.424Z","agent":"sales","kind":"fact","content":"客户 ABC 公司预算 50 万,需要 30 天交付","tags":["customer:abc","budget"]}
+{"at":"2026-07-20T03:57:25.228Z","agent":"sales","kind":"fact","content":"客户 ABC 公司预算 50 万,需要 30 天交付","tags":["customer:abc","budget"]}
+{"at":"2026-07-20T04:19:30.197Z","agent":"sales","kind":"fact","content":"客户 ABC 公司预算 50 万,需要 30 天交付","tags":["customer:abc","budget"]}
+{"at":"2026-07-20T04:42:07.291Z","agent":"sales","kind":"fact","content":"客户 ABC 公司预算 50 万,需要 30 天交付","tags":["customer:abc","budget"]}
+{"at":"2026-07-20T08:57:19.822Z","agent":"sales","kind":"fact","subject":"LEAD-20260720-1853","content":"LEAD-20260720-1853：一位公司信息待补的客户想了解 AI Agent 平台，预算 50 万；联系人、来源待补。","tags":["lead:LEAD-20260720-1853","ai-agent","budget"]}
+{"at":"2026-07-20T10:35:23Z","agent":"sales","kind":"fact","subject":"LEAD-20260720-1962","content":"LEAD-20260720-1962：右侧科技联系人李四（VP，139-0000-0000）从官网咨询 AI 智能客服平台，预算约 80 万；已生成三档初步方案，具体场景、渠道、系统集成和时间窗口待 discovery。","tags":["lead:LEAD-20260720-1962","customer:右侧科技","ai-agent","ai-customer-service","budget"]}
+{"at":"2026-07-20T12:00:00+08:00","agent":"sales","kind":"fact","subject":"LEAD-20260720-2085","content":"LEAD-20260720-2085：右侧科技联系人张三（CTO，138-0013-8000）从官网咨询 AI 消防工单处理平台，预算 50 万 RMB；已生成 PRD 与三档报价，具体消防场景、现有系统集成、上线窗口和决策链待 discovery。","tags":["lead:LEAD-20260720-2085","customer:右侧科技","ai-agent","fire-protection","budget"]}

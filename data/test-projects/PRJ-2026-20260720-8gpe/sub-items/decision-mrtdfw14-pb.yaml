@@ -1,0 +1,15 @@
+id: decision-mrtdfw14-pb
+type: decision
+content:
+  decision: 使用 Node.js + discord.js
+  reason:
+    - 社区活跃
+    - 文档完善
+  alternatives: []
+  tradeoffs: []
+  decidedBy: user
+  status: proposed
+aiGenerated: false
+createdBy: ai
+projectId: PRJ-2026-20260720-8gpe
+createdAt: "2026-07-20T15:20:28.648Z"

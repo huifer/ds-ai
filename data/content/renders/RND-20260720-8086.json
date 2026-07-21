@@ -1,0 +1,11 @@
+{
+  "id": "RND-20260720-8086",
+  "type": "render",
+  "createdAt": "2026-07-20T06:00:46.434Z",
+  "candidateId": "CNT-20260720-9134",
+  "platform": "xiaohongshu",
+  "format": "png",
+  "bytes": 186534,
+  "llmEnhanced": false,
+  "status": "rendered"
+}

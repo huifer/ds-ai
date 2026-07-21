@@ -92,7 +92,7 @@ const pi = new RpcClient({
     CH_RSS: env.CH_RSS,
     CH_DAILY: env.CH_DAILY,
     CH_MEMORY: env.CH_MEMORY, CH_IDEAS: env.CH_IDEAS, CH_BUILD: env.CH_BUILD,
-    CH_JOURNAL: env.CH_JOURNAL, CH_SIGNAL: env.CH_SIGNAL, CH_SYSTEM: env.CH_SYSTEM,
+    CH_SYSTEM: env.CH_SYSTEM,
   },
   args: [
     '--mode', 'rpc',

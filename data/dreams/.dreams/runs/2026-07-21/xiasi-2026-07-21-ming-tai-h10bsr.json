@@ -1,0 +1,41 @@
+{
+  "id": "xiasi-2026-07-21-ming-tai-h10bsr",
+  "type": "ming-tai",
+  "theme": null,
+  "triggeredBy": "scheduled",
+  "dateKey": "2026-07-21",
+  "startedAt": "2026-07-21T04:00:28.879Z",
+  "durationMs": 39229,
+  "endedAt": "2026-07-21T04:01:10.345Z",
+  "status": "failed",
+  "phases": {
+    "light": {
+      "status": "ok",
+      "signals": 0,
+      "candidates": 18,
+      "mood": "bright"
+    },
+    "rem": {
+      "status": "failed",
+      "error": "log is not defined"
+    }
+  },
+  "artifacts": [],
+  "tokens": {
+    "in": 0,
+    "out": 0,
+    "total": 0
+  },
+  "errors": [
+    "log is not defined"
+  ],
+  "budgetSnapshot": {
+    "dateKey": "2026-07-21",
+    "tokensIn": 0,
+    "tokensOut": 0,
+    "total": 0,
+    "dailyLimit": 5000000,
+    "remaining": 5000000,
+    "over": false
+  }
+}

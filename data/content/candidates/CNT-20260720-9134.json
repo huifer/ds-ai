@@ -1,0 +1,35 @@
+{
+  "id": "CNT-20260720-9134",
+  "type": "candidate",
+  "createdAt": "2026-07-20T00:00:13.241Z",
+  "materialId": "MAT-20260719-7767",
+  "title": "只有一个指令：这条素材暂不具备发布价值",
+  "brief": "输入仅包含 intake 指令，缺少可供评分、蒸馏和发布的实际素材。",
+  "content": "!intake",
+  "rawContent": "!intake",
+  "privacyFindings": [],
+  "factCheck": {
+    "totalClaims": 0,
+    "supported": 0,
+    "unsupported": 0,
+    "details": [],
+    "passed": true
+  },
+  "score": {
+    "scores": {
+      "authenticity": 1,
+      "evidence": 0,
+      "audience-value": 0,
+      "novelty": 0,
+      "brand-fit": 1,
+      "virality": 0,
+      "reusability": 0,
+      "privacy-safety": 5
+    },
+    "total": 7,
+    "max": 40
+  },
+  "llmEnhanced": true,
+  "status": "ready",
+  "platforms": []
+}

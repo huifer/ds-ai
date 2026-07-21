@@ -6,6 +6,10 @@
 > 启动从 ~10s 降到 ~200ms,assistant 输出支持流式转发。
 >
 > v2.2 新增:**长期记忆系统** + **机会发现** + **记忆蒸馏** + **记忆治理**
+>
+> v3.0 规划:**记忆2.0** + **Loop Agent** + **做梦增强(好梦机制)** + **OPC优化**
+> 详见: [`docs/OPC_MEMORY_AND_LOOP_AGENT_DESIGN.md`](docs/OPC_MEMORY_AND_LOOP_AGENT_DESIGN.md)
+> 遐思增强详细方案: [`docs/XIASI_ENHANCEMENT_PLAN.md`](docs/XIASI_ENHANCEMENT_PLAN.md)
 
 ---
 
@@ -75,12 +79,41 @@
 - **结构化输出**: 5 个 cluster + SaaS/App 创业灵感
 - **灵活触发**: `!opportunity <topic>` 手动触发
 
-### 6️⃣ GitHub 仓库监控
+### 6️⃣ Connection 系统（第三方服务接入）
+- **统一接入**: Strava / Notion / RescueTime / Garmin / HealthKit 等
+- **OAuth 授权**: 安全的标准 OAuth 2.0 流程
+- **自动刷新**: Token 过期自动刷新，无需手动操作
+- **统一查询**: `!connection <add|list|status|sync|remove>`
+- **数据查询**: `!connection query <service> <type> [params]`
+
+#### 🚴 Strava 集成
+```bash
+# 查看已连接服务
+!connection list
+
+# 添加 Strava
+!connection add strava
+
+# 查看状态
+!connection status strava
+
+# 查询数据
+!connection query strava recent 10       # 最近 10 次活动
+!connection query strava stats weekly   # 本周统计
+!connection query strava stats monthly # 本月统计
+
+# 同步数据
+!connection sync strava
+```
+
+详细文档: [`docs/CONNECTIONS_README.md`](docs/CONNECTIONS_README.md)
+
+### 7️⃣ GitHub 仓库监控
 - **监控池管理**: `!watch add/remove/list` 管理仓库
 - **自动生成**: 每天 10:00 生成未评论 Issue 待办
 - **直接推送**: 推送到 `#每日任务` 频道
 
-### 7️⃣ 命令系统
+### 8️⃣ 命令系统
 - `!help` - 显示所有命令
 - `!watch` - GitHub 仓库监控
 - `!archive` - 显式知识归档
@@ -88,6 +121,28 @@
 - `!distill` - 手动触发记忆蒸馏
 - `!memory` - 记忆管理（查询/统计/清理）
 - `!opportunity` - 机会发现调研
+- `!connection` - 第三方服务连接管理
+
+### 9️⃣ 遐思梦境系统 (Xiasi)
+- **三阶段流水线**: Light → REM → Deep
+- **四种梦**: 连珠(自由联想) / 归藏(抽象巩固) / 明台(主题沉思) / 预言(反事实)
+- **5 信号评分**: 新颖性 / 连贯性 / 实用性 / 扎根度 / 惊喜度
+- **影子试用**: AI 对比候选洞察的价值
+- **Discord 投票**: 👍👎⭐ + 归档
+- **周报/月报**: 主题云 + 关系图
+- **好梦机制(v3)**: 自动区分正向/负向洞察
+- **噩梦干预(v3)**: 负面联想自动干预和替换
+- **预言模式(v3)**: yu-yan 反事实推理和情景模拟
+- **梦境→记忆(v3)**: 高分产物自动沉淀到记忆系统
+
+### 🔟 Agent Team 系统 (v1.0)
+- **25 个真实 Agent**: 从 registry.json 加载 + 115 个 Skill
+- **Session 隔离**: 6 维度 (channel, user, project, task, intent, agent) 独立上下文
+- **自动压缩**: 轮次/token/时间三种触发
+- **Team 引擎**: 多 Agent 串行/并行/层级/扇出收集协作
+- **Subagent 管理**: 生命周期、资源限制、自动清理
+- **预定义模板**: 开发团队 / 销售团队 / 内容团队
+- **Memory 四层**: Session → AgentScope → SharedScope → KnowledgeBase
 
 ---
 
@@ -105,7 +160,23 @@ pi-discord-agents/
 │   ├── memory-*.mjs                        长期记忆系统(store/distiller/mirror/context/governance/quality)
 │   ├── embedder.mjs                        语义 embedding(用于记忆检索)
 │   ├── rss-fetcher.mjs                     RSS 抓取器
-│   ├── dreaming/                          遐思梦境系统
+│   ├── storage.mjs                         本地存储(credentials等)
+│   ├── dreaming/                          遐思梦境系统(store/distiller/mirror/context/governance/quality)
+│   ├── connections/                       ← 第三方服务连接管理
+│   │   ├── base.mjs                       Connection 基类
+│   │   ├── manager.mjs                    Connection 管理器
+│   │   ├── strava.mjs                     Strava 连接器
+│   │   └── index.mjs                      统一导出
+│   └── jobs/
+│       ├── rss-daily.mjs              RSS hub 任务(12:00 北京时间触发)
+│       ├── daily-summary.mjs          每日总结任务(23:00 北京时间触发)
+│       ├── token-usage.mjs            Token 用量任务(12:30 北京时间触发)
+│       └── opportunity.mjs            机会发现 brief 生成
+│   ├── connections/                       ← 第三方服务连接管理
+│   │   ├── base.mjs                       Connection 基类
+│   │   ├── manager.mjs                    Connection 管理器
+│   │   ├── strava.mjs                     Strava 连接器
+│   │   └── index.mjs                      统一导出
 │   └── jobs/
 │       ├── rss-daily.mjs              RSS hub 任务(12:00 北京时间触发)
 │       ├── daily-summary.mjs          每日总结任务(23:00 北京时间触发)
@@ -124,7 +195,10 @@ pi-discord-agents/
 │   ├── stop.sh                            完整停止
 │   ├── smoke-test.mjs                     跳过 Discord,纯 RPC + extension 链路测试
 │   ├── create-channels.mjs                一次性:在 Guild 里建 #📰 资讯 + #🌙 每日总结
-│   └── trigger-job.mjs                    手动触发 RSS hub 或每日总结(立刻跑一次)
+│   ├── trigger-job.mjs                    手动触发 RSS hub 或每日总结(立刻跑一次)
+│   ├── connection-cli.mjs                 Connection CLI 工具
+│   ├── connection-server.mjs              OAuth 回调服务器
+│   └── connection-quickstart.mjs          Connection 快速开始向导
 │
 ├── 🧪 test/                            ← Node 内置测试(频道路由 / GitHub 监控池)
 │   ├── channel-routing.test.mjs           显式频道类别路由测试

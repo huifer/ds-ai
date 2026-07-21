@@ -1,0 +1,45 @@
+{
+  "id": "xiasi-2026-07-20-gui-cang-0t7m1t",
+  "type": "gui-cang",
+  "theme": null,
+  "triggeredBy": "scheduled",
+  "dateKey": "2026-07-20",
+  "startedAt": "2026-07-20T03:45:28.311Z",
+  "durationMs": 46155,
+  "endedAt": "2026-07-20T03:46:15.257Z",
+  "status": "completed",
+  "phases": {
+    "light": {
+      "status": "ok",
+      "signals": 0,
+      "candidates": 18,
+      "mood": "bright"
+    },
+    "rem": {
+      "status": "ok",
+      "candidatesIn": 1,
+      "llmCalls": 1
+    },
+    "deep": {
+      "status": "ok",
+      "scored": 1,
+      "kept": 0
+    }
+  },
+  "artifacts": [],
+  "tokens": {
+    "in": 0,
+    "out": 0,
+    "total": 0
+  },
+  "errors": [],
+  "budgetSnapshot": {
+    "dateKey": "2026-07-20",
+    "tokensIn": 0,
+    "tokensOut": 0,
+    "total": 0,
+    "dailyLimit": 5000000,
+    "remaining": 5000000,
+    "over": false
+  }
+}

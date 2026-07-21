@@ -8,7 +8,7 @@
 //   - **机会导向**:每个 cluster 不只描述"发生了什么",更要回答"我能拿它做什么"
 //
 // 与旧 discover 的区别:
-//   - 默认输出频道从 signal → opportunity
+//   - 默认输出统一进入 opportunity 频道
 //   - "机会洞察"段(原文叫"给你的具体机会")现在更结构化:
 //     每个机会含名字 + 一句话定位 + 目标用户 + 核心功能 + 商业模式 + 最小验证 + 风险
 //   - 入口命令从 !discover 改为 !opportunity
@@ -20,6 +20,7 @@ const ROOT = resolve(homedir(), 'pi-discord-agents');
 const DATA_DIR = resolve(ROOT, 'data', 'opportunity');
 
 export const OPPORTUNITY_JOB_ID = 'opportunity';
+export const OPPORTUNITY_TARGET_CATEGORIES = ['opportunity', 'build', 'ideas', 'memory'];
 
 // 兼容旧调用:discover 任务名也指向这里
 export const DISCOVER_JOB_ID = OPPORTUNITY_JOB_ID;
@@ -53,6 +54,9 @@ export const CHINESE_RSS_FEEDS = [
 
 export function buildOpportunityPrompt({ topic, dateKey, channelCategory = 'opportunity' }) {
   if (!topic || !topic.trim()) throw new Error('buildOpportunityPrompt: topic 必填');
+  if (!OPPORTUNITY_TARGET_CATEGORIES.includes(channelCategory)) {
+    throw new Error(`buildOpportunityPrompt: 不支持的目标频道 ${channelCategory}`);
+  }
   const dk = dateKey || todayKey();
   const slug = slugify(topic);
   const outPath = `data/opportunity/${dk}-${slug}.md`;
@@ -205,11 +209,12 @@ ${feedList}
 
 \`\`\`
 
-### 推送 Discord
+### 完成与 Discord 推送
 
-调 \`discord_post_message\` category=\`${channelCategory}\`,content = 第 7 步的 markdown(自动按 1900 字符分片)。
-
-prefix 加 \`💡 **【机会 · ${topic} · ${dk}】**\`。
+1. 调用 \`write_file\` 写入上面的 brief 到 \`${outPath}\`。
+2. **不要调用 \`discord_post_message\`**。外层 \`scripts/trigger-job.mjs\` 会在 Pi settled 或超时退出后读取这个文件，并以 \`channelCategory=${channelCategory}\` 直接、可靠地推送到目标频道。
+3. 写文件成功后立即输出完成状态，不要继续等待新的工具调用。
+4. 外层 runner 会负责 Discord 分片、目标频道校验和在 \`#主入口\` 发送完成通知。
 
 ---
 

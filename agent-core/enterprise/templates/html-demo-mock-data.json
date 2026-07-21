@@ -1,0 +1,46 @@
+{
+  "project": {
+    "brand": "Zenbuild",
+    "title": "Demo · AI Customer Service in Feishu",
+    "tagline": "Auto-reply common 30% questions on night shifts, with order and FAQ integrations.",
+    "cta": { "label": "Talk to huifer", "href": "https://discord.com/users/1527726951425507348" },
+    "badge": "FDE Demo · v0.1",
+    "year": 2026,
+    "owner": "huifer",
+    "lang": "en"
+  },
+  "stats": [
+    { "label": "Target auto-reply rate", "value": "50%", "delta": "vs 0% before" },
+    { "label": "Target latency (P95)", "value": "3s", "delta": "feishu webhook" },
+    { "label": "Pilot scope", "value": "1 site", "delta": "single tenant" }
+  ],
+  "scenarios": [
+    { "id": "order-status", "title": "Order status", "hint": "Customer asks 'where is my order'." },
+    { "id": "return-policy", "title": "Return policy", "hint": "Customer asks 'can I return this'." },
+    { "id": "transfer", "title": "Transfer to human", "hint": "Customer requests a real person." }
+  ],
+  "responses": {
+    "order-status": { "title": "Order #12345", "body": "Your order is in transit and will arrive in 2 days.\nTracking: https://example.com/t/12345", "latencyMs": 1240 },
+    "return-policy": { "title": "Return within 7 days", "body": "You can return the item within 7 days of delivery, as long as it is unopened.\nReply RETURN-12345 to start a return.", "latencyMs": 980 },
+    "transfer": { "title": "Transferring to a human", "body": "Connecting you to a human agent now. Average wait time: 30s.", "latencyMs": 2100 }
+  },
+  "chart": {
+    "title": "Pilot KPIs",
+    "subtitle": "Targets after 6 weeks pilot.",
+    "bars": [
+      { "label": "Auto-reply rate", "value": "50%", "note": "target" },
+      { "label": "P95 latency", "value": "3s", "note": "target" },
+      { "label": "CSAT", "value": "4.5", "note": "out of 5" }
+    ]
+  },
+  "boundaries": [
+    { "icon": "✅", "text": "In scope: Feishu single chat, FAQ retrieval, order lookup, transfer to human." },
+    { "icon": "✅", "text": "Single-tenant deployment, daily data purge after 7 days." },
+    { "icon": "⚠️", "text": "Out of scope: WeChat, group chat, multi-language beyond EN/ZH, outbound calls." },
+    { "icon": "⚠️", "text": "No real backend yet — this demo is fully driven by mock-data.json." }
+  ],
+  "contactChannels": [
+    { "label": "Discord · huifer", "href": "https://discord.com/users/1527726951425507348" },
+    { "label": "Feishu DM", "href": "https://www.feishu.cn/" }
+  ]
+}

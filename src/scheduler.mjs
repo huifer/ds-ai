@@ -22,7 +22,7 @@ export function createScheduler({ log = () => {}, tickIntervalMs = DEFAULT_TICK_
   let stopped = false;
 
   function nowInTz(tzOffsetHours) {
-    // 返回目标时区的"今天 YYYY-MM-DD" + "HH:MM"
+    // 返回目标时区的"今天 YYYY-MM-DD" + "HH:MM" + "dayOfWeek"
     const now = new Date();
     const utcMs = now.getTime() + now.getTimezoneOffset() * 60_000;
     const tzMs = utcMs + tzOffsetHours * 3600_000;
@@ -37,12 +37,17 @@ export function createScheduler({ log = () => {}, tickIntervalMs = DEFAULT_TICK_
       hm: `${hh}:${mi}`,
       hh: d.getUTCHours(),
       mi: d.getUTCMinutes(),
-      utcMs: tzMs, // 该时区"今天的 00:00 UTC ms" 推算用
+      dayOfWeek: d.getUTCDay(), // 0=周日, 1=周一, ..., 6=周六
+      utcMs: tzMs,
     };
   }
 
   function shouldRun(job) {
     const t = nowInTz(job.tzOffsetHours);
+    // PR3 修复:如果设了 dayOfWeek,先检查
+    if (typeof job.dayOfWeek === 'number' && t.dayOfWeek !== job.dayOfWeek) {
+      return { run: false };
+    }
     if (t.hh !== job.hour) return { run: false };
     if (t.mi < job.minute) return { run: false };
     // 同一天同一小时同一分钟内:用 lastRunKey 去重,确保一天只跑一次
@@ -80,7 +85,7 @@ export function createScheduler({ log = () => {}, tickIntervalMs = DEFAULT_TICK_
       log(`[scheduler] 注册 ${job.id} @ ${String(job.hour).padStart(2,'0')}:${String(job.minute).padStart(2,'0')} UTC${job.tzOffsetHours >= 0 ? '+' : ''}${job.tzOffsetHours}`);
     },
     list() {
-      return jobs.map((j) => ({ id: j.id, hour: j.hour, minute: j.minute, tzOffsetHours: j.tzOffsetHours, lastRunKey: j.lastRunKey }));
+      return jobs.map((j) => ({ id: j.id, hour: j.hour, minute: j.minute, tzOffsetHours: j.tzOffsetHours, dayOfWeek: j.dayOfWeek ?? null, lastRunKey: j.lastRunKey }));
     },
     start() {
       if (timer) return;

@@ -133,7 +133,31 @@ export class SessionPool {
   /**
    * 获取或创建一个 session
    */
+  /**
+   * 查找频道中用户的活跃 session（最近有过对话的）
+   */
+  findActive(channelId, userId) {
+    for (const [key, session] of this.sessions) {
+      if (session.channelId === channelId && session.userId === userId) {
+        // 5 分钟内有活动的 session
+        const lastActive = new Date(session.lastActiveAt).getTime();
+        if (Date.now() - lastActive < 5 * 60 * 1000) {
+          return session;
+        }
+      }
+    }
+    return null;
+  }
+
   getOrCreate({ channelId, userId, topicKey = '', agentId = '' }) {
+    // 先找同频道同用户的活跃 session
+    const active = this.findActive(channelId, userId);
+    if (active) {
+      this._touchIdleTimer(active.key);
+      this.log(`[session-pool] 复用活跃 session: ${active.key}`);
+      return active;
+    }
+
     const key = SessionPool.makeKey({ channelId, userId, topicKey, agentId });
     if (this.sessions.has(key)) {
       const s = this.sessions.get(key);

@@ -1,0 +1,54 @@
+{
+  "id": "CNT-20260719-7269",
+  "type": "candidate",
+  "createdAt": "2026-07-19T20:32:32.470Z",
+  "materialId": "MAT-20260719-2843",
+  "title": "今天用 React + TypeScript + Vite + TanStack Query 给客户做了一个 SaaS ",
+  "brief": "",
+  "content": "今天用 React + TypeScript + Vite + TanStack Query 给客户做了一个 SaaS 数据分析平台的 Demo，用了 shadcn/ui 组件库，commit abc1234ef 部署在 https://github.com/huifer/demo，客户反馈界面专业、数据可视化清晰。",
+  "rawContent": "今天用 React + TypeScript + Vite + TanStack Query 给客户做了一个 SaaS 数据分析平台的 Demo，用了 shadcn/ui 组件库，commit abc1234ef 部署在 https://github.com/huifer/demo，客户反馈界面专业、数据可视化清晰。",
+  "privacyFindings": [],
+  "factCheck": {
+    "totalClaims": 2,
+    "supported": 1,
+    "unsupported": 1,
+    "details": [
+      {
+        "claim": "今天用 React + TypeScript + Vite + TanStack Query 给客户做了一个 SaaS 数据分析平台的 Demo，用了 shadcn/ui 组件库，commit abc1234ef 部署在 https://g",
+        "hasEvidence": true,
+        "evidenceTypes": [
+          "url",
+          "commit-hash"
+        ]
+      },
+      {
+        "claim": "com/huifer/demo，客户反馈界面专业、数据可视化清晰。",
+        "hasEvidence": false,
+        "evidenceTypes": []
+      }
+    ],
+    "passed": true
+  },
+  "score": {
+    "scores": {
+      "authenticity": 4,
+      "evidence": 5,
+      "audience-value": 4,
+      "novelty": 3,
+      "brand-fit": 4,
+      "virality": 4,
+      "reusability": 4,
+      "privacy-safety": 5
+    },
+    "total": 33,
+    "max": 40
+  },
+  "llmEnhanced": false,
+  "status": "ready",
+  "platforms": [
+    "wechat",
+    "xiaohongshu",
+    "x",
+    "newsletter"
+  ]
+}

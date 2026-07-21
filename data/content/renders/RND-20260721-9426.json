@@ -1,0 +1,12 @@
+{
+  "id": "RND-20260721-9426",
+  "type": "render",
+  "createdAt": "2026-07-21T06:00:37.569Z",
+  "candidateId": "CNT-20260721-6348",
+  "platform": "x",
+  "format": "markdown",
+  "body": "# Pipeline Intake Log\n\n🔄 Running `scheduled intake` — pulling data on cadence but no publishable signal yet. Holding for richer source feed before promoting to production. Patience in the pipeline. ⚙️ #DataPipeline #Automation #Zenbuild\n\n---\n\n© 2026 Zenbuild · All rights reserved",
+  "bytes": 291,
+  "llmEnhanced": true,
+  "status": "rendered"
+}

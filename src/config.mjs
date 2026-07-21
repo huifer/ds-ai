@@ -1,5 +1,5 @@
 // ~/pi-discord-agents/src/config.mjs
-// 配置加载:优先 ~/.pi-discord-agents/.env,fallback 到 ~/.pi-discord-agents/config.json
+// 配置加载:读取 ~/pi-discord-agents/.env,并统一校验所有运行时频道。
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { homedir } from 'node:os';
@@ -15,7 +15,6 @@ function parseEnvText(text) {
     const m = line.match(/^([A-Z0-9_]+)\s*=\s*(.*)$/);
     if (!m) continue;
     let v = m[2];
-    // 简单值:去掉首尾引号
     if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
       v = v.slice(1, -1);
     }
@@ -24,59 +23,93 @@ function parseEnvText(text) {
   return out;
 }
 
+const CHANNEL_ENV_KEYS = [
+  'CH_ENTRY', 'CH_MEMORY', 'CH_IDEAS', 'CH_BUILD',
+  'CH_SYSTEM', 'CH_RSS', 'CH_DAILY', 'CH_GH', 'CH_USAGE',
+  'CH_OPPORTUNITY', 'CH_XIASI',
+];
+
+function isSnowflake(value) {
+  return /^\d{17,20}$/.test(String(value || ''));
+}
+
 export function loadConfig() {
   if (!existsSync(ENV_PATH)) {
     return { ok: false, error: `.env 不存在,模板在: ${ROOT}/.env.example` };
   }
-  const env = parseEnvText(readFileSync_(ENV_PATH));
+  const env = parseEnvText(readFileSync(ENV_PATH, 'utf8'));
 
   const token = env.DISCORD_TOKEN;
-  const entryChannelId = env.CH_ENTRY;
   if (!token) return { ok: false, error: '.env 缺 DISCORD_TOKEN' };
-  if (!entryChannelId) return { ok: false, error: '.env 缺 CH_ENTRY(主入口 channel ID)' };
+
+  const missing = CHANNEL_ENV_KEYS.filter((key) => !env[key]);
+  if (missing.length) {
+    return { ok: false, error: `.env 缺少频道配置: ${missing.join(', ')}` };
+  }
+
+  const invalidReq = CHANNEL_ENV_KEYS.filter((key) => !isSnowflake(env[key]));
+  if (invalidReq.length) {
+    return { ok: false, error: `必需频道 ID 格式错误: ${invalidReq.join(', ')}` };
+  }
+
+  // 企业/扩展频道：任何 CH_* 一旦配置就必须是合法 snowflake，否则启动即拒。
+  // 避免 channel-map.mjs / approval.mjs 在运行时静默读到畸形频道 ID（原仅校验 11 个必需频道）。
+  const allChKeys = Object.keys(env).filter((k) => k.startsWith('CH_'));
+  const invalidExt = allChKeys.filter((k) => !isSnowflake(env[k]));
+  if (invalidExt.length) {
+    return { ok: false, error: `频道 ID 格式错误: ${invalidExt.join(', ')}` };
+  }
+
+  const usageChannel = env.CH_USAGE;
+  const opportunityChannel = env.CH_OPPORTUNITY;
 
   return {
     ok: true,
+    _env: env,
     value: {
       token,
       allowedUserIds: (env.ALLOWED_USER_IDS || '').split(',').map(s => s.trim()).filter(Boolean),
       guildId: env.GUILD_ID || '',
       channels: {
-        entry:   env.CH_ENTRY,
-        memory:  env.CH_MEMORY,
-        ideas:   env.CH_IDEAS,
-        build:   env.CH_BUILD,
-        journal: env.CH_JOURNAL,
-        signal:  env.CH_SIGNAL,
-        system:  env.CH_SYSTEM,
-        rss:     env.CH_RSS,
-        daily:   env.CH_DAILY,
+        entry:       env.CH_ENTRY,
+        memory:      env.CH_MEMORY,
+        ideas:       env.CH_IDEAS,
+        build:       env.CH_BUILD,
+        system:      env.CH_SYSTEM,
+        rss:         env.CH_RSS,
+        daily:       env.CH_DAILY,
+        gh:          env.CH_GH,
+        usage:       usageChannel,
+        opportunity: opportunityChannel,
+        xiasi:       env.CH_XIASI || '',
+        fileCollection: env.CH_FILE_COLLECTION || '',
       },
       labels: {
-        memory:  '🧠',
-        ideas:   '✨',
-        build:   '🔨',
-        journal: '🌿',
-        signal:  '📡',
-        system:  '🛠',
-        rss:     '📰',
-        daily:   '🌙',
+        entry:       '📝',
+        memory:      '🧠',
+        ideas:       '✨',
+        build:       '🔨',
+        system:      '🛠',
+        rss:         '📰',
+        daily:       '🌙',
+        gh:          '🎯',
+        usage:       '📊',
+        opportunity: '💡',
+        xiasi:       '🌙',
       },
-      // 智能路由:类别关键词命中 → 对应 channel
-      routing: {
-        memory:  ['preference','always','never','prefer','rule','constraint','target','version','framework','language','language preference','constraint:','rule:','禁用','禁止','不要','总是','永远','偏好','约束','原则'],
-        ideas:   ['idea','灵感','点子','imagine','wouldn','t be cool','what if','hack','wish','未来','设想','设想一下','我有个想法','突发奇想'],
-        build:   ['build','deploy','code','error','bug','fix','commit','push','pr','merge','branch','version','library','package','config','架构','架构选型','实现','部署','代码','报错','修复','bug','提交','合并','分支','版本','库','包','配置'],
-        journal: ['feel','mood','sleep','tired','happy','sad','angry','anxious','reflect','thoughts','today','was a','心情','心境','失眠','累','开心','难过','生气','焦虑','反思','感悟','日记','今天','一日','状态'],
+      usageDays: parseInt(env.USAGE_DAYS || '14', 10) || 14,
+      // 「遐思」配置 — 由 dreaming/config.mjs 进一步规范化
+      dreamingRaw: {
+        channelId: env.CH_XIASI || '',
+        enabled: env.XIASI_ENABLED || 'false',
+        silent: env.XIASI_SILENT || 'false',
+        types: env.XIASI_TYPES || 'lian-zhu,gui-cang,ming-tai',
+        dailyTokenBudget: env.XIASI_DAILY_TOKEN_BUDGET || '5000000',
+        feedContext: env.XIASI_FEED_CONTEXT || 'false',
+        tzOffsetHours: parseInt(env.XIASI_TZ_OFFSET || '8', 10) || 8,
       },
-      // system prompt 注入
-      routerSystemPrompt: env.ROUTER_SYSTEM_PROMPT || null,
     },
   };
-}
-
-function readFileSync_(p) {
-  return readFileSync(p, 'utf8');
 }
 
 export const PATHS = {

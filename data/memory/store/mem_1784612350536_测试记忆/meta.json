@@ -1,0 +1,19 @@
+{
+  "id": "mem_1784612350536_测试记忆",
+  "kind": "idea",
+  "scope": "user",
+  "subject": "测试记忆",
+  "content": "这是一个测试记忆",
+  "tags": [
+    "test"
+  ],
+  "source": null,
+  "confidence": 0.9,
+  "revision": 1,
+  "supersedes": [],
+  "status": "active",
+  "embedding": null,
+  "createdAt": "2026-07-21T05:39:10.536Z",
+  "updatedAt": "2026-07-21T05:39:10.536Z",
+  "expiresAt": null
+}

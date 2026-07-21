@@ -1,0 +1,12 @@
+{
+  "id": "RND-20260721-9863",
+  "type": "render",
+  "createdAt": "2026-07-21T06:00:49.062Z",
+  "candidateId": "CNT-20260721-6348",
+  "platform": "newsletter",
+  "format": "markdown",
+  "body": "# Scheduled Intake: A Pipeline Status Note\n\nThis edition is a **status note**, not a story. A `scheduled intake` task fired on the Zenbuild automation pipeline, pulled data on cadence from a configured source, and produced **no publishable signal**.\n\n## What Happened\n\nThe intake ran exactly as designed. A job woke up on its scheduled tick, queried the source queue, and returned its payload. The system behaved; the content didn't.\n\n## Why Nothing Ships\n\n- **No narrative hook.** The harvested items were routine — no event, no inflection point.\n- **Below the novelty threshold.** Nothing in this cycle cleared the editorial bar for distribution.\n- **No actionable angle for the reader.** A redistribution would add noise, not signal.\n\n> A heartbeat is not a headline. The pipeline is alive; the newsroom has nothing to publish. Both are healthy signals.\n\n## How to Read This Edition\n\nTreat it as a **negative result** — and a useful one. Negative results confirm the filter is doing its job: not every intake tick should produce a newsletter. Quiet weeks are part of a working system.\n\n## What's Next\n\n- The next scheduled intake will re-evaluate the source queue on its regular cadence.\n- Any material that clears the editorial filter will ship in the next newsletter window.\n- Until then, the silence is **by design**, not by failure.\n\nIf you're new here: Zenbuild publishes only when the pipeline earns the send.\n\n---\n\n© 2026 Zenbuild · All rights reserved",
+  "bytes": 1468,
+  "llmEnhanced": true,
+  "status": "rendered"
+}

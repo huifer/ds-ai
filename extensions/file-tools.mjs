@@ -4,7 +4,7 @@
 // 设计动机:RSS hub 和每日总结要落本地 md 留底,Pi 需要有写文件的能力。
 // 路径白名单:只允许写到项目内的 data/ 目录,防越权。
 import { Type } from '@sinclair/typebox';
-import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
+import { writeFileSync, readFileSync, mkdirSync, existsSync, cpSync, readdirSync } from 'node:fs';
 import { resolve, dirname, isAbsolute, relative } from 'node:path';
 import { homedir } from 'node:os';
 
@@ -84,3 +84,136 @@ export default function (pi) {
     },
   });
 }
+// ===== 5 个新 writer（阶段 1 Day 3）=====
+
+function registerFileWriters(pi) {
+  pi.registerTool({
+    name: 'write_html',
+    label: 'write_html',
+    description: '把 HTML 写到项目内 data/ 目录。',
+    parameters: Type.Object({
+      path: Type.String({ description: '相对路径，如 data/agent-runtime/drafts/xxx.html' }),
+      content: Type.String(),
+    }),
+    execute: async (_id, args) => {
+      try {
+        const abs = resolveSafe(args.path);
+        mkdirSync(dirname(abs), { recursive: true });
+        writeFileSync(abs, args.content, 'utf8');
+        return { content: [{ type: 'text', text: `wrote HTML ${args.path} (${args.content.length} bytes)` }] };
+      } catch (e) {
+        return { content: [{ type: 'text', text: `write_html 失败: ${e.message}` }], isError: true };
+      }
+    },
+  });
+
+  pi.registerTool({
+    name: 'write_pdf',
+    label: 'write_pdf',
+    description: '把 PDF（base64 编码或本地 playwright 产物）保存到 data/ 目录。',
+    parameters: Type.Object({
+      path: Type.String(),
+      base64: Type.Optional(Type.String()),
+      srcHtmlPath: Type.Optional(Type.String()),
+    }),
+    execute: async (_id, args) => {
+      try {
+        const abs = resolveSafe(args.path);
+        mkdirSync(dirname(abs), { recursive: true });
+        if (args.base64) {
+          writeFileSync(abs, Buffer.from(args.base64, 'base64'));
+        } else if (args.srcHtmlPath) {
+          // srcHtmlPath 分支：复制源 HTML 到目标（HTML→图片渲染由 renderer-agent 用 playwright 完成，非本工具职责）
+          const src = resolveSafe(args.srcHtmlPath);
+          if (!existsSync(src)) throw new Error(`src not found: ${args.srcHtmlPath}`);
+          writeFileSync(abs, readFileSync(src));
+        } else {
+          throw new Error('必须提供 base64 或 srcHtmlPath');
+        }
+        return { content: [{ type: 'text', text: `wrote PDF ${args.path}` }] };
+      } catch (e) {
+        return { content: [{ type: 'text', text: `write_pdf 失败: ${e.message}` }], isError: true };
+      }
+    },
+  });
+
+  pi.registerTool({
+    name: 'write_kp',
+    label: 'write_kp',
+    description: '把 knowledge-pack 文件（kp-XX-name.md）写到 data/business/accounts/<id>/projects/<PRJ-ID>/knowledge-pack/。',
+    parameters: Type.Object({
+      prjId: Type.String(),
+      file: Type.String({ description: 'kp-01-domain.md / kp-02-users.md / ...' }),
+      content: Type.String(),
+    }),
+    execute: async (_id, args) => {
+      try {
+        const safe = safePrjPath(args.prjId, `knowledge-pack/${args.file}`);
+        writeFileSync(safe.abs, args.content, 'utf8');
+        return { content: [{ type: 'text', text: `wrote KP ${args.file} for ${args.prjId}` }] };
+      } catch (e) {
+        return { content: [{ type: 'text', text: `write_kp 失败: ${e.message}` }], isError: true };
+      }
+    },
+  });
+
+  pi.registerTool({
+    name: 'write_prd',
+    label: 'write_prd',
+    description: '把 PRD 文档写到 data/business/accounts/<id>/projects/<PRJ-ID>/prd/。',
+    parameters: Type.Object({
+      prjId: Type.String(),
+      version: Type.String({ description: 'v0.1 / v1.0 / v1.1' }),
+      content: Type.String(),
+    }),
+    execute: async (_id, args) => {
+      try {
+        const safe = safePrjPath(args.prjId, `prd/prd-${args.version}.md`);
+        writeFileSync(safe.abs, args.content, 'utf8');
+        return { content: [{ type: 'text', text: `wrote PRD ${args.version} for ${args.prjId}` }] };
+      } catch (e) {
+        return { content: [{ type: 'text', text: `write_prd 失败: ${e.message}` }], isError: true };
+      }
+    },
+  });
+
+  pi.registerTool({
+    name: 'write_demo',
+    label: 'write_demo',
+    description: '把 React 项目目录拷贝到 data/business/projects/<alias>/。',
+    parameters: Type.Object({
+      alias: Type.String(),
+      srcPath: Type.String({ description: '源目录绝对路径' }),
+    }),
+    execute: async (_id, args) => {
+      try {
+        const target = resolve(ROOT, 'data/business/projects', args.alias);
+        if (!existsSync(args.srcPath)) throw new Error(`src 目录不存在: ${args.srcPath}`);
+        mkdirSync(target, { recursive: true });
+        cpSync(args.srcPath, target, { recursive: true });
+        return { content: [{ type: 'text', text: `copied ${args.srcPath} → ${target}` }] };
+      } catch (e) {
+        return { content: [{ type: 'text', text: `write_demo 失败: ${e.message}` }], isError: true };
+      }
+    },
+  });
+}
+
+function safePrjPath(prjId, rel) {
+  // 路径必须形如 data/business/accounts/<account-id>/projects/<prjId>/<rel>
+  if (rel.startsWith('/') || rel.includes('..')) throw new Error('bad rel path');
+  // 反查真实 account-id：扫描 data/business/accounts/*/projects/<prjId>/（由 !pr new 创建）
+  const accountsDir = resolve(ROOT, 'data/business/accounts');
+  let accountId = null;
+  try {
+    for (const acc of readdirSync(accountsDir)) {
+      if (existsSync(resolve(accountsDir, acc, 'projects', prjId))) { accountId = acc; break; }
+    }
+  } catch {}
+  if (!accountId) throw new Error(`未找到项目 ${prjId} 的 account 目录（先用 !pr new 创建项目）`);
+  const real = resolve(accountsDir, accountId, 'projects', prjId, rel);
+  mkdirSync(dirname(real), { recursive: true });
+  return { abs: real };
+}
+
+export { registerFileWriters };

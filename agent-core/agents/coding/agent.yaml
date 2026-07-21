@@ -1,0 +1,53 @@
+id: coding
+display_name: Coding
+description: |
+  生成 React Demo / MVP / 内部工具的专属 Agent。
+  接收基础文件与业务说明，加载 `react-design`、`component-library`、`react-vite`、
+  `react-router`、`tailwind-v4`、`shadcn-ui`、`react-testing` 等 Skill，
+  调用 `react-demo` Skill 自动生成可运行项目。
+model:
+  primary: minimax-cn/MiniMax-M3
+  thinking: high
+runtime:
+  session_scope: per-project
+  idle_ttl_minutes: 45
+  max_concurrency: 2
+skills:
+  - shared/skills/read-foundation
+  - shared/skills/react-design
+  - shared/skills/component-library
+  - shared/skills/react-vite
+  - shared/skills/react-router
+  - shared/skills/tailwind-v4
+  - shared/skills/shadcn-ui
+  - shared/skills/tanstack-query
+  - shared/skills/msw-mock
+  - shared/skills/react-testing
+  - shared/skills/zenbuild-design-tokens
+  - shared/skills/react-demo
+  - shared/skills/pnpm-install
+  - shared/skills/codespace-build
+  - shared/skills/zip-folder
+permissions:
+  allowed_write_roots:
+    - data/business/projects/<alias>/
+    - data/business/accounts/<account-id>/projects/<PRJ-ID>/demo/
+  external_actions: approval-required
+memory:
+  read_scopes:
+    - company
+    - coding
+    - current-project
+  write_scope: coding
+notifications:
+  channel_pm: CH_PROJECT_MGMT
+  channel_demo: CH_FDE_DELIVERY
+buttons:
+  - { label: Approve,     custom_id: coding-approve, style: success }
+  - { label: Request Changes, custom_id: coding-changes, style: danger }
+  - { label: Open Preview, custom_id: coding-preview,  style: primary }
+commands:
+  - "!demo new <alias> <industry> <一句话需求>"
+  - "!demo refactor <PRJ-ID>"
+  - "!mvp new <alias> <industry> <一句话需求>"
+  - "!build run <PRJ-ID>"

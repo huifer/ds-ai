@@ -1,0 +1,53 @@
+{
+  "id": "CNT-20260719-7846",
+  "type": "candidate",
+  "createdAt": "2026-07-19T20:32:42.344Z",
+  "materialId": "MAT-20260719-6326",
+  "title": "帮一个跨境电商客户用 Rust 写了一个高性能的订单聚合 API，用了 axum + tokio + sqlx，QPS ",
+  "brief": "",
+  "content": "帮一个跨境电商客户用 Rust 写了一个高性能的订单聚合 API，用了 axum + tokio + sqlx，QPS 从 200 提升到 5000，延迟从 200ms 降到 15ms，commit def5678ab 部署在 https://github.com/huifer/order-aggregator",
+  "rawContent": "帮一个跨境电商客户用 Rust 写了一个高性能的订单聚合 API，用了 axum + tokio + sqlx，QPS 从 200 提升到 5000，延迟从 200ms 降到 15ms，commit def5678ab 部署在 https://github.com/huifer/order-aggregator",
+  "privacyFindings": [],
+  "factCheck": {
+    "totalClaims": 1,
+    "supported": 1,
+    "unsupported": 0,
+    "details": [
+      {
+        "claim": "帮一个跨境电商客户用 Rust 写了一个高性能的订单聚合 API，用了 axum + tokio + sqlx，QPS 从 200 提升到 5000，延迟从 200ms 降到 15ms，commit def5678ab 部署在 https:",
+        "hasEvidence": true,
+        "evidenceTypes": [
+          "url",
+          "commit-hash",
+          "number"
+        ]
+      }
+    ],
+    "passed": true
+  },
+  "score": {
+    "scores": {
+      "authenticity": 4,
+      "evidence": 5,
+      "audience-value": 4,
+      "novelty": 3,
+      "brand-fit": 4,
+      "virality": 4,
+      "reusability": 4,
+      "privacy-safety": 5
+    },
+    "total": 33,
+    "max": 40
+  },
+  "llmEnhanced": false,
+  "status": "ready",
+  "platforms": [
+    "wechat",
+    "xiaohongshu",
+    "x",
+    "newsletter"
+  ],
+  "privacyChecked": true,
+  "factChecked": true,
+  "factCheckLlmEnhanced": false
+}
